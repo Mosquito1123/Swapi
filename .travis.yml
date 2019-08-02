@@ -1,4 +1,5 @@
-language: swift 
+language: swift
+os: osx 
 osx_image: xcode10
 xcode_workspace: Swapi.xcworkspace
 xcode_scheme: Swapi
