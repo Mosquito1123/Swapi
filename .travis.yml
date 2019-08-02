@@ -1,8 +1,10 @@
 language: swift
 os: osx 
-osx_image: xcode10
+osx_image: xcode10.1
 xcode_workspace: Swapi.xcworkspace
 xcode_scheme: Swapi
 xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
+podfile: Podfile
 before_install:
+- gem install cocoapods --pre
 - pod install --repo-update
