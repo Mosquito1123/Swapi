@@ -21,16 +21,14 @@ class FilmsViewController: UITableViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-  
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-  
-  
-    // MARK: Routing
-    
-    var router = Router()
 
+    // MARK: Routing
+
+    var router = Router()
   
     // MARK: View lifecycle
 
@@ -45,19 +43,19 @@ class FilmsViewController: UITableViewController {
             view.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
     }
-    
+
     // MARK: Table view setup
-    
+
     var films: Dictionary<Int, Film>? = LocalCache.films
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films?.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilmsTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "FilmsTableViewCelll")
@@ -72,7 +70,7 @@ class FilmsViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(films?.keys ?? Dictionary<Int, Film>().keys)
         router.routeTo(from: self, to: .FilmDetails, param: films?[keysArray[indexPath.row]])

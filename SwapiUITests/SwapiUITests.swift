@@ -9,13 +9,12 @@
 import XCTest
 
 class SwapiUITests: XCTestCase {
-    
+
     var app: XCUIApplication = XCUIApplication()
-    
-    
+
     override func setUp() {
         super.setUp()
-        
+
         // Put setup code here. This method is called before the invocation of each test method in the class.
         app.launch()
         
@@ -27,11 +26,11 @@ class SwapiUITests: XCTestCase {
         
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func testTableView(identifier: String) {
         let table = app.tables.matching(identifier: identifier).element(boundBy: 0)
         
@@ -41,12 +40,12 @@ class SwapiUITests: XCTestCase {
             table.cells.matching(.staticText, identifier: cell.value as? String)
         }
     }
-    
+
     func onTapMenuBar(index: Int) {
         let categoryTable = app.tables.matching(identifier: "CategoriesTableView").element(boundBy: 0)
         categoryTable.cells.element(boundBy: index).tap()
     }
-    
+
     func testEntitiesTableView() {
         app.launch()
 
@@ -100,7 +99,7 @@ extension XCUIElement {
             swipeUp()
         }
     }
-    
+
     var isVisible: Bool {
         guard self.exists && !self.frame.isEmpty else { return false }
         return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)

@@ -12,51 +12,48 @@
 
 import UIKit
 
-
 class SpeciesViewController: UITableViewController {
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
 
     // MARK: Object lifecycle
-  
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-  
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-  
-  
+
     // MARK: Routing
     var router = Router()
-  
-  
+
     // MARK: View lifecycle
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.accessibilityIdentifier = "SpeciesTableView"
-        
+
         if let revealVC = revealViewController() {
             revealMenuBar.target = revealVC
             revealMenuBar.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
     }
-    
+
     // MARK: Tableview setup
-    
+
     var species: Dictionary<Int, Specie>? = LocalCache.species
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return species?.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciesTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "SpeciesTableViewCelll")
@@ -71,7 +68,7 @@ class SpeciesViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(species?.keys ?? Dictionary<Int, Specie>().keys)
         router.routeTo(from: self, to: .SpecieDetails, param: species?[keysArray[indexPath.row]])

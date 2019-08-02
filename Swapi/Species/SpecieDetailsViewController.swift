@@ -10,7 +10,7 @@ import Foundation
 
 struct SpecieDetailsViewModel {
     weak var specieDetailsVC: SpecieDetailsViewController?
-    
+
     var homeWorlds: [String] {
         let specieDatas = specieDetailsVC?.routeSpecieData
         var result: [String] = []
@@ -18,10 +18,10 @@ struct SpecieDetailsViewModel {
             let id = Int(homeWorld.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.planets?[id]?.name ?? "")
         }
-        
+    
         return result
     }
-    
+
     var characters: [String] {
         let specieDatas = specieDetailsVC?.routeSpecieData
         var result: [String] = []
@@ -29,10 +29,10 @@ struct SpecieDetailsViewModel {
             let id = Int(character.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.characters?[id]?.name ?? "")
         }
-        
+    
         return result
     }
-    
+
     var films: [String] {
         let specieDatas = specieDetailsVC?.routeSpecieData
         var result: [String] = []
@@ -44,19 +44,18 @@ struct SpecieDetailsViewModel {
     }
 }
 
-
 class SpecieDetailsViewController: UIViewController {
     var routeSpecieData: Specie?
-    
+
     var viewModel: SpecieDetailsViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = routeSpecieData?.name
         viewModel = SpecieDetailsViewModel(specieDetailsVC: self)
     }
-    
+
     func presentDetails() {
         // TODO: present details to UIView
     }

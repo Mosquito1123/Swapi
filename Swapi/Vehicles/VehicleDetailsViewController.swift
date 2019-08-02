@@ -10,9 +10,9 @@ import UIKit
 
 
 struct VehicleDetailsViewModel {
-    
+
     weak var vehicleDetailsVC: VehicleDetailsViewController?
-    
+
     var films: [String] {
         let vehicleDatas = vehicleDetailsVC?.routeVehiclepData
         var result: [String] = []
@@ -22,7 +22,7 @@ struct VehicleDetailsViewModel {
         }
         return result
     }
-    
+
     var pilots: [String] {
         let vehicleDatas = vehicleDetailsVC?.routeVehiclepData
         var result: [String] = []
@@ -37,9 +37,9 @@ struct VehicleDetailsViewModel {
 
 class VehicleDetailsViewController: UIViewController {
     var routeVehiclepData: Vehicle?
-    
+
     var viewModel: VehicleDetailsViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -48,7 +48,7 @@ class VehicleDetailsViewController: UIViewController {
         
         presentDetails()
     }
-    
+
     func presentDetails() {
         // TODO: present details to UIView
     }

@@ -16,47 +16,46 @@ import UIKit
 class PlanetsViewController: UITableViewController {
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
 
-
     // MARK: Object lifecycle
-  
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-  
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-  
+
     // MARK: Routing
-    
+
     var router = Router()
-  
+
     // MARK: View lifecycle
-  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.accessibilityIdentifier = "PlanetsTableView"
-        
+
         if let revealVC = revealViewController() {
             revealMenuBar.target = revealVC
             revealMenuBar.action = #selector(SWRevealViewController.revealToggle(_:))
             view.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
     }
-    
+
     // MARK: Tableview setup
-    
+
     var planets: Dictionary<Int, Planet>? = LocalCache.planets
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return planets?.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlanetsTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "PlanetsTableViewCelll")
@@ -64,14 +63,14 @@ class PlanetsViewController: UITableViewController {
         let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
         let planet = planets?[keysArray[indexPath.row]]
         cell.textLabel?.text = planet?.name
-        
+
         // test identifiers
         cell.accessibilityIdentifier = planet?.name ?? ""
         cell.accessibilityValue = planet?.name ?? ""
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
         router.routeTo(from: self, to: .PlanetDetails, param: planets?[keysArray[indexPath.row]])

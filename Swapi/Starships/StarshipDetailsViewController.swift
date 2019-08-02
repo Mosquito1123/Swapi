@@ -10,7 +10,7 @@ import UIKit
 
 struct StarshipDetailsViewModel {
     weak var starshipDetailsVC: StarshipDetailsViewController?
-    
+
     var films: [String] {
         let starshipDatas = starshipDetailsVC?.routeStarshipData
         var result: [String] = []
@@ -20,7 +20,7 @@ struct StarshipDetailsViewModel {
         }
         return result
     }
-    
+
     var pilots: [String] {
         let starshipDatas = starshipDetailsVC?.routeStarshipData
         var result: [String] = []
@@ -34,9 +34,9 @@ struct StarshipDetailsViewModel {
 
 class StarshipDetailsViewController: UIViewController {
     var routeStarshipData: Starship?
-    
+
     var viewModel: StarshipDetailsViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,7 +44,7 @@ class StarshipDetailsViewController: UIViewController {
         viewModel = StarshipDetailsViewModel(starshipDetailsVC: self)
         
     }
-    
+
     func presentDetails() {
         // TODO: present details to UIView
     }

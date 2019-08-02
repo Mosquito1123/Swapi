@@ -17,7 +17,6 @@ protocol RoutingLogic
     func routeTo(from: UIViewController, to route: Router.Route, param: Any?)
 }
 
-
 class Router: NSObject, RoutingLogic {
     // MARK: Routing
     enum Route: String {
@@ -28,7 +27,7 @@ class Router: NSObject, RoutingLogic {
         case StarshipDetails
         case VehicleDetails
     }
-    
+
     func routeTo(from: UIViewController, to route: Router.Route, param: Any?) {
         var toVC: UIViewController = UIViewController()
         switch route {

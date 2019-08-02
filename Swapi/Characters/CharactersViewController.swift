@@ -21,9 +21,9 @@ protocol CharactersDataStore {
 
 
 class CharactersViewController: UITableViewController {
-    
+
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
-    
+
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -79,7 +79,7 @@ class CharactersViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(characters?.keys ?? Dictionary<Int, People>().keys)
         router.routeTo(from: self, to: .CharacterDetails, param: characters?[keysArray[indexPath.row]])

@@ -10,7 +10,7 @@ import Foundation
 
 struct PlanetDetailsViewModel {
     weak var planetDetailsVC: PlanetDetailsViewController?
-    
+
     var residents: [String] {
         let planetDatas = planetDetailsVC?.routePlanetData
         var result: [String] = []
@@ -21,7 +21,7 @@ struct PlanetDetailsViewModel {
         }
         return result
     }
-    
+
     var films: [String] {
         let planetDatas = planetDetailsVC?.routePlanetData
         var result: [String] = []
@@ -36,17 +36,16 @@ struct PlanetDetailsViewModel {
 
 class PlanetDetailsViewController: UIViewController {
     var routePlanetData: Planet?
-    
+
     var viewModel: PlanetDetailsViewModel?
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = routePlanetData?.name
         viewModel = PlanetDetailsViewModel(planetDetailsVC: self)
     }
-    
+
     func presentDetails() {
         // TODO: present details to UIView
     }

@@ -10,7 +10,7 @@ import Foundation
 
 struct CharacterDetailsViewModel {
     weak var characterDetailsVC: CharacterDetailsViewController?
-    
+
     var homeWorlds: [String] {
         let characterDatas = characterDetailsVC?.routeCharacterData
         var result: [String] = []
@@ -21,7 +21,7 @@ struct CharacterDetailsViewModel {
         }
         return result
     }
-    
+
     var films: [String] {
         let characterDatas = characterDetailsVC?.routeCharacterData
         var result: [String] = []
@@ -33,7 +33,7 @@ struct CharacterDetailsViewModel {
         
         return result
     }
-    
+
     var vehicles: [String] {
         let characterDatas = characterDetailsVC?.routeCharacterData
         var result: [String] = []
@@ -44,7 +44,7 @@ struct CharacterDetailsViewModel {
         }
         return result
     }
-    
+
     var starships: [String] {
         let characterDatas = characterDetailsVC?.routeCharacterData
         var result: [String] = []
@@ -60,9 +60,9 @@ struct CharacterDetailsViewModel {
 
 class CharacterDetailsViewController: UIViewController {
     var routeCharacterData: People?
-    
+
     var viewModel: CharacterDetailsViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -72,7 +72,7 @@ class CharacterDetailsViewController: UIViewController {
         
         presentDetails()
     }
-    
+
     func presentDetails() {
         // TODO: present details to UIView
     }
