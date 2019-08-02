@@ -7,7 +7,7 @@ target 'Swapi' do
 
   # Pods for Swapi
   pod 'Alamofire', '~>4.8.2'
-  pod 'SwiftyJSON'
+  pod 'SwiftyJSON', '~>4.2'
 
   target 'SwapiTests' do
     inherit! :search_paths
@@ -18,7 +18,7 @@ target 'Swapi' do
     inherit! :search_paths
     # Pods for testing
     pod 'Alamofire', '~>4.8.2'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~>4.2'
   end
 
 end
