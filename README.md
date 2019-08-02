@@ -13,7 +13,7 @@ API and back end service are already written and credit to https://github.com/ph
 
 # Design Patter
 
-This app currently uses Clean IOS and ViewModel architecture.
+This app currently uses Clean IOS and ViewModel architecture. It also contains SwapiUiTests.swfit and SwapiTests.swift for continous integration
 
 # Contribution
 
