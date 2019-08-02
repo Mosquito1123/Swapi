@@ -6,7 +6,7 @@ target 'Swapi' do
   use_frameworks!
 
   # Pods for Swapi
-  pod 'Alamofire'
+  pod 'Alamofire', '~>4.8.2'
   pod 'SwiftyJSON'
 
   target 'SwapiTests' do
@@ -17,7 +17,7 @@ target 'Swapi' do
   target 'SwapiUITests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Alamofire'
+    pod 'Alamofire', '~>4.8.2'
     pod 'SwiftyJSON'
   end
 
