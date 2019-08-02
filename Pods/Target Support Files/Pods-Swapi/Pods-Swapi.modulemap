@@ -1,0 +1,6 @@
+framework module Pods_Swapi {
+  umbrella header "Pods-Swapi-umbrella.h"
+
+  export *
+  module * { export * }
+}

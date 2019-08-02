@@ -9,26 +9,100 @@
 import XCTest
 
 class SwapiUITests: XCTestCase {
-
+    
+    var app: XCUIApplication = XCUIApplication()
+    
+    
     override func setUp() {
+        super.setUp()
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
+        app.launch()
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
+        
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
+        
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testTableView(identifier: String) {
+        let table = app.tables.matching(identifier: identifier).element(boundBy: 0)
+        
+        for index in 0..<table.cells.count {
+            let cell = table.cells.element(boundBy: index)
+            table.scrollToElement(element: cell)
+            table.cells.matching(.staticText, identifier: cell.value as? String)
+        }
     }
+    
+    func onTapMenuBar(index: Int) {
+        let categoryTable = app.tables.matching(identifier: "CategoriesTableView").element(boundBy: 0)
+        categoryTable.cells.element(boundBy: index).tap()
+    }
+    
+    func testEntitiesTableView() {
+        app.launch()
 
+        sleep(10)
+
+        // characters
+        testTableView(identifier: "CharactersTableView")
+
+        // films
+        let charactersMenuBar = app.buttons.matching(identifier: "CharactersMenuBar").element(boundBy: 0)
+        charactersMenuBar.tap()
+
+        onTapMenuBar(index: 1)
+        testTableView(identifier: "FilmsTableView")
+
+        // planets
+        let filmsMenuBar = app.buttons.matching(identifier: "FilmsMenuBar").element(boundBy: 0)
+        filmsMenuBar.tap()
+
+        onTapMenuBar(index: 2)
+        testTableView(identifier: "PlanetsTableView")
+
+        // species
+        let planetsMenuBar = app.buttons.matching(identifier: "PlanetsMenuBar").element(boundBy: 0)
+        planetsMenuBar.tap()
+
+        onTapMenuBar(index: 3)
+        testTableView(identifier: "SpeciesTableView")
+
+        // starships
+        let speciesMenuBar = app.buttons.matching(identifier: "SpeciesMenuBar").element(boundBy: 0)
+        speciesMenuBar.tap()
+
+        onTapMenuBar(index: 4)
+        testTableView(identifier: "StarshipsTableView")
+
+        // vehicles
+        let starshipsMenuBar = app.buttons.matching(identifier: "StarshipsMenuBar").element(boundBy: 0)
+        starshipsMenuBar.tap()
+
+        onTapMenuBar(index: 5)
+        testTableView(identifier: "VehiclesTableView")
+
+        app.terminate()
+    }
+}
+
+extension XCUIElement {
+    func scrollToElement(element: XCUIElement) {
+        while !element.isVisible {
+            swipeUp()
+        }
+    }
+    
+    var isVisible: Bool {
+        guard self.exists && !self.frame.isEmpty else { return false }
+        return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
+    }
 }
