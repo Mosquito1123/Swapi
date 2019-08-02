@@ -11,6 +11,10 @@ API and back end service are already written and credit to https://github.com/ph
 * Carvilsi
 * Andrea Stagi
 
+# Design Patter
+
+This app currently uses Clean IOS and ViewModel architecture.
+
 # Contribution
 
 Since this is the early stage. All contributions are more than welcomed.
