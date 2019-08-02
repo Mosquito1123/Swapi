@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi.svg?branch=master)](https://travis-ci.com/tdle94/Swapi)
+https://cocoapod-badges.herokuapp.com/v/$PODNAME/badge.png
 
 # Swapi
 
