@@ -15,7 +15,7 @@
 		040A0ADC22EFD28A000DF6F1 /* LaunchScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD622EFD28A000DF6F1 /* LaunchScreenModels.swift */; };
 		040A0ADD22EFD28A000DF6F1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD722EFD28A000DF6F1 /* LaunchScreenViewController.swift */; };
 		040A0ADE22EFD28A000DF6F1 /* LaunchScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD822EFD28A000DF6F1 /* LaunchScreenInteractor.swift */; };
-		040A0AE022F012F6000DF6F1 /* CharactersRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0ADF22F012F6000DF6F1 /* CharactersRouter.swift */; };
+		040A0AE022F012F6000DF6F1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0ADF22F012F6000DF6F1 /* Router.swift */; };
 		040A0AE222F0162A000DF6F1 /* CharacterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AE122F0162A000DF6F1 /* CharacterDetailsViewController.swift */; };
 		040A0AE522F0457A000DF6F1 /* FilmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AE422F0457A000DF6F1 /* FilmDetailsViewController.swift */; };
 		040A0AE722F04981000DF6F1 /* PlanetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AE622F04981000DF6F1 /* PlanetDetailsViewController.swift */; };
@@ -67,7 +67,7 @@
 		040A0AD622EFD28A000DF6F1 /* LaunchScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenModels.swift; sourceTree = "<group>"; };
 		040A0AD722EFD28A000DF6F1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		040A0AD822EFD28A000DF6F1 /* LaunchScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenInteractor.swift; sourceTree = "<group>"; };
-		040A0ADF22F012F6000DF6F1 /* CharactersRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersRouter.swift; sourceTree = "<group>"; };
+		040A0ADF22F012F6000DF6F1 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		040A0AE122F0162A000DF6F1 /* CharacterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsViewController.swift; sourceTree = "<group>"; };
 		040A0AE422F0457A000DF6F1 /* FilmDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailsViewController.swift; sourceTree = "<group>"; };
 		040A0AE622F04981000DF6F1 /* PlanetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailsViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		040A0AE322F04289000DF6F1 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				040A0ADF22F012F6000DF6F1 /* CharactersRouter.swift */,
+				040A0ADF22F012F6000DF6F1 /* Router.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -574,7 +574,7 @@
 				040D799E22F05AD1002111A6 /* StarshipsViewController.swift in Sources */,
 				040A18C822EED16000EA9D83 /* MenuBarTablViewController.swift in Sources */,
 				040A0ADD22EFD28A000DF6F1 /* LaunchScreenViewController.swift in Sources */,
-				040A0AE022F012F6000DF6F1 /* CharactersRouter.swift in Sources */,
+				040A0AE022F012F6000DF6F1 /* Router.swift in Sources */,
 				040A187D22EEC12800EA9D83 /* AppDelegate.swift in Sources */,
 				040849CE22EF418400739FBC /* SpeciesViewController.swift in Sources */,
 				040A18C022EEC2A000EA9D83 /* StarWars.swift in Sources */,
