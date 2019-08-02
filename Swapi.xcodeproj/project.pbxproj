@@ -404,13 +404,16 @@
 				TargetAttributes = {
 					040A187822EEC12800EA9D83 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 					};
 					040A188C22EEC12900EA9D83 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 						TestTargetID = 040A187822EEC12800EA9D83;
 					};
 					040A189722EEC12900EA9D83 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 						TestTargetID = 040A187822EEC12800EA9D83;
 					};
 				};
