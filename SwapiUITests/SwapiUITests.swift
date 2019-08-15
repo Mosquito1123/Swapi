@@ -18,8 +18,6 @@ class SwapiUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         app.launch()
         
-        sleep(10)
-        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         
@@ -27,6 +25,7 @@ class SwapiUITests: XCTestCase {
         XCUIApplication().launch()
         
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+
     }
 
     override func tearDown() {
@@ -93,7 +92,31 @@ class SwapiUITests: XCTestCase {
 
         app.terminate()
     }
+    
+    func testDetailsView() {
+        app.launch()
+
+        sleep(10)
+
+        let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
+        
+        table.cells.element(boundBy: 0).tap()
+        app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
+
+        app.buttons.element(matching: .button, identifier: "charactersLeftScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
+        
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        
+        table.cells.element(boundBy: 1).tap()
+        app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeLeft()
+        app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeRight()
+        
+        
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        
+    }
 }
+
 
 extension XCUIElement {
     func scrollToElement(element: XCUIElement) {
