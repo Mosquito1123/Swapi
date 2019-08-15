@@ -7,4 +7,3 @@ xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
 podfile: Podfile
 before_install:
 - gem install cocoapods --pre
-- pod install --repo-update
