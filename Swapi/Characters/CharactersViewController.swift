@@ -19,7 +19,6 @@ protocol CharactersDataStore {
 
 }
 
-
 class CharactersViewController: UITableViewController {
 
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
@@ -81,7 +80,6 @@ class CharactersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(characters?.keys ?? Dictionary<Int, People>().keys)
-        router.routeTo(from: self, to: .CharacterDetails, param: characters?[keysArray[indexPath.row]])
+        router.routeTo(from: self, to: .CharacterDetails, param: indexPath.row)
     }
 }

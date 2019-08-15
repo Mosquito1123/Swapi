@@ -18,6 +18,8 @@ class SwapiUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         app.launch()
         
+        sleep(10)
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         
@@ -38,6 +40,8 @@ class SwapiUITests: XCTestCase {
             let cell = table.cells.element(boundBy: index)
             table.scrollToElement(element: cell)
             table.cells.matching(.staticText, identifier: cell.value as? String)
+            cell.tap()
+            app.navigationBars.buttons.element(boundBy: 0).tap()
         }
     }
 

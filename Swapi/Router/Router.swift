@@ -32,27 +32,27 @@ class Router: NSObject, RoutingLogic {
         var toVC: UIViewController = UIViewController()
         switch route {
         case .CharacterDetails:
-            toVC = CharacterDetailsViewController()
-            (toVC as! CharacterDetailsViewController).routeCharacterData = param as? People
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "CharacterDetailsViewController")
+            (toVC as! CharacterDetailsViewController).characterIndex = param as? Int
             break
         case .FilmDetails:
-            toVC = FilmDetailsViewController()
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "FilmDetailsViewController")
             (toVC as! FilmDetailsViewController).routeFilmData = param as? Film
             break
         case .PlanetDetails:
-            toVC = PlanetDetailsViewController()
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")
             (toVC as! PlanetDetailsViewController).routePlanetData = param as? Planet
             break
         case .SpecieDetails:
-            toVC = SpecieDetailsViewController()
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "SpecieDetailsViewController")
             (toVC as! SpecieDetailsViewController).routeSpecieData = param as? Specie
             break
         case .StarshipDetails:
-            toVC = StarshipDetailsViewController()
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "StarshipDetailsViewController")
             (toVC as! StarshipDetailsViewController).routeStarshipData = param as? Starship
             break
         case .VehicleDetails:
-            toVC = VehicleDetailsViewController()
+            toVC = from.storyboard!.instantiateViewController(withIdentifier: "VehicleDetailsViewController")
             (toVC as! VehicleDetailsViewController).routeVehiclepData = param as? Vehicle
             break
         }
