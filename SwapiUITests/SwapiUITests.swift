@@ -33,8 +33,11 @@ class SwapiUITests: XCTestCase {
     }
 
     func testTableView(identifier: String) {
+        let exists = NSPredicate(format: "exists == true")
         let table = app.tables.matching(identifier: identifier).element(boundBy: 0)
-        
+        expectation(for: exists, evaluatedWith: table, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
+
         for index in 0..<table.cells.count {
             let cell = table.cells.element(boundBy: index)
             table.scrollToElement(element: cell)
@@ -48,9 +51,7 @@ class SwapiUITests: XCTestCase {
     }
 
     func testEntitiesTableView() {
-        app.launch()
 
-        sleep(20)
 
         // characters
         testTableView(identifier: "CharactersTableView")
@@ -90,15 +91,16 @@ class SwapiUITests: XCTestCase {
         onTapMenuBar(index: 5)
         testTableView(identifier: "VehiclesTableView")
 
-        app.terminate()
     }
     
     func testDetailsView() {
-        app.launch()
-
-        sleep(20)
+        
 
         let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
+        
+        let exists = NSPredicate(format: "exists == true")
+        expectation(for: exists, evaluatedWith: table, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         table.cells.element(boundBy: 0).tap()
         app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
