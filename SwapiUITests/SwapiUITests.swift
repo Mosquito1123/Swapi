@@ -50,7 +50,7 @@ class SwapiUITests: XCTestCase {
     func testEntitiesTableView() {
         app.launch()
 
-        sleep(10)
+        sleep(15)
 
         // characters
         testTableView(identifier: "CharactersTableView")
@@ -96,22 +96,21 @@ class SwapiUITests: XCTestCase {
     func testDetailsView() {
         app.launch()
 
-        sleep(10)
+        sleep(15)
 
         let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
-        
+
         table.cells.element(boundBy: 0).tap()
         app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
 
         app.buttons.element(matching: .button, identifier: "charactersLeftScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
-        
+
         app.navigationBars.buttons.element(boundBy: 0).tap()
-        
+
         table.cells.element(boundBy: 1).tap()
         app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeLeft()
         app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeRight()
-        
-        
+
         app.navigationBars.buttons.element(boundBy: 0).tap()
         
     }
