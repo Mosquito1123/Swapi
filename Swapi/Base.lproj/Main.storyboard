@@ -479,7 +479,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="arrowLeft"/>
                                 <connections>
-                                    <action selector="leftArrowAction:" destination="0c6-WH-hdv" eventType="touchUpInside" id="DIx-80-oUx"/>
+                                    <action selector="characterScrollViewLeftArrowAction:" destination="0c6-WH-hdv" eventType="touchUpInside" id="JGx-fV-8qw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJZ-WZ-l9c">
@@ -487,7 +487,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="arrowRight"/>
                                 <connections>
-                                    <action selector="rightArrowAction:" destination="0c6-WH-hdv" eventType="touchUpInside" id="SyW-Xr-FjN"/>
+                                    <action selector="characterScrollViewRightArrowAction:" destination="0c6-WH-hdv" eventType="touchUpInside" id="SK7-Rv-8my"/>
                                 </connections>
                             </button>
                         </subviews>

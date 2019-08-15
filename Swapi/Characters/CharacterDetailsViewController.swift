@@ -133,6 +133,7 @@ class CharacterDetailsViewController: UIViewController {
 
         view.backgroundColor = .white
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
+        scrollView.delegate = self
 
         
         if let index = characterIndex {
@@ -156,13 +157,13 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: Character scroll view logic
 
-    @IBAction func leftArrowAction(_ sender: Any) {
+    @IBAction func characterScrollViewLeftArrowAction(_ sender: Any) {
         if characterIndex! > 0 {
             viewModel?.setCharacter(page: .left)
         }
     }
-
-    @IBAction func rightArrowAction(_ sender: Any) {
+    
+    @IBAction func characterScrollViewRightArrowAction(_ sender: Any) {
         if characterIndex! < 87  {
             viewModel?.setCharacter(page: .right)
         }
