@@ -40,8 +40,6 @@ class SwapiUITests: XCTestCase {
             let cell = table.cells.element(boundBy: index)
             table.scrollToElement(element: cell)
             table.cells.matching(.staticText, identifier: cell.value as? String)
-            cell.tap()
-            app.navigationBars.buttons.element(boundBy: 0).tap()
         }
     }
 
