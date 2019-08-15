@@ -50,7 +50,7 @@ class SwapiUITests: XCTestCase {
     func testEntitiesTableView() {
         app.launch()
 
-        sleep(15)
+        sleep(20)
 
         // characters
         testTableView(identifier: "CharactersTableView")
@@ -96,7 +96,7 @@ class SwapiUITests: XCTestCase {
     func testDetailsView() {
         app.launch()
 
-        sleep(15)
+        sleep(20)
 
         let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
 
