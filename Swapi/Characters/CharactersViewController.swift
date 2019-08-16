@@ -15,11 +15,9 @@
 
 import UIKit
 
-protocol CharactersDataStore {
-
-}
-
 class CharactersViewController: UITableViewController {
+
+    // MARK: Views
 
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
 
@@ -42,7 +40,7 @@ class CharactersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.accessibilityIdentifier = "CharactersTableView"
-    
+
         if let revealVC = revealViewController() {
             revealMenuBar.target = revealVC
             revealMenuBar.action = #selector(SWRevealViewController.revealToggle(_:))

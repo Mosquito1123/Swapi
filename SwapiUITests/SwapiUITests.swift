@@ -52,7 +52,7 @@ class SwapiUITests: XCTestCase {
         let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: table, handler: nil)
-        waitForExpectations(timeout: 60, handler: nil)
+        waitForExpectations(timeout: 20, handler: nil)
 
         // characters
         testTableView(identifier: "CharactersTableView")
@@ -101,7 +101,8 @@ class SwapiUITests: XCTestCase {
         
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: table, handler: nil)
-        waitForExpectations(timeout: 60, handler: nil)
+
+        waitForExpectations(timeout: 20, handler: nil)
 
         table.cells.element(boundBy: 0).tap()
         app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)

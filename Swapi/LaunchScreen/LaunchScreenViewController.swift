@@ -27,6 +27,20 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
 
     var interactor: LaunchScreenBusinessLogic?
     var router: (NSObjectProtocol & LaunchScreenRoutingLogic & LaunchScreenDataPassing)?
+    
+    lazy var tryAgainButton: UIButton = {
+        let button = UIButton()
+        button.accessibilityIdentifier = "tryServiceRequestAgain"
+        button.setTitle("Try Again", for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .lightText
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 0.5
+        button.addTarget(self, action: #selector(preFetchAllStarwarsEntities), for: .touchUpInside)
+        
+        return button
+    }()
 
     // MARK: Object lifecycle
 
@@ -75,7 +89,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
 
     // MARK: Prefetch entities and cach them to local database
 
-    func preFetchAllStarwarsEntities() {
+    @objc func preFetchAllStarwarsEntities() {
         interactor?.preFetchCharacters(request: LaunchScreen.Fetch.Request(sequence: 1..<10))
         interactor?.preFetchFilms()
         interactor?.preFetchPlanets(request: LaunchScreen.Fetch.Request(sequence: 1..<8))
@@ -84,8 +98,20 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
         interactor?.preFetchVehicles(request: LaunchScreen.Fetch.Request(sequence: 1..<5))
 
         Service.dispatchGroup.notify(queue: .main) {
-            print("finish pre-fetching all starwars entities")
-            self.performSegue(withIdentifier: "first_screen", sender: nil)
+            if let _ = LocalCache.characters, let _ = LocalCache.films, let _ = LocalCache.planets,
+                let _ = LocalCache.species, let _ = LocalCache.starships, let _ = LocalCache.vehicles {
+               
+                print("finish pre-fetching all starwars entities")
+                self.performSegue(withIdentifier: "first_screen", sender: nil)
+
+            } else {
+                print("error pre-fetching starwards properties")
+                self.view.addSubview(self.tryAgainButton)
+                self.tryAgainButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+                self.tryAgainButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                self.tryAgainButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                self.tryAgainButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            }
         }
 
     }

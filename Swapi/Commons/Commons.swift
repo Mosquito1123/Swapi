@@ -2,6 +2,9 @@
 //  ViewModel.swift
 //  Swapi
 //
+//  This file is intended to store common class, properties,
+//  and protocol that can be used throughout the app
+//
 //  Created by TuyenLe on 8/15/19.
 //  Copyright © 2019 TuyenLe. All rights reserved.
 //
