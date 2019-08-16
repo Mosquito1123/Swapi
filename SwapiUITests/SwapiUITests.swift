@@ -18,6 +18,7 @@ class SwapiUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         app.launch()
         
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         
@@ -33,10 +34,7 @@ class SwapiUITests: XCTestCase {
     }
 
     func testTableView(identifier: String) {
-        let exists = NSPredicate(format: "exists == true")
         let table = app.tables.matching(identifier: identifier).element(boundBy: 0)
-        expectation(for: exists, evaluatedWith: table, handler: nil)
-        waitForExpectations(timeout: 20, handler: nil)
 
         for index in 0..<table.cells.count {
             let cell = table.cells.element(boundBy: index)
@@ -51,8 +49,10 @@ class SwapiUITests: XCTestCase {
     }
 
     func testEntitiesTableView() {
-
-        
+        let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
+        let exists = NSPredicate(format: "exists == true")
+        expectation(for: exists, evaluatedWith: table, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
 
         // characters
         testTableView(identifier: "CharactersTableView")
@@ -101,7 +101,7 @@ class SwapiUITests: XCTestCase {
         
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: table, handler: nil)
-        waitForExpectations(timeout: 20, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
 
         table.cells.element(boundBy: 0).tap()
         app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)

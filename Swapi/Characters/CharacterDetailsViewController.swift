@@ -73,7 +73,7 @@ class CharacterDetailsViewModel: ViewModel {
         super.setCharacter(page: page)
 
         if let vc = characterDetailsVC {
-            vc.characterData = Array(LocalCache.characters!.values)[vc.characterIndex!]
+            vc.characterData = Array(LocalCache.characters!.values)[vc.pageIndex]
             vc.title = vc.characterData?.name
         }
     }
@@ -113,7 +113,7 @@ class CharacterDetailsViewController: UIViewController {
     // MARK: scroll view properties
 
     @IBOutlet weak var charactersScrollView: UIScrollView!
-    
+
     @IBOutlet weak var characterScrollViewLeftArrow: UIButton!
 
     @IBOutlet weak var characterScrollViewRightArrow: UIButton!
@@ -124,7 +124,7 @@ class CharacterDetailsViewController: UIViewController {
 
     var viewModel: CharacterDetailsViewModel?
 
-    var characterIndex: Int?
+    private var characterIndex: Int?
 
     // MARK: initial setup
 
@@ -135,7 +135,7 @@ class CharacterDetailsViewController: UIViewController {
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
         scrollView.delegate = self
 
-        
+
         if let index = characterIndex {
             characterData = Array(LocalCache.characters!.values)[index]
             title = characterData?.name
@@ -148,7 +148,7 @@ class CharacterDetailsViewController: UIViewController {
     func presentDetails() {
         // TODO: present details to UIView
     }
-    
+
     // MARK: Device rotation
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -158,23 +158,22 @@ class CharacterDetailsViewController: UIViewController {
     // MARK: Character scroll view logic
 
     @IBAction func characterScrollViewLeftArrowAction(_ sender: Any) {
-        if characterIndex! > 0 {
+        if pageIndex > 0 {
             viewModel?.setCharacter(page: .left)
         }
     }
-    
+
     @IBAction func characterScrollViewRightArrowAction(_ sender: Any) {
-        if characterIndex! < 87  {
+        if pageIndex < 87  {
             viewModel?.setCharacter(page: .right)
         }
     }
 }
 
 extension CharacterDetailsViewController: UIScrollViewDelegate {
-
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        characterIndex = scrollView.page
-        characterData = Array(LocalCache.characters!.values)[characterIndex!]
+        pageIndex = scrollView.page
+        characterData = Array(LocalCache.characters!.values)[pageIndex]
         title = characterData?.name
     }
 }
