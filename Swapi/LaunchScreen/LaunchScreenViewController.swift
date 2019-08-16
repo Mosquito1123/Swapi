@@ -27,7 +27,9 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
 
     var interactor: LaunchScreenBusinessLogic?
     var router: (NSObjectProtocol & LaunchScreenRoutingLogic & LaunchScreenDataPassing)?
-    
+
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+
     lazy var tryAgainButton: UIButton = {
         let button = UIButton()
         button.accessibilityIdentifier = "tryServiceRequestAgain"
@@ -90,6 +92,8 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
     // MARK: Prefetch entities and cach them to local database
 
     @objc func preFetchAllStarwarsEntities() {
+        tryAgainButton.removeFromSuperview()
+        loadingIndicator.startAnimating()
         interactor?.preFetchCharacters(request: LaunchScreen.Fetch.Request(sequence: 1..<10))
         interactor?.preFetchFilms()
         interactor?.preFetchPlanets(request: LaunchScreen.Fetch.Request(sequence: 1..<8))
@@ -106,6 +110,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
 
             } else {
                 print("error pre-fetching starwards properties")
+                self.loadingIndicator.stopAnimating()
                 self.view.addSubview(self.tryAgainButton)
                 self.tryAgainButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
                 self.tryAgainButton.heightAnchor.constraint(equalToConstant: 30).isActive = true

@@ -451,10 +451,20 @@
                     <view key="view" contentMode="scaleToFill" id="F3z-7x-R3G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2dx-yk-ahg">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2dx-yk-ahg" firstAttribute="centerX" secondItem="cHD-b3-OWa" secondAttribute="centerX" id="SfC-gC-N33"/>
+                            <constraint firstItem="2dx-yk-ahg" firstAttribute="centerY" secondItem="cHD-b3-OWa" secondAttribute="centerY" id="Wgd-X4-v87"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cHD-b3-OWa"/>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="2dx-yk-ahg" id="KSR-Gi-eAc"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="first_screen" id="iYh-DD-1PF"/>
                     </connections>
                 </viewController>
