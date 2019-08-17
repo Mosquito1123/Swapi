@@ -27,14 +27,8 @@ class LaunchScreenWorker
     }
 
     func preFetchFilms(completion: @escaping (Data?) -> Void) {
-        category.getFilms{ (films: () throws -> Data?) -> Void in
-            do {
-                let data = try films()
-                completion(data)
-            } catch let error {
-                print(error)
-                completion(nil)
-            }
+        category.getFilms { (datas: Data?) in
+            completion(datas)
         }
     }
 

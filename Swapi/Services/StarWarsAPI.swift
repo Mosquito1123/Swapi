@@ -11,7 +11,7 @@ import Alamofire
 
 protocol CategoryProtocol {
     func getCharacters(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void)
-    func getFilms(completion: @escaping (() throws -> Data?) -> Void)
+    func getFilms(completion: @escaping (Data?) -> Void)
     func getPlanets(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void)
     func getSpecies(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void)
     func getStarships(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void)
@@ -64,9 +64,26 @@ class CategoryProtocolImplementation: CategoryProtocol {
 
     }
 
-    func getFilms(completion: @escaping (() throws -> Data?) -> Void) {
+    func getFilms(completion: @escaping (Data?) -> Void) {
         let url = "https://swapi.co/api/films/"
-        Service.request(url: url, completion)
+        var result: Data?
+
+        Service.dispatchGroup.enter()
+        Service.request(url: url) { (films: () throws -> Data?) in
+            do {
+                let datas = try films()
+                result = datas
+                Service.dispatchGroup.leave()
+            } catch let error {
+                print("Error fetching planets: ", error)
+                result = nil
+                Service.dispatchGroup.leave()
+            }
+        }
+        
+        Service.dispatchGroup.notify(queue: .main) {
+            completion(result)
+        }
     }
 
     func getPlanets(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void) {
