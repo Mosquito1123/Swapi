@@ -20,10 +20,13 @@ protocol DetailScrollViewProtocol {
 }
 
 class ViewModel {
-    
+
     var detailScrollViewProtocol: DetailScrollViewProtocol
+
     var detailsVC: UIViewController
     
+    var previousImageViewContentOffset: CGPoint = .zero
+
     enum PageDirection {
         case left
         case right
@@ -65,6 +68,10 @@ class ViewModel {
 
     func scrollViewSetup() {
         
+        set(direction: .same)
+        
+        // set mask into constraints to false
+        
         detailScrollViewProtocol.imageScrollView.translatesAutoresizingMaskIntoConstraints = false
         detailScrollViewProtocol.leftArrow.translatesAutoresizingMaskIntoConstraints = false
         detailScrollViewProtocol.rightArrow.translatesAutoresizingMaskIntoConstraints = false
@@ -74,13 +81,16 @@ class ViewModel {
 
         detailScrollViewProtocol.mainScrollView.contentSize = CGSize(width: detailsVC.view.frame.width, height: 0)
         detailScrollViewProtocol.imageScrollView.contentSize = CGSize(width: detailScrollViewProtocol.imageScrollView.frame.width * 87, height: 0)
-        set(direction: .same)
         
         // vertical main scroll view constraints
         
-        mainScrollViewTopConstraint = detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.view.topAnchor, constant: detailsVC.navigationController?.navigationBar.frame.maxY ?? 0)
+        if #available(iOS 11.0, *) {
+            mainScrollViewTopConstraint = detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.view.safeAreaLayoutGuide.topAnchor)
+        } else {
+            mainScrollViewTopConstraint = detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.topLayoutGuide.bottomAnchor, constant: 30)
+        }
         mainScrollViewTopConstraint.isActive = true
-        mainScrollViewHeightConstraint = detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalToConstant: detailsVC.view.bounds.height)
+        mainScrollViewHeightConstraint = detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalTo: detailsVC.view.heightAnchor)
         mainScrollViewHeightConstraint.isActive = true
         imageScrollViewWidthConstraint = detailScrollViewProtocol.imageScrollView.widthAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.widthAnchor, constant: -80)
         imageScrollViewWidthConstraint.isActive = true
@@ -88,9 +98,9 @@ class ViewModel {
         // horizontal image scroll view constraints
 
         if UIDevice.current.orientation.isLandscape {
-            imageScrollViewHeightConstraint = detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 2)
-            imageLeftArrowHeightConstraint = detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 2)
-            imageRightArrowHeightConstraint = detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 2)
+            imageScrollViewHeightConstraint = detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
+            imageLeftArrowHeightConstraint = detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
+            imageRightArrowHeightConstraint = detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
         } else {
             mainScrollViewHeightConstraint = detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalToConstant: detailsVC.view.bounds.height)
             imageScrollViewHeightConstraint = detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
@@ -101,10 +111,6 @@ class ViewModel {
         imageScrollViewHeightConstraint.isActive = true
         imageLeftArrowHeightConstraint.isActive = true
         imageRightArrowHeightConstraint.isActive = true
-
-        detailScrollViewProtocol.imageScrollView.backgroundColor = UIColor(red: 125/241, green: 125/243, blue: 125/244, alpha: 0.1)
-        detailScrollViewProtocol.rightArrow.backgroundColor = UIColor(red: 125/241, green: 125/243, blue: 125/244, alpha: 0.1)
-        detailScrollViewProtocol.leftArrow.backgroundColor = UIColor(red: 125/241, green: 125/243, blue: 125/244, alpha: 0.1)
 
         imageScrollViewLeftConstraint = detailScrollViewProtocol.imageScrollView.leftAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.leftAnchor, constant: 40)
         imageScrollViewLeftConstraint.isActive = true
@@ -140,28 +146,12 @@ class ViewModel {
             break
         default:
             newPage = detailScrollViewProtocol.pageIndex
+            scrollToVisibleRect.x = detailScrollViewProtocol.imageScrollView.frame.width * CGFloat(newPage)
+            scrollToVisibleRect.y = 0
+            detailScrollViewProtocol.imageScrollView.setContentOffset(scrollToVisibleRect, animated: true)
+            previousImageViewContentOffset = detailScrollViewProtocol.imageScrollView.contentOffset
         }
-
-        scrollToVisibleRect.x = detailScrollViewProtocol.imageScrollView.frame.width * CGFloat(newPage)
-        scrollToVisibleRect.y = 0
-        detailScrollViewProtocol.imageScrollView.setContentOffset(scrollToVisibleRect, animated: true)
+ 
         detailScrollViewProtocol.pageIndex = newPage
-    }
-    
-    func updateConstraints(to size: CGSize) {
-
-        if UIDevice.current.orientation.isLandscape {
-            mainScrollViewTopConstraint.constant /= 2
-            imageScrollViewHeightConstraint.constant = size.height / 2
-            imageLeftArrowHeightConstraint.constant = size.height / 2
-            imageRightArrowHeightConstraint.constant = size.height / 2
-        } else if UIDevice.current.orientation.isPortrait {
-            mainScrollViewTopConstraint.constant *= 2
-            imageScrollViewHeightConstraint.constant = size.height / 5 + 44
-            imageLeftArrowHeightConstraint.constant = size.height / 5 + 44
-            imageRightArrowHeightConstraint.constant = size.height / 5 + 44
-        }
-
-        imageScrollViewLeftConstraint.constant = 40
     }
 }

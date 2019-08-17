@@ -101,7 +101,6 @@ class SwapiUITests: XCTestCase {
         
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: table, handler: nil)
-
         waitForExpectations(timeout: 20, handler: nil)
 
         table.cells.element(boundBy: 0).tap()
