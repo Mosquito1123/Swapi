@@ -63,14 +63,14 @@ class CharacterDetailsViewModel: ViewModel {
     // MARK: initialization
 
     init(characterDetailsVC: CharacterDetailsViewController) {
-        super.init(imageScrollViewProtocol: characterDetailsVC, detailVC: characterDetailsVC)
+        super.init(detailScrollViewProtocol: characterDetailsVC, detailVC: characterDetailsVC)
         self.characterDetailsVC = characterDetailsVC
     }
 
     // MARK: view logic
 
-    override func setCharacter(page: ViewModel.PageDirection) {
-        super.setCharacter(page: page)
+    override func set(direction: ViewModel.PageDirection) {
+        super.set(direction: direction)
 
         if let vc = characterDetailsVC {
             vc.characterData = Array(LocalCache.characters!.values)[vc.pageIndex]
@@ -79,10 +79,16 @@ class CharacterDetailsViewModel: ViewModel {
     }
 }
 
-extension CharacterDetailsViewController: ImageScrollViewProtocol {
-    var scrollView: UIScrollView {
+extension CharacterDetailsViewController: DetailScrollViewProtocol {
+    var mainScrollView: UIScrollView {
         get {
-            return charactersScrollView
+            return characterMainScrollView
+        }
+    }
+
+    var imageScrollView: UIScrollView {
+        get {
+            return charactersImageScrollView
         }
     }
 
@@ -112,7 +118,9 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: scroll view properties
 
-    @IBOutlet weak var charactersScrollView: UIScrollView!
+    @IBOutlet weak var characterMainScrollView: UIScrollView!
+
+    @IBOutlet weak var charactersImageScrollView: UIScrollView!
 
     @IBOutlet weak var characterScrollViewLeftArrow: UIButton!
 
@@ -133,15 +141,14 @@ class CharacterDetailsViewController: UIViewController {
 
         view.backgroundColor = .white
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-        scrollView.delegate = self
-
+        imageScrollView.delegate = self
 
         if let index = characterIndex {
             characterData = Array(LocalCache.characters!.values)[index]
             title = characterData?.name
         }
 
-        viewModel?.charactersScrollViewSetup()
+        viewModel?.scrollViewSetup()
         presentDetails()
     }
 
@@ -159,13 +166,13 @@ class CharacterDetailsViewController: UIViewController {
 
     @IBAction func characterScrollViewLeftArrowAction(_ sender: Any) {
         if pageIndex > 0 {
-            viewModel?.setCharacter(page: .left)
+            viewModel?.set(direction: .left)
         }
     }
 
     @IBAction func characterScrollViewRightArrowAction(_ sender: Any) {
-        if pageIndex < 87  {
-            viewModel?.setCharacter(page: .right)
+        if pageIndex < 86  {
+            viewModel?.set(direction: .right)
         }
     }
 }

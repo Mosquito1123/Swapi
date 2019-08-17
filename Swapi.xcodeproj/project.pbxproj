@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		040849C122EF1EF500739FBC /* PlanetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040849BB22EF1EF500739FBC /* PlanetsViewController.swift */; };
 		040849CE22EF418400739FBC /* SpeciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040849C822EF418400739FBC /* SpeciesViewController.swift */; };
-		0409FA1E2305276F00827A88 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409FA1D2305276F00827A88 /* Commons.swift */; };
+		0409FA1E2305276F00827A88 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409FA1D2305276F00827A88 /* ViewModel.swift */; };
 		040A0AD922EFD28A000DF6F1 /* LaunchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD322EFD28A000DF6F1 /* LaunchScreenPresenter.swift */; };
 		040A0ADA22EFD28A000DF6F1 /* LaunchScreenWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD422EFD28A000DF6F1 /* LaunchScreenWorker.swift */; };
 		040A0ADB22EFD28A000DF6F1 /* LaunchScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A0AD522EFD28A000DF6F1 /* LaunchScreenRouter.swift */; };
@@ -62,7 +62,7 @@
 /* Begin PBXFileReference section */
 		040849BB22EF1EF500739FBC /* PlanetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsViewController.swift; sourceTree = "<group>"; };
 		040849C822EF418400739FBC /* SpeciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewController.swift; sourceTree = "<group>"; };
-		0409FA1D2305276F00827A88 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		0409FA1D2305276F00827A88 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		040A0AD322EFD28A000DF6F1 /* LaunchScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenPresenter.swift; sourceTree = "<group>"; };
 		040A0AD422EFD28A000DF6F1 /* LaunchScreenWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenWorker.swift; sourceTree = "<group>"; };
 		040A0AD522EFD28A000DF6F1 /* LaunchScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenRouter.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		0409FA1C2305275100827A88 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				0409FA1D2305276F00827A88 /* Commons.swift */,
+				0409FA1D2305276F00827A88 /* ViewModel.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 				040A18C822EED16000EA9D83 /* MenuBarTablViewController.swift in Sources */,
 				040A0ADD22EFD28A000DF6F1 /* LaunchScreenViewController.swift in Sources */,
 				040A0AE022F012F6000DF6F1 /* Router.swift in Sources */,
-				0409FA1E2305276F00827A88 /* Commons.swift in Sources */,
+				0409FA1E2305276F00827A88 /* ViewModel.swift in Sources */,
 				040A187D22EEC12800EA9D83 /* AppDelegate.swift in Sources */,
 				040849CE22EF418400739FBC /* SpeciesViewController.swift in Sources */,
 				040A18C022EEC2A000EA9D83 /* StarWars.swift in Sources */,
