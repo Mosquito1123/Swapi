@@ -33,30 +33,6 @@ class ViewModel {
         case same
     }
 
-    // MARK: horizontal image view constraints
-
-    var imageScrollViewWidthConstraint: NSLayoutConstraint!
-
-    var imageScrollViewLeftConstraint: NSLayoutConstraint!
-
-    var imageScrollViewTopConstraint: NSLayoutConstraint!
-
-    var imageScrollViewHeightConstraint: NSLayoutConstraint!
-
-    var imageRightArrowTopConstraint: NSLayoutConstraint!
-
-    var imageRightArrowHeightConstraint: NSLayoutConstraint!
-
-    var imageLeftArrowTopConstraint: NSLayoutConstraint!
-
-    var imageLeftArrowHeightConstraint: NSLayoutConstraint!
-    
-    // MARK: vertical main view constraints
-    
-    var mainScrollViewTopConstraint: NSLayoutConstraint!
-    
-    var mainScrollViewHeightConstraint: NSLayoutConstraint!
-
     // MARK: initialization
 
     init(detailScrollViewProtocol: DetailScrollViewProtocol, detailVC: UIViewController) {
@@ -85,52 +61,42 @@ class ViewModel {
         // vertical main scroll view constraints
         
         if #available(iOS 11.0, *) {
-            mainScrollViewTopConstraint = detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.view.safeAreaLayoutGuide.topAnchor)
+            detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.view.safeAreaLayoutGuide.topAnchor).isActive = true
         } else {
-            mainScrollViewTopConstraint = detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.topLayoutGuide.bottomAnchor, constant: 30)
+            detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.topLayoutGuide.bottomAnchor, constant: 30).isActive = true
         }
-        mainScrollViewTopConstraint.isActive = true
-        mainScrollViewHeightConstraint = detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalTo: detailsVC.view.heightAnchor)
-        mainScrollViewHeightConstraint.isActive = true
-        imageScrollViewWidthConstraint = detailScrollViewProtocol.imageScrollView.widthAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.widthAnchor, constant: -80)
-        imageScrollViewWidthConstraint.isActive = true
+
+        detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalTo: detailsVC.view.heightAnchor).isActive = true
+        detailScrollViewProtocol.imageScrollView.widthAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.widthAnchor, constant: -80).isActive = true
 
         // horizontal image scroll view constraints
 
         if UIDevice.current.orientation.isLandscape {
-            imageScrollViewHeightConstraint = detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
-            imageLeftArrowHeightConstraint = detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
-            imageRightArrowHeightConstraint = detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
+            detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
+            detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
+            detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
         } else {
-            mainScrollViewHeightConstraint = detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalToConstant: detailsVC.view.bounds.height)
-            imageScrollViewHeightConstraint = detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
-            imageLeftArrowHeightConstraint = detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
-            imageRightArrowHeightConstraint = detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5)
+            detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalToConstant: detailsVC.view.bounds.height).isActive = true
+            detailScrollViewProtocol.imageScrollView.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
+            detailScrollViewProtocol.leftArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
+            detailScrollViewProtocol.rightArrow.heightAnchor.constraint(equalToConstant: detailScrollViewProtocol.mainScrollView.bounds.height / 5).isActive = true
         }
 
-        imageScrollViewHeightConstraint.isActive = true
-        imageLeftArrowHeightConstraint.isActive = true
-        imageRightArrowHeightConstraint.isActive = true
-
-        imageScrollViewLeftConstraint = detailScrollViewProtocol.imageScrollView.leftAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.leftAnchor, constant: 40)
-        imageScrollViewLeftConstraint.isActive = true
-        imageScrollViewTopConstraint = detailScrollViewProtocol.imageScrollView.topAnchor.constraint(equalTo:
-            detailScrollViewProtocol.mainScrollView.topAnchor)
-        imageScrollViewTopConstraint.isActive = true
+        detailScrollViewProtocol.imageScrollView.leftAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.leftAnchor, constant: 40).isActive = true
+        detailScrollViewProtocol.imageScrollView.topAnchor.constraint(equalTo:
+            detailScrollViewProtocol.mainScrollView.topAnchor).isActive = true
 
         // horizontal image scroll view left arrow constraints
 
         detailScrollViewProtocol.leftArrow.widthAnchor.constraint(equalToConstant: 40).isActive = true
         detailScrollViewProtocol.leftArrow.leftAnchor.constraint(equalTo: detailsVC.view.leftAnchor).isActive = true
-        imageLeftArrowTopConstraint = detailScrollViewProtocol.leftArrow.topAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.topAnchor)
-        imageLeftArrowTopConstraint.isActive = true
+        detailScrollViewProtocol.leftArrow.topAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.topAnchor).isActive = true
 
         // horizontal image scroll view right arrow constraints
 
         detailScrollViewProtocol.rightArrow.widthAnchor.constraint(equalToConstant: 40).isActive = true
         detailScrollViewProtocol.rightArrow.rightAnchor.constraint(equalTo: detailsVC.view.rightAnchor).isActive = true
-        imageRightArrowTopConstraint = detailScrollViewProtocol.rightArrow.topAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.topAnchor)
-        imageRightArrowTopConstraint.isActive = true
+        detailScrollViewProtocol.rightArrow.topAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.topAnchor).isActive = true
     }
 
     func set(direction: PageDirection) {
