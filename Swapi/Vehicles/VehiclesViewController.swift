@@ -39,6 +39,13 @@ class VehiclesViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Vehicles"
+        navigationItem.backBarButtonItem = backItem
+    }
+
     // MARK: Tableview setup
 
     var vehicles: Dictionary<Int, Vehicle>? = LocalCache.vehicles
