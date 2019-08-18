@@ -24,12 +24,20 @@ class FilmCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var viewMoreIndicator: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrowRight"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private func setupFilmLabel() {
         contentView.addSubview(filmLabel)
         filmLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         filmLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
         filmLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         filmLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        filmLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     }
 
     override init(frame: CGRect) {
@@ -40,6 +48,8 @@ class FilmCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupFilmLabel()
+        contentView.addSubview(viewMoreIndicator)
+        viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     }
 }
 
@@ -103,9 +113,15 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
         let label = UILabel()
         label.text = viewModel?.films[indexPath.row]
 
-        return label.intrinsicContentSize
+        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell else { return }
+        filmCell.backgroundColor = UIColor.black
+        // TODO: tap to take to film detail screen
+    }
+
 }
 
 // Main class
@@ -179,12 +195,21 @@ class CharacterDetailsViewModel: ViewModel {
             vc.title = vc.characterData?.name
         }
     }
+    
+    func filmsCollectionSetupConstraints() {
+        guard let vc = characterDetailsVC else { return }
+        vc.filmsCollection.leftAnchor.constraint(equalTo: vc.characterMainScrollView.leftAnchor).isActive = true
+        vc.filmsCollection.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        vc.filmsCollection.topAnchor.constraint(equalTo: vc.filmsLabel.topAnchor, constant: 30).isActive = true
+    }
 }
 
 
 class CharacterDetailsViewController: UIViewController {
 
-    // MARK: scroll view properties
+    // MARK: view properties
+
+    @IBOutlet weak var filmsLabel: UILabel!
 
     @IBOutlet weak var filmsCollection: UICollectionView!
 
@@ -209,9 +234,7 @@ class CharacterDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-        imageScrollView.delegate = self
 
         if let index = characterIndex {
             characterData = Array(LocalCache.characters!.values)[index]
@@ -219,6 +242,7 @@ class CharacterDetailsViewController: UIViewController {
         }
 
         viewModel?.scrollViewSetup()
+        viewModel?.filmsCollectionSetupConstraints()
         presentDetails()
     }
 
@@ -231,12 +255,14 @@ class CharacterDetailsViewController: UIViewController {
     @IBAction func characterScrollViewRightArrowAction() {
         if pageIndex < 86  {
             viewModel?.set(direction: .right)
+            filmsCollection.reloadData()
         }
     }
     
     @IBAction func characterScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
+            filmsCollection.reloadData()
         }
     }
 }
@@ -253,6 +279,7 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
             viewModel?.previousImageViewContentOffset = scrollView.contentOffset
             characterData = Array(LocalCache.characters!.values)[pageIndex]
             title = characterData?.name
+            filmsCollection.reloadData()
         }
     }
 }
