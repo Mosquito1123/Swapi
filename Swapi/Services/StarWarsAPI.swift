@@ -57,7 +57,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 }
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(datas)
         }
@@ -80,7 +80,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 Service.dispatchGroup.leave()
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(result)
         }
@@ -103,7 +103,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 }
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(datas)
         }
@@ -126,7 +126,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 }
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(datas)
         }
@@ -149,7 +149,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 }
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(datas)
         }
@@ -172,7 +172,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
                 }
             }
         }
-        
+
         Service.dispatchGroup.notify(queue: .main) {
             completion(datas)
         }
