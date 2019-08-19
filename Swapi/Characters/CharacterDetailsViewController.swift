@@ -137,14 +137,16 @@ extension CharacterDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "attribute", for: indexPath)
         let rightAccesory = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+
         rightAccesory.textAlignment = .right
-        cell.textLabel?.highlightedTextColor = .black
+        cell.accessoryType = .none
+
         if indexPath.row == 0 {
             cell.textLabel?.text = "height"
-            cell.detailTextLabel?.text = characterData?.height
+            cell.detailTextLabel?.text = viewModel?.height
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "mass"
-            cell.detailTextLabel?.text = characterData?.mass
+            cell.detailTextLabel?.text = viewModel?.mass
         } else if indexPath.row == 2 {
             cell.textLabel?.text = "hair color"
             cell.detailTextLabel?.text = characterData?.hairColor
@@ -162,9 +164,9 @@ extension CharacterDetailsViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = characterData?.gender
         } else if indexPath.row == 7 {
             cell.detailTextLabel?.text = viewModel?.homeworld
-            cell.isUserInteractionEnabled = true
+            cell.isUserInteractionEnabled = viewModel?.homeworld == "unknown" ? false : true
             cell.textLabel?.text = "homeworld"
-            cell.accessoryType = .disclosureIndicator
+            cell.accessoryType = viewModel?.homeworld == "unknown" ? .none : .disclosureIndicator
             return cell
         }
         return cell
@@ -178,6 +180,18 @@ class CharacterDetailsViewModel: ViewModel {
     weak var characterDetailsVC: CharacterDetailsViewController?
     
     // MARK: data manipulation
+    
+    var height: String {
+        let characterDatas = characterDetailsVC?.characterData
+        
+        return "\(characterDatas?.height ?? String(0)) meter"
+    }
+    
+    var mass: String {
+        let characterDatas = characterDetailsVC?.characterData
+        
+        return "\(characterDatas?.mass ?? String(0)) kg"
+    }
     
     var homeworld: String {
         let characterDatas = characterDetailsVC?.characterData
@@ -254,7 +268,7 @@ class CharacterDetailsViewController: UIViewController {
     // MARK: view properties
 
     @IBOutlet weak var attributeCollection: UITableView!
-
+    
     @IBOutlet weak var filmsLabel: UILabel!
 
     @IBOutlet weak var filmsCollection: UICollectionView!
@@ -301,14 +315,16 @@ class CharacterDetailsViewController: UIViewController {
     @IBAction func characterScrollViewRightArrowAction() {
         if pageIndex < 86  {
             viewModel?.set(direction: .right)
-            filmsCollection.reloadData()
+            filmsCollection.reloadSections(IndexSet(integer: 0))
+            attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
     
     @IBAction func characterScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
-            filmsCollection.reloadData()
+            filmsCollection.reloadSections(IndexSet(integer: 0))
+            attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
 }
