@@ -26,7 +26,8 @@ class FilmCell: UICollectionViewCell {
     
     private lazy var viewMoreIndicator: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "arrowRight"), for: .normal)
+        let arrowRight = imageResize(image: UIImage(named: "arrowRight"), sizeChange: CGSize(width: 12, height: 12))
+        button.setImage(arrowRight, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -124,6 +125,52 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
 
 }
 
+extension CharacterDetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "attribute", for: indexPath)
+        let rightAccesory = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        rightAccesory.textAlignment = .right
+        cell.textLabel?.highlightedTextColor = .black
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "height"
+            cell.detailTextLabel?.text = characterData?.height
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "mass"
+            cell.detailTextLabel?.text = characterData?.mass
+        } else if indexPath.row == 2 {
+            cell.textLabel?.text = "hair color"
+            cell.detailTextLabel?.text = characterData?.hairColor
+        } else if indexPath.row == 3 {
+            cell.textLabel?.text = "skin color"
+            cell.detailTextLabel?.text = characterData?.skinColor
+        } else if indexPath.row == 4 {
+            cell.textLabel?.text = "eye color"
+            cell.detailTextLabel?.text = characterData?.eyeColor
+        } else if indexPath.row == 5 {
+            cell.textLabel?.text = "birth year"
+            cell.detailTextLabel?.text = characterData?.birthYear
+        } else if indexPath.row == 6 {
+            cell.textLabel?.text = "gender"
+            cell.detailTextLabel?.text = characterData?.gender
+        } else if indexPath.row == 7 {
+            cell.detailTextLabel?.text = viewModel?.homeworld
+            cell.isUserInteractionEnabled = true
+            cell.textLabel?.text = "homeworld"
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
+        return cell
+    }
+}
+
 // Main class
 
 class CharacterDetailsViewModel: ViewModel {
@@ -132,15 +179,12 @@ class CharacterDetailsViewModel: ViewModel {
     
     // MARK: data manipulation
     
-    var homeWorlds: [String] {
+    var homeworld: String {
         let characterDatas = characterDetailsVC?.characterData
-        var result: [String] = []
-        
-        for homeWorld in characterDatas?.homeworld ?? [] {
-            let id = Int(homeWorld.string!.components(separatedBy: "/")[5])!
-            result.append(LocalCache.characters?[id]?.name ?? "")
-        }
-        return result
+
+        let id = Int(characterDatas!.homeworld.components(separatedBy: "/")[5])!
+
+        return LocalCache.planets?[id]?.name ?? ""
     }
     
     var films: [String] {
@@ -208,6 +252,8 @@ class CharacterDetailsViewModel: ViewModel {
 class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties
+
+    @IBOutlet weak var attributeCollection: UITableView!
 
     @IBOutlet weak var filmsLabel: UILabel!
 

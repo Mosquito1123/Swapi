@@ -39,7 +39,7 @@ struct People: Equatable {
 
     var gender: String
 
-    var homeworld: [JSON]
+    var homeworld: String
 
     var films: [JSON]
 

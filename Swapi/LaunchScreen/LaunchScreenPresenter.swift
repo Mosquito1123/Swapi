@@ -48,7 +48,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                       eyeColor: people.1["eye_color"].string ?? "",
                                       birthYear: people.1["birth_year"].string ?? "",
                                       gender: people.1["gender"].string ?? "",
-                                      homeworld: people.1["homeworld"].array ?? [],
+                                      homeworld: people.1["homeworld"].string ?? "",
                                       films: people.1["films"].array ?? [],
                                       vehicles: people.1["vehicles"].array ?? [],
                                       starships: people.1["starships"].array ?? [])

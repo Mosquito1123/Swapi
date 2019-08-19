@@ -11,6 +11,21 @@
 
 import Foundation
 
+func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
+    guard image != nil else {
+        return nil
+    }
+    let hasAlpha = true
+    let scale: CGFloat = 0.0 // Use scale factor of main screen
+    
+    UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+    image?.draw(in: CGRect(origin: .zero, size: sizeChange))
+    
+    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+    return scaledImage
+}
+
+
 protocol DetailScrollViewProtocol {
     var mainScrollView: UIScrollView { get }
     var imageScrollView: UIScrollView { get }
