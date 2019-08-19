@@ -10,15 +10,15 @@ import Foundation
 
 // Views
 
-class FilmCell: UICollectionViewCell {
+class Cell: UICollectionViewCell {
     var name: String? {
         didSet {
             guard let name = name else { return }
-            filmLabel.text = name
+            label.text = name
         }
     }
-
-    private lazy var filmLabel: UILabel = {
+    
+    private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,26 +32,38 @@ class FilmCell: UICollectionViewCell {
         return button
     }()
     
-    private func setupFilmLabel() {
-        contentView.addSubview(filmLabel)
-        filmLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        filmLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        filmLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        filmLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        filmLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    private func setupLabel() {
+        contentView.addSubview(label)
+        label.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        label.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        label.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupFilmLabel()
+        setupLabel()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupFilmLabel()
+        setupLabel()
         contentView.addSubview(viewMoreIndicator)
         viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     }
+}
+
+class FilmCell: Cell {
+   // leave this class empty on purpose just for the sake of readability for filmCollection
+}
+
+class SpecieCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for specieCollection
+}
+
+class VehicleCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for vehicleCollection
 }
 
 // Extension
@@ -93,17 +105,33 @@ extension CharacterDetailsViewController: DetailScrollViewProtocol {
 
 extension CharacterDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.films.count ?? 0
+        if collectionView == filmsCollection {
+            return viewModel?.films.count ?? 0
+        } else if collectionView == vehicleCollection {
+            return viewModel?.vehicles.count ?? 0
+        }
+        return viewModel?.species.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell else {
-            return UICollectionViewCell()
+        if collectionView == filmsCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell  {
+
+            filmCell.name = viewModel?.films[indexPath.row]
+
+            return filmCell
+        } else if collectionView == specieCollection, let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
+
+            specieCell.name = viewModel?.species[indexPath.row]
+
+            return specieCell
+        } else if collectionView == vehicleCollection, let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
+
+            vehicleCell.name = viewModel?.vehicles[indexPath.row]
+
+            return vehicleCell
         }
 
-        filmCell.name = viewModel?.films[indexPath.row]
-
-        return filmCell
+        return UICollectionViewCell()
     }
 }
 
@@ -112,14 +140,18 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel()
-        label.text = viewModel?.films[indexPath.row]
+        if collectionView == filmsCollection {
+            label.text = viewModel?.films[indexPath.row]
+        } else if collectionView == vehicleCollection {
+            label.text = viewModel?.vehicles[indexPath.row]
+        } else {
+            label.text = viewModel?.species[indexPath.row]
+        }
 
         return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell else { return }
-        filmCell.backgroundColor = UIColor.black
         // TODO: tap to take to film detail screen
     }
 
@@ -183,14 +215,14 @@ class CharacterDetailsViewModel: ViewModel {
     
     var height: String {
         let characterDatas = characterDetailsVC?.characterData
-        
-        return "\(characterDatas?.height ?? String(0)) meter"
+        let meter = characterDatas?.height == "unknown" ? "" : "meter"
+        return "\(characterDatas?.height ?? String(0)) \(meter)"
     }
     
     var mass: String {
         let characterDatas = characterDetailsVC?.characterData
-        
-        return "\(characterDatas?.mass ?? String(0)) kg"
+        let kg = characterDatas?.mass == "unknown" ? "" : "kg"
+        return "\(characterDatas?.mass ?? String(0)) \(kg)"
     }
     
     var homeworld: String {
@@ -236,6 +268,18 @@ class CharacterDetailsViewModel: ViewModel {
         return result
     }
     
+    var species: [String] {
+        let characterDatas = characterDetailsVC?.characterData
+        var result: [String] = []
+        
+        for specie in characterDatas?.species ?? [] {
+            let id = Int(specie.string!.components(separatedBy: "/")[5])!
+            result.append(LocalCache.species?[id]?.name ?? "")
+        }
+        
+        return result
+    }
+    
     // MARK: initialization
     
     init(characterDetailsVC: CharacterDetailsViewController) {
@@ -254,11 +298,11 @@ class CharacterDetailsViewModel: ViewModel {
         }
     }
     
-    func filmsCollectionSetupConstraints() {
+    func reloadAllTableAndCollection() {
         guard let vc = characterDetailsVC else { return }
-        vc.filmsCollection.leftAnchor.constraint(equalTo: vc.characterMainScrollView.leftAnchor).isActive = true
-        vc.filmsCollection.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        vc.filmsCollection.topAnchor.constraint(equalTo: vc.filmsLabel.topAnchor, constant: 30).isActive = true
+        vc.filmsCollection.reloadSections(IndexSet(integer: 0))
+        vc.specieCollection.reloadSections(IndexSet(integer: 0))
+        vc.attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
 
@@ -267,8 +311,12 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties
 
+    @IBOutlet weak var vehicleCollection: UICollectionView!
+
+    @IBOutlet weak var specieCollection: UICollectionView!
+
     @IBOutlet weak var attributeCollection: UITableView!
-    
+
     @IBOutlet weak var filmsLabel: UILabel!
 
     @IBOutlet weak var filmsCollection: UICollectionView!
@@ -300,14 +348,11 @@ class CharacterDetailsViewController: UIViewController {
             characterData = Array(LocalCache.characters!.values)[index]
             title = characterData?.name
         }
-
-        viewModel?.scrollViewSetup()
-        viewModel?.filmsCollectionSetupConstraints()
         presentDetails()
     }
 
     func presentDetails() {
-        // TODO: present details to UIView
+        viewModel?.scrollViewSetup()
     }
 
     // MARK: Character scroll view logic
@@ -315,16 +360,14 @@ class CharacterDetailsViewController: UIViewController {
     @IBAction func characterScrollViewRightArrowAction() {
         if pageIndex < 86  {
             viewModel?.set(direction: .right)
-            filmsCollection.reloadSections(IndexSet(integer: 0))
-            attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
+            viewModel?.reloadAllTableAndCollection()
         }
     }
     
     @IBAction func characterScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
-            filmsCollection.reloadSections(IndexSet(integer: 0))
-            attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
+            viewModel?.reloadAllTableAndCollection()
         }
     }
 }

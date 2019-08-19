@@ -51,7 +51,8 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                       homeworld: people.1["homeworld"].string ?? "",
                                       films: people.1["films"].array ?? [],
                                       vehicles: people.1["vehicles"].array ?? [],
-                                      starships: people.1["starships"].array ?? [])
+                                      starships: people.1["starships"].array ?? [],
+                                      species: people.1["species"].array ?? [])
                 }
             }
             viewController?.cachPeople(viewModel: LaunchScreen.Fetch.ViewModel.Characters(people: dict))

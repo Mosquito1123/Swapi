@@ -46,6 +46,8 @@ struct People: Equatable {
     var vehicles: [JSON]
 
     var starships: [JSON]
+
+    var species: [JSON]
 }
 
 struct Film: Equatable {
