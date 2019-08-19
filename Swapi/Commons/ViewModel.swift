@@ -70,7 +70,6 @@ class ViewModel {
 
         // set up content size for main scroll view and image scroll view
 
-        detailScrollViewProtocol.mainScrollView.contentSize = CGSize(width: detailsVC.view.frame.width, height: 0)
         detailScrollViewProtocol.imageScrollView.contentSize = CGSize(width: detailScrollViewProtocol.imageScrollView.frame.width * 87, height: 0)
         
         // vertical main scroll view constraints
@@ -81,7 +80,6 @@ class ViewModel {
             detailScrollViewProtocol.mainScrollView.topAnchor.constraint(equalTo: detailsVC.topLayoutGuide.bottomAnchor, constant: 30).isActive = true
         }
 
-        detailScrollViewProtocol.mainScrollView.heightAnchor.constraint(equalTo: detailsVC.view.heightAnchor).isActive = true
         detailScrollViewProtocol.imageScrollView.widthAnchor.constraint(equalTo: detailScrollViewProtocol.mainScrollView.widthAnchor, constant: -80).isActive = true
 
         // horizontal image scroll view constraints

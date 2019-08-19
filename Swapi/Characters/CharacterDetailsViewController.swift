@@ -66,6 +66,10 @@ class VehicleCell: Cell {
     // leave this class empty on purpose just for the sake of readablility for vehicleCollection
 }
 
+class StarshipCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for starshipCollection
+}
+
 // Extension
 
 extension CharacterDetailsViewController: DetailScrollViewProtocol {
@@ -109,6 +113,8 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
             return viewModel?.films.count ?? 0
         } else if collectionView == vehicleCollection {
             return viewModel?.vehicles.count ?? 0
+        } else if collectionView == starshipCollection {
+            return viewModel?.starships.count ?? 0
         }
         return viewModel?.species.count ?? 0
     }
@@ -129,6 +135,11 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
             vehicleCell.name = viewModel?.vehicles[indexPath.row]
 
             return vehicleCell
+        } else if collectionView == starshipCollection, let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
+
+            starshipCell.name = viewModel?.starships[indexPath.row]
+
+            return starshipCell
         }
 
         return UICollectionViewCell()
@@ -144,7 +155,10 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
             label.text = viewModel?.films[indexPath.row]
         } else if collectionView == vehicleCollection {
             label.text = viewModel?.vehicles[indexPath.row]
-        } else {
+        } else if collectionView == starshipCollection {
+            label.text = viewModel?.starships[indexPath.row]
+        }
+        else {
             label.text = viewModel?.species[indexPath.row]
         }
 
@@ -302,6 +316,8 @@ class CharacterDetailsViewModel: ViewModel {
         guard let vc = characterDetailsVC else { return }
         vc.filmsCollection.reloadSections(IndexSet(integer: 0))
         vc.specieCollection.reloadSections(IndexSet(integer: 0))
+        vc.vehicleCollection.reloadSections(IndexSet(integer: 0))
+        vc.starshipCollection.reloadSections(IndexSet(integer: 0))
         vc.attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
@@ -310,6 +326,8 @@ class CharacterDetailsViewModel: ViewModel {
 class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties
+
+    @IBOutlet weak var starshipCollection: UICollectionView!
 
     @IBOutlet weak var vehicleCollection: UICollectionView!
 
