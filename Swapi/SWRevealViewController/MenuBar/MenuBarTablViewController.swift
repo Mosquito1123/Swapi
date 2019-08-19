@@ -24,7 +24,7 @@ class MenuBarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let menuCell = tableView.dequeueReusableCell(withIdentifier: menu[indexPath.row], for: indexPath)
-
+        menuCell.textLabel?.text = menu[indexPath.row]
         return menuCell
     }
 }
