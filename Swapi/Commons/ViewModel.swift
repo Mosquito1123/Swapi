@@ -58,11 +58,7 @@ class ViewModel {
     // MARK: view logic
 
     func scrollViewSetup() {
-        
         set(direction: .same)
-
-        // set up content size for image scroll view
-
         detailScrollViewProtocol.imageScrollView.contentSize = CGSize(width: detailScrollViewProtocol.imageScrollView.frame.width * 87, height: 0)
     }
 

@@ -331,15 +331,13 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties
 
-    @IBOutlet weak var starshipCollection: UICollectionView!
-
     @IBOutlet weak var vehicleCollection: UICollectionView!
-
-    @IBOutlet weak var specieCollection: UICollectionView!
 
     @IBOutlet weak var attributeCollection: UITableView!
 
-    @IBOutlet weak var filmsLabel: UILabel!
+    @IBOutlet weak var starshipCollection: UICollectionView!
+
+    @IBOutlet weak var specieCollection: UICollectionView!
 
     @IBOutlet weak var filmsCollection: UICollectionView!
 
@@ -365,7 +363,7 @@ class CharacterDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-
+  
         if let index = characterIndex {
             characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)[index]
             title = characterData?.name
