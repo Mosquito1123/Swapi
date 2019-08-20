@@ -8,11 +8,57 @@
 
 import Foundation
 
-struct FilmDetailsViewModel {
+// Extension
+
+extension FilmDetailsViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == filmsImageScrollView {
+            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+                filmScrollViewRightArrowAction()
+            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+                filmScrollViewLeftArrowAction()
+            }
+        }
+    }
+}
+
+extension FilmDetailsViewController: DetailScrollViewProtocol {
+    var mainScrollView: UIScrollView {
+        return filmMainScrollView
+    }
+    
+    var imageScrollView: UIScrollView {
+        return filmsImageScrollView
+    }
+    
+    var leftArrow: UIButton {
+        return filmScrollViewLeftArrow
+    }
+    
+    var rightArrow: UIButton {
+        return filmScrollViewRightArrow
+    }
+    
+    var pageIndex: Int {
+        get {
+            return filmIndex ?? 0
+        }
+        set {
+            filmIndex = newValue
+        }
+    }
+    
+    
+}
+
+// Main class
+
+class FilmDetailsViewModel: ViewModel {
+
     weak var filmDetailsVC: FilmDetailsViewController?
 
     var characters: [String] {
-        let filmDatas = filmDetailsVC?.routeFilmData
+        let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
 
         for character in filmDatas?.characters ?? [] {
@@ -23,7 +69,7 @@ struct FilmDetailsViewModel {
     }
 
     var planets: [String] {
-        let filmDatas = filmDetailsVC?.routeFilmData
+        let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
 
         for planet in filmDatas?.planets ?? [] {
@@ -34,7 +80,7 @@ struct FilmDetailsViewModel {
     }
 
     var starships: [String] {
-        let filmDatas = filmDetailsVC?.routeFilmData
+        let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
 
         for starship in filmDatas?.starships ?? [] {
@@ -45,7 +91,7 @@ struct FilmDetailsViewModel {
     }
 
     var species: [String] {
-        let filmDatas = filmDetailsVC?.routeFilmData
+        let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
 
         for specie in filmDatas?.species ?? [] {
@@ -54,23 +100,65 @@ struct FilmDetailsViewModel {
         }
         return result
     }
+    
+    init(filmDetailsVC: FilmDetailsViewController) {
+        super.init(detailScrollViewProtocol: filmDetailsVC, detailVC: filmDetailsVC)
+        self.filmDetailsVC = filmDetailsVC
+    }
+
+    // MARK: view logic
+
+    override func set(direction: ViewModel.PageDirection) {
+        super.set(direction: direction)
+
+        if let vc = filmDetailsVC {
+            vc.filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[vc.pageIndex]
+            vc.title = vc.filmData?.title
+        }
+    }
 }
 
 class FilmDetailsViewController: UIViewController {
-    var routeFilmData: Film?
+
+    @IBOutlet weak var filmMainScrollView: UIScrollView!
+
+    @IBOutlet weak var filmScrollViewLeftArrow: UIButton!
+
+    @IBOutlet weak var filmScrollViewRightArrow: UIButton!
+
+    @IBOutlet weak var filmsImageScrollView: UIScrollView!
+
+    var filmData: Film?
 
     var viewModel: FilmDetailsViewModel?
 
+    private var filmIndex: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = routeFilmData?.title
+
         viewModel = FilmDetailsViewModel(filmDetailsVC: self)
-        
+
+        if let index = filmIndex {
+            filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[index]
+            title = filmData?.title
+        }
         presentDetails()
     }
 
     func presentDetails() {
-        // TODO: present details to UIView
+        viewModel?.scrollViewSetup()
+    }
+
+    @IBAction func filmScrollViewRightArrowAction() {
+        if pageIndex < (LocalCache.films?.count ?? 0) - 1 {
+            viewModel?.set(direction: .right)
+        }
+    }
+
+    @IBAction func filmScrollViewLeftArrowAction() {
+        if pageIndex > 0 {
+            viewModel?.set(direction: .left)
+        }
     }
 }

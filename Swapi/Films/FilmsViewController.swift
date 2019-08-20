@@ -72,7 +72,6 @@ class FilmsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(films?.keys ?? Dictionary<Int, Film>().keys)
-        router.routeTo(from: self, to: .FilmDetails, param: films?[keysArray[indexPath.row]])
+        router.routeTo(from: self, to: .FilmDetails, param: indexPath.row)
     }
 }

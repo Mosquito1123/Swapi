@@ -400,13 +400,13 @@
             <objects>
                 <viewController storyboardIdentifier="CharacterDetailsViewController" automaticallyAdjustsScrollViewInsets="NO" id="0c6-WH-hdv" customClass="CharacterDetailsViewController" customModule="Swapi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WO6-aw-Vzw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5k-IY-mkm">
-                                <rect key="frame" x="0.0" y="50" width="414" height="950"/>
+                                <rect key="frame" x="0.0" y="-2" width="414" height="896"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-Gq-c9M">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-Gq-c9M">
                                         <rect key="frame" x="59" y="0.0" width="296" height="170"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -457,21 +457,6 @@
                                             <outlet property="delegate" destination="0c6-WH-hdv" id="Fjf-PI-mS9"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJZ-WZ-l9c">
-                                        <rect key="frame" x="351" y="2" width="63" height="168"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="63" id="FU6-Fi-VCR"/>
-                                            <constraint firstAttribute="height" constant="168" id="T8D-AI-o1t"/>
-                                        </constraints>
-                                        <state key="normal" image="arrowRight"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="charactersRightScrollViewButton"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="characterScrollViewRightArrowAction" destination="0c6-WH-hdv" eventType="touchUpInside" id="hhp-Pf-d9B"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Appear in" textAlignment="center" lineBreakMode="clip" baselineAdjustment="none" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHK-YU-o86">
                                         <rect key="frame" x="174" y="192" width="66" height="18"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
@@ -617,6 +602,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJZ-WZ-l9c">
+                                        <rect key="frame" x="351" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="63" id="FU6-Fi-VCR"/>
+                                            <constraint firstAttribute="height" constant="170" id="T8D-AI-o1t"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowRight"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="charactersRightScrollViewButton"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="characterScrollViewRightArrowAction" destination="0c6-WH-hdv" eventType="touchUpInside" id="hhp-Pf-d9B"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="3PI-oj-Qbu" firstAttribute="centerX" secondItem="g5k-IY-mkm" secondAttribute="centerX" id="2id-Cm-Uo7"/>
@@ -629,12 +629,11 @@
                                     <constraint firstItem="JOJ-1y-RmF" firstAttribute="centerX" secondItem="g5k-IY-mkm" secondAttribute="centerX" id="Adi-vK-Lrk"/>
                                     <constraint firstItem="dcy-iW-LbB" firstAttribute="top" secondItem="3PI-oj-Qbu" secondAttribute="bottom" constant="8" symbolic="YES" id="B0J-N5-DvW"/>
                                     <constraint firstItem="zw7-5w-KrL" firstAttribute="top" secondItem="g5k-IY-mkm" secondAttribute="top" constant="542" id="Cgu-F7-wJq"/>
-                                    <constraint firstItem="NtK-iv-7yh" firstAttribute="bottom" secondItem="g5k-IY-mkm" secondAttribute="bottomMargin" constant="7" id="DPe-n9-2iQ"/>
+                                    <constraint firstItem="NtK-iv-7yh" firstAttribute="bottom" secondItem="g5k-IY-mkm" secondAttribute="bottomMargin" constant="-65" id="DPe-n9-2iQ"/>
                                     <constraint firstItem="cHK-YU-o86" firstAttribute="bottom" secondItem="vQt-Gq-c9M" secondAttribute="bottom" constant="40" id="Dov-sX-ZxM"/>
                                     <constraint firstItem="zw7-5w-KrL" firstAttribute="top" secondItem="dcy-iW-LbB" secondAttribute="bottom" constant="154" id="IIN-FX-6di"/>
                                     <constraint firstItem="zw7-5w-KrL" firstAttribute="top" secondItem="JOJ-1y-RmF" secondAttribute="bottom" constant="8" symbolic="YES" id="JNb-Fk-sWi"/>
                                     <constraint firstItem="zw7-5w-KrL" firstAttribute="centerX" secondItem="g5k-IY-mkm" secondAttribute="centerX" id="KEi-fR-c3Q"/>
-                                    <constraint firstItem="vQt-Gq-c9M" firstAttribute="centerX" secondItem="6xc-nH-sJf" secondAttribute="centerX" id="MHD-b3-U7i"/>
                                     <constraint firstItem="ppX-n7-ebc" firstAttribute="bottom" secondItem="vQt-Gq-c9M" secondAttribute="bottom" id="PpJ-7f-Y7W"/>
                                     <constraint firstItem="3PI-oj-Qbu" firstAttribute="width" secondItem="g5k-IY-mkm" secondAttribute="width" id="QCu-cw-KHs"/>
                                     <constraint firstItem="ppX-n7-ebc" firstAttribute="top" secondItem="vQt-Gq-c9M" secondAttribute="top" id="UDR-aT-Kkg"/>
@@ -655,7 +654,7 @@
                                     <constraint firstItem="ppX-n7-ebc" firstAttribute="leading" secondItem="6xc-nH-sJf" secondAttribute="leading" id="gb6-kk-hpk"/>
                                     <constraint firstItem="jph-Cg-unO" firstAttribute="top" secondItem="6xc-nH-sJf" secondAttribute="bottom" constant="8" symbolic="YES" id="rns-M7-U6y"/>
                                     <constraint firstItem="eJZ-WZ-l9c" firstAttribute="trailing" secondItem="6xc-nH-sJf" secondAttribute="trailing" id="uSY-1n-1Rs"/>
-                                    <constraint firstItem="eJZ-WZ-l9c" firstAttribute="top" secondItem="g5k-IY-mkm" secondAttribute="top" constant="2" id="vEa-yT-5LB"/>
+                                    <constraint firstItem="eJZ-WZ-l9c" firstAttribute="top" secondItem="g5k-IY-mkm" secondAttribute="top" id="vEa-yT-5LB"/>
                                     <constraint firstItem="ppX-n7-ebc" firstAttribute="top" secondItem="g5k-IY-mkm" secondAttribute="top" id="wbt-JX-cY0"/>
                                 </constraints>
                             </scrollView>
@@ -663,13 +662,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="g5k-IY-mkm" firstAttribute="leading" secondItem="WO6-aw-Vzw" secondAttribute="leading" id="1zT-D5-8Dz"/>
-                            <constraint firstItem="g5k-IY-mkm" firstAttribute="bottom" secondItem="Kdj-AY-n7P" secondAttribute="bottom" constant="34" id="6kR-Iu-J9x"/>
+                            <constraint firstItem="g5k-IY-mkm" firstAttribute="bottom" secondItem="Kdj-AY-n7P" secondAttribute="bottom" constant="32" id="6kR-Iu-J9x"/>
                             <constraint firstItem="g5k-IY-mkm" firstAttribute="width" secondItem="WO6-aw-Vzw" secondAttribute="width" id="7cC-dm-p1p"/>
-                            <constraint firstItem="g5k-IY-mkm" firstAttribute="height" secondItem="WO6-aw-Vzw" secondAttribute="height" constant="-50" id="NTb-zy-D94"/>
+                            <constraint firstItem="g5k-IY-mkm" firstAttribute="height" secondItem="WO6-aw-Vzw" secondAttribute="height" id="NTb-zy-D94"/>
+                            <constraint firstItem="vQt-Gq-c9M" firstAttribute="centerX" secondItem="Kdj-AY-n7P" secondAttribute="centerX" id="nT1-GU-YOJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kdj-AY-n7P"/>
                     </view>
-                    <size key="freeformSize" width="414" height="1000"/>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="attributeCollection" destination="NtK-iv-7yh" id="tib-rf-bHq"/>
                         <outlet property="characterMainScrollView" destination="g5k-IY-mkm" id="6tY-V5-yoH"/>
@@ -692,15 +692,78 @@
             <objects>
                 <viewController storyboardIdentifier="FilmDetailsViewController" id="WVU-3f-dba" customClass="FilmDetailsViewController" customModule="Swapi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FIH-tv-2NI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Dz-nQE">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S40-iW-81G">
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="CfF-Iz-52r"/>
+                                            <constraint firstAttribute="width" constant="63" id="qum-jJ-xyz"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowLeft"/>
+                                        <connections>
+                                            <action selector="filmScrollViewLeftArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="jwW-rD-8jF"/>
+                                        </connections>
+                                    </button>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-Ud-z0y">
+                                        <rect key="frame" x="59" y="0.0" width="296" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="WVU-3f-dba" id="sL1-B2-hDz"/>
+                                        </connections>
+                                    </scrollView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwE-pJ-ePs">
+                                        <rect key="frame" x="351" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="63" id="lnz-kq-KoP"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowRight"/>
+                                        <connections>
+                                            <action selector="filmScrollViewRightArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="0dR-Ds-FwQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="B8F-Ud-z0y" firstAttribute="centerX" secondItem="AQz-Dz-nQE" secondAttribute="centerX" id="1z3-Ak-abn"/>
+                                    <constraint firstItem="S40-iW-81G" firstAttribute="top" secondItem="B8F-Ud-z0y" secondAttribute="top" id="8Mg-oG-q4v"/>
+                                    <constraint firstItem="S40-iW-81G" firstAttribute="bottom" secondItem="B8F-Ud-z0y" secondAttribute="bottom" id="8TJ-90-O2a"/>
+                                    <constraint firstItem="S40-iW-81G" firstAttribute="baseline" secondItem="jwE-pJ-ePs" secondAttribute="baseline" id="EfO-1y-Yzs"/>
+                                    <constraint firstAttribute="trailing" secondItem="B8F-Ud-z0y" secondAttribute="trailing" constant="59" id="SlS-cG-EG1"/>
+                                    <constraint firstAttribute="bottom" secondItem="S40-iW-81G" secondAttribute="bottom" constant="638" id="ZGx-at-m8u"/>
+                                    <constraint firstItem="B8F-Ud-z0y" firstAttribute="top" secondItem="jwE-pJ-ePs" secondAttribute="top" id="aln-pV-Jef"/>
+                                    <constraint firstItem="B8F-Ud-z0y" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" constant="59" id="bXf-Un-mQn"/>
+                                    <constraint firstItem="S40-iW-81G" firstAttribute="top" secondItem="AQz-Dz-nQE" secondAttribute="top" id="cqb-aW-2ou"/>
+                                    <constraint firstItem="S40-iW-81G" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" id="hdE-69-OFK"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwE-pJ-ePs" secondAttribute="trailing" id="zef-ra-Hon"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="leading" secondItem="FIH-tv-2NI" secondAttribute="leading" id="2i7-qA-ICU"/>
+                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="height" secondItem="FIH-tv-2NI" secondAttribute="height" id="6B9-hG-UE5"/>
+                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="width" secondItem="FIH-tv-2NI" secondAttribute="width" id="AHj-68-IJG"/>
+                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="bottom" secondItem="ws8-XQ-2td" secondAttribute="bottom" constant="34" id="fIT-MY-t4L"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ws8-XQ-2td"/>
                     </view>
+                    <size key="freeformSize" width="414" height="1000"/>
+                    <connections>
+                        <outlet property="filmMainScrollView" destination="AQz-Dz-nQE" id="QNn-7d-djK"/>
+                        <outlet property="filmScrollViewLeftArrow" destination="S40-iW-81G" id="tpf-ad-ABL"/>
+                        <outlet property="filmScrollViewRightArrow" destination="jwE-pJ-ePs" id="3Fn-JR-dNj"/>
+                        <outlet property="filmsImageScrollView" destination="B8F-Ud-z0y" id="gPE-ob-jMi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7q-Gn-5Yw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-588" y="-816"/>
+            <point key="canvasLocation" x="-588.40579710144937" y="-816.29464285714278"/>
         </scene>
         <!--Planet Details View Controller-->
         <scene sceneID="oq9-TN-CAu">

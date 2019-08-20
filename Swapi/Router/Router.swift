@@ -37,7 +37,7 @@ class Router: NSObject, RoutingLogic {
             break
         case .FilmDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "FilmDetailsViewController")
-            (toVC as! FilmDetailsViewController).routeFilmData = param as? Film
+            (toVC as! FilmDetailsViewController).pageIndex = param as? Int ?? 0
             break
         case .PlanetDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")

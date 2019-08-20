@@ -74,27 +74,19 @@ class StarshipCell: Cell {
 
 extension CharacterDetailsViewController: DetailScrollViewProtocol {
     var mainScrollView: UIScrollView {
-        get {
-            return characterMainScrollView
-        }
+        return characterMainScrollView
     }
 
     var imageScrollView: UIScrollView {
-        get {
-            return charactersImageScrollView
-        }
+        return charactersImageScrollView
     }
 
     var leftArrow: UIButton {
-        get {
-            return characterScrollViewLeftArrow
-        }
+        return characterScrollViewLeftArrow
     }
 
     var rightArrow: UIButton {
-        get {
-            return characterScrollViewRightArrow
-        }
+        return characterScrollViewRightArrow
     }
 
     var pageIndex: Int {
@@ -219,6 +211,18 @@ extension CharacterDetailsViewController: UITableViewDataSource {
     }
 }
 
+extension CharacterDetailsViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == charactersImageScrollView {
+            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+                characterScrollViewLeftArrowAction()
+            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+                characterScrollViewRightArrowAction()
+            }
+        }
+    }
+}
+
 // Main class
 
 class CharacterDetailsViewModel: ViewModel {
@@ -307,7 +311,7 @@ class CharacterDetailsViewModel: ViewModel {
         super.set(direction: direction)
         
         if let vc = characterDetailsVC {
-            vc.characterData = Array(LocalCache.characters!.values)[vc.pageIndex]
+            vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)[vc.pageIndex]
             vc.title = vc.characterData?.name
         }
     }
@@ -363,20 +367,20 @@ class CharacterDetailsViewController: UIViewController {
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
 
         if let index = characterIndex {
-            characterData = Array(LocalCache.characters!.values)[index]
+            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)[index]
             title = characterData?.name
         }
         presentDetails()
     }
 
     func presentDetails() {
-        viewModel?.scrollViewSetup()
+       viewModel?.scrollViewSetup()
     }
 
     // MARK: Character scroll view logic
 
     @IBAction func characterScrollViewRightArrowAction() {
-        if pageIndex < 86  {
+        if pageIndex < (LocalCache.characters?.count ?? 0) - 1  {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
         }
@@ -386,23 +390,6 @@ class CharacterDetailsViewController: UIViewController {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
-        }
-    }
-}
-
-extension CharacterDetailsViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.accessibilityIdentifier == "characterDetailScrollView" {
-
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
-                characterScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
-                characterScrollViewRightArrowAction()
-            }
-            viewModel?.previousImageViewContentOffset = scrollView.contentOffset
-            characterData = Array(LocalCache.characters!.values)[pageIndex]
-            title = characterData?.name
-            filmsCollection.reloadData()
         }
     }
 }
