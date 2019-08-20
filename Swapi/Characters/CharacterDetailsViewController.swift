@@ -180,30 +180,30 @@ extension CharacterDetailsViewController: UITableViewDataSource {
         cell.accessoryType = .none
 
         if indexPath.row == 0 {
-            cell.textLabel?.text = "height"
+            cell.textLabel?.text = "Height"
             cell.detailTextLabel?.text = viewModel?.height
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "mass"
+            cell.textLabel?.text = "Mass"
             cell.detailTextLabel?.text = viewModel?.mass
         } else if indexPath.row == 2 {
-            cell.textLabel?.text = "hair color"
+            cell.textLabel?.text = "Hair color"
             cell.detailTextLabel?.text = characterData?.hairColor
         } else if indexPath.row == 3 {
-            cell.textLabel?.text = "skin color"
+            cell.textLabel?.text = "Skin color"
             cell.detailTextLabel?.text = characterData?.skinColor
         } else if indexPath.row == 4 {
-            cell.textLabel?.text = "eye color"
+            cell.textLabel?.text = "Eye color"
             cell.detailTextLabel?.text = characterData?.eyeColor
         } else if indexPath.row == 5 {
-            cell.textLabel?.text = "birth year"
+            cell.textLabel?.text = "Birth year"
             cell.detailTextLabel?.text = characterData?.birthYear
         } else if indexPath.row == 6 {
-            cell.textLabel?.text = "gender"
+            cell.textLabel?.text = "Gender"
             cell.detailTextLabel?.text = characterData?.gender
         } else if indexPath.row == 7 {
             cell.detailTextLabel?.text = viewModel?.homeworld
             cell.isUserInteractionEnabled = viewModel?.homeworld == "unknown" ? false : true
-            cell.textLabel?.text = "homeworld"
+            cell.textLabel?.text = "Homeworld"
             cell.accessoryType = viewModel?.homeworld == "unknown" ? .none : .disclosureIndicator
             return cell
         }

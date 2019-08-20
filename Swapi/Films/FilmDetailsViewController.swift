@@ -14,9 +14,9 @@ extension FilmDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == filmsImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
-                filmScrollViewRightArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
+            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+                filmScrollViewRightArrowAction()
             }
         }
     }
