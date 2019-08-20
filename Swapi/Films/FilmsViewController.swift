@@ -25,10 +25,6 @@ class FilmsViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    // MARK: Routing
-
-    var router = Router()
   
     // MARK: View lifecycle
 
@@ -72,6 +68,6 @@ class FilmsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router.routeTo(from: self, to: .FilmDetails, param: indexPath.row)
+        Router.routeTo(from: self, to: .FilmDetails, param: indexPath.row)
     }
 }

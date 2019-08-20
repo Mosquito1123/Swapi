@@ -31,10 +31,6 @@ class CharactersViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    // MARK: Routing
-
-    var router = Router()
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -78,6 +74,6 @@ class CharactersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router.routeTo(from: self, to: .CharacterDetails, param: indexPath.row)
+        Router.routeTo(from: self, to: .CharacterDetails, param: indexPath.row)
     }
 }

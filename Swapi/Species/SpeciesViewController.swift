@@ -25,9 +25,6 @@ class SpeciesViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    // MARK: Routing
-    var router = Router()
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -71,7 +68,7 @@ class SpeciesViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(species?.keys ?? Dictionary<Int, Specie>().keys)
-        router.routeTo(from: self, to: .SpecieDetails, param: species?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .SpecieDetails, param: species?[keysArray[indexPath.row]])
     }
     
 }

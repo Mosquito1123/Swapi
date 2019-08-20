@@ -21,10 +21,6 @@ class VehiclesViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    // MARK: Routing
-
-    var router = Router()
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -76,7 +72,7 @@ class VehiclesViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(vehicles!.keys)
-        router.routeTo(from: self, to: .VehicleDetails, param: vehicles?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .VehicleDetails, param: vehicles?[keysArray[indexPath.row]])
     }
     
 

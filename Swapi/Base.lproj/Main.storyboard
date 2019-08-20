@@ -451,7 +451,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7jQ-JR-rJH">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7jQ-JR-rJH">
                                         <rect key="frame" x="0.0" y="201" width="414" height="50"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="rw4-Q1-7aG">
@@ -481,7 +481,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BJb-4z-9Yy">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BJb-4z-9Yy">
                                         <rect key="frame" x="0.0" y="283" width="414" height="50"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="cOl-pF-eLT">
@@ -511,7 +511,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ong-6T-76r">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ong-6T-76r">
                                         <rect key="frame" x="0.0" y="367" width="414" height="50"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="dPd-0S-AYN">
@@ -541,7 +541,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sH2-Rd-62g">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sH2-Rd-62g">
                                         <rect key="frame" x="0.0" y="451" width="414" height="50"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="IRY-gg-NRM">
@@ -677,6 +677,7 @@
                         <outlet property="specieCollection" destination="BJb-4z-9Yy" id="59E-LZ-Us1"/>
                         <outlet property="starshipCollection" destination="ong-6T-76r" id="HSS-Dr-Ouw"/>
                         <outlet property="vehicleCollection" destination="sH2-Rd-62g" id="iJB-U8-phe"/>
+                        <segue destination="WVU-3f-dba" kind="show" identifier="filmDetails" id="oqM-Pr-ldJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1e-q6-NND" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -713,8 +714,8 @@
                                             <outlet property="delegate" destination="WVU-3f-dba" id="sL1-B2-hDz"/>
                                         </connections>
                                     </scrollView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwE-pJ-ePs">
-                                        <rect key="frame" x="351" y="0.0" width="63" height="170"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwE-pJ-ePs">
+                                        <rect key="frame" x="351" y="0.0" width="63" height="154"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="63" id="lnz-kq-KoP"/>
@@ -724,18 +725,55 @@
                                             <action selector="filmScrollViewRightArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="0dR-Ds-FwQ"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGW-2a-Zqv">
+                                        <rect key="frame" x="169" y="178" width="76" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AzN-ZG-xnN">
+                                        <rect key="frame" x="0.0" y="204" width="414" height="50"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="7va-Vp-wZy">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="characterCell" id="Blq-Rp-wnd" customClass="CharacterCell" customModule="Swapi" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="WVU-3f-dba" id="7r4-MQ-dQK"/>
+                                            <outlet property="delegate" destination="WVU-3f-dba" id="tMM-QX-Qs9"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="B8F-Ud-z0y" firstAttribute="centerX" secondItem="AQz-Dz-nQE" secondAttribute="centerX" id="1z3-Ak-abn"/>
+                                    <constraint firstItem="EGW-2a-Zqv" firstAttribute="centerX" secondItem="AQz-Dz-nQE" secondAttribute="centerX" id="66l-fv-pzq"/>
                                     <constraint firstItem="S40-iW-81G" firstAttribute="top" secondItem="B8F-Ud-z0y" secondAttribute="top" id="8Mg-oG-q4v"/>
                                     <constraint firstItem="S40-iW-81G" firstAttribute="bottom" secondItem="B8F-Ud-z0y" secondAttribute="bottom" id="8TJ-90-O2a"/>
+                                    <constraint firstItem="AzN-ZG-xnN" firstAttribute="centerX" secondItem="AQz-Dz-nQE" secondAttribute="centerX" id="9Hp-oH-et5"/>
                                     <constraint firstItem="S40-iW-81G" firstAttribute="baseline" secondItem="jwE-pJ-ePs" secondAttribute="baseline" id="EfO-1y-Yzs"/>
+                                    <constraint firstItem="AzN-ZG-xnN" firstAttribute="bottom" secondItem="EGW-2a-Zqv" secondAttribute="bottom" constant="58" id="SlG-jT-gFR"/>
                                     <constraint firstAttribute="trailing" secondItem="B8F-Ud-z0y" secondAttribute="trailing" constant="59" id="SlS-cG-EG1"/>
+                                    <constraint firstItem="AzN-ZG-xnN" firstAttribute="width" secondItem="AQz-Dz-nQE" secondAttribute="width" id="UnD-eN-Pzx"/>
+                                    <constraint firstItem="EGW-2a-Zqv" firstAttribute="bottom" secondItem="B8F-Ud-z0y" secondAttribute="bottom" constant="26" id="UxH-Dn-P9R"/>
                                     <constraint firstAttribute="bottom" secondItem="S40-iW-81G" secondAttribute="bottom" constant="638" id="ZGx-at-m8u"/>
                                     <constraint firstItem="B8F-Ud-z0y" firstAttribute="top" secondItem="jwE-pJ-ePs" secondAttribute="top" id="aln-pV-Jef"/>
                                     <constraint firstItem="B8F-Ud-z0y" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" constant="59" id="bXf-Un-mQn"/>
                                     <constraint firstItem="S40-iW-81G" firstAttribute="top" secondItem="AQz-Dz-nQE" secondAttribute="top" id="cqb-aW-2ou"/>
                                     <constraint firstItem="S40-iW-81G" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" id="hdE-69-OFK"/>
+                                    <constraint firstItem="AzN-ZG-xnN" firstAttribute="height" secondItem="EGW-2a-Zqv" secondAttribute="height" constant="32" id="jhB-4K-siD"/>
+                                    <constraint firstItem="EGW-2a-Zqv" firstAttribute="width" secondItem="AQz-Dz-nQE" secondAttribute="width" constant="-338" id="ppe-PI-SoX"/>
                                     <constraint firstAttribute="trailing" secondItem="jwE-pJ-ePs" secondAttribute="trailing" id="zef-ra-Hon"/>
                                 </constraints>
                             </scrollView>
@@ -751,10 +789,12 @@
                     </view>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
+                        <outlet property="characterCollection" destination="AzN-ZG-xnN" id="zwm-Yc-O3z"/>
                         <outlet property="filmMainScrollView" destination="AQz-Dz-nQE" id="QNn-7d-djK"/>
                         <outlet property="filmScrollViewLeftArrow" destination="S40-iW-81G" id="tpf-ad-ABL"/>
                         <outlet property="filmScrollViewRightArrow" destination="jwE-pJ-ePs" id="3Fn-JR-dNj"/>
                         <outlet property="filmsImageScrollView" destination="B8F-Ud-z0y" id="gPE-ob-jMi"/>
+                        <segue destination="0c6-WH-hdv" kind="show" identifier="characterDetails" id="jJ6-hS-afP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7q-Gn-5Yw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -950,6 +990,8 @@
         <image name="menu" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="oqM-Pr-ldJ"/>
+        <segue reference="jJ6-hS-afP"/>
         <segue reference="vTG-9q-Man"/>
     </inferredMetricsTieBreakers>
 </document>

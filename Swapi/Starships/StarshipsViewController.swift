@@ -22,10 +22,6 @@ class StarshipsViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    // MARK: Routing
-
-    var router = Router()
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -69,7 +65,7 @@ class StarshipsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(starships?.keys ?? Dictionary<Int, Starship>().keys)
-        router.routeTo(from: self, to: .StarshipDetails, param: starships?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .StarshipDetails, param: starships?[keysArray[indexPath.row]])
     }
     
 

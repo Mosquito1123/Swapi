@@ -26,10 +26,6 @@ class PlanetsViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
 
-    // MARK: Routing
-
-    var router = Router()
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -73,6 +69,6 @@ class PlanetsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
-        router.routeTo(from: self, to: .PlanetDetails, param: planets?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .PlanetDetails, param: planets?[keysArray[indexPath.row]])
     }
 }

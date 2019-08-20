@@ -10,50 +10,6 @@ import Foundation
 
 // Views
 
-class Cell: UICollectionViewCell {
-    var name: String? {
-        didSet {
-            guard let name = name else { return }
-            label.text = name
-        }
-    }
-    
-    private lazy var label: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var viewMoreIndicator: UIButton = {
-        let button = UIButton()
-        let arrowRight = imageResize(image: UIImage(named: "arrowRight"), sizeChange: CGSize(width: 12, height: 12))
-        button.setImage(arrowRight, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private func setupLabel() {
-        contentView.addSubview(label)
-        label.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        label.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        label.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupLabel()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupLabel()
-        contentView.addSubview(viewMoreIndicator)
-        viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-    }
-}
-
 class FilmCell: Cell {
    // leave this class empty on purpose just for the sake of readability for filmCollection
 }
@@ -158,7 +114,17 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: tap to take to film detail screen
+        if collectionView == filmsCollection {
+            let filmTitle = viewModel?.films[indexPath.row]
+            let films = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)
+            
+            for (index, film) in films.enumerated() {
+                if filmTitle == film.title {
+                    Router.routeTo(from: self, to: .FilmDetails, param: index)
+                    break
+                }
+            }
+        }
     }
 
 }
@@ -369,6 +335,13 @@ class CharacterDetailsViewController: UIViewController {
             title = characterData?.name
         }
         presentDetails()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = title
+        navigationItem.backBarButtonItem = backItem
     }
 
     func presentDetails() {
