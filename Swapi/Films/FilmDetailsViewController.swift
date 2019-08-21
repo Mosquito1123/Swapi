@@ -71,7 +71,7 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
             starshipCell.name = viewModel?.starships[indexPath.row]
             return starshipCell
         } else if collectionView == vehicleCollection, let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
-            vehicleCell.name = viewModel?.starships[indexPath.row]
+            vehicleCell.name = viewModel?.vehicles[indexPath.row]
             return vehicleCell
         } else if collectionView == specieCollection, let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
             specieCell.name = viewModel?.species[indexPath.row]

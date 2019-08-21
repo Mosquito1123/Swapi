@@ -81,7 +81,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                 characters: film.1["characters"].array ?? [],
                                 planets: film.1["planets"].array ?? [],
                                 starships: film.1["starships"].array ?? [],
-                                vehicles: film.1["vechiles"].array ?? [],
+                                vehicles: film.1["vehicles"].array ?? [],
                                 species: film.1["species"].array ?? [],
                                 created: film.1["created"].string ?? "",
                                 edited: film.1["edited"].string ?? "")
