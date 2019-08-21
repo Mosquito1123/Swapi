@@ -205,18 +205,20 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Whi-n6-dDH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nlv-om-WO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="gkl-8j-Yov" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OzU-As-3qn"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bvq-o3-ak6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="P7i-do-hrj" kind="relationship" relationship="viewControllers" id="lzw-4J-RfS"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nlv-om-WO3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2239" y="-816"/>
         </scene>
@@ -424,6 +426,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="c4g-iU-hSx" kind="relationship" relationship="viewControllers" id="7PP-pb-qWk"/>
@@ -442,7 +446,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5k-IY-mkm">
-                                <rect key="frame" x="0.0" y="49" width="414" height="1100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1100"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-Gq-c9M">
                                         <rect key="frame" x="59" y="0.0" width="296" height="170"/>
@@ -732,7 +736,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Dz-nQE">
-                                <rect key="frame" x="0.0" y="49" width="414" height="1000"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S40-iW-81G">
                                         <rect key="frame" x="0.0" y="0.0" width="63" height="170"/>
@@ -1183,7 +1187,7 @@
         <image name="menu" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oqM-Pr-ldJ"/>
+        <segue reference="w2V-tt-kDi"/>
         <segue reference="jJ6-hS-afP"/>
         <segue reference="bFe-KV-bdZ"/>
     </inferredMetricsTieBreakers>
