@@ -8,12 +8,6 @@
 
 import Foundation
 
-// Views
-
-class CharacterCell: Cell {
-
-}
-
 // Extension
 
 extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -23,6 +17,14 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
         let label = UILabel()
         if collectionView == characterCollection {
             label.text = viewModel?.characters[indexPath.row]
+        } else if collectionView == planetCollection {
+            label.text = viewModel?.planets[indexPath.row]
+        } else if collectionView == starshipCollection {
+            label.text = viewModel?.starships[indexPath.row]
+        } else if collectionView == vehicleCollection {
+            label.text = viewModel?.vehicles[indexPath.row]
+        } else if collectionView == specieCollection {
+            label.text = viewModel?.species[indexPath.row]
         }
 
         return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
@@ -46,6 +48,14 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == characterCollection {
             return viewModel?.characters.count ?? 0
+        } else if collectionView == planetCollection {
+            return viewModel?.planets.count ?? 0
+        } else if collectionView == starshipCollection {
+            return viewModel?.starships.count ?? 0
+        } else if collectionView == vehicleCollection {
+            return viewModel?.vehicles.count ?? 0
+        } else if collectionView == specieCollection {
+            return viewModel?.species.count ?? 0
         }
         return 0
     }
@@ -54,6 +64,18 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
         if collectionView == characterCollection, let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             characterCell.name = viewModel?.characters[indexPath.row]
             return characterCell
+        } else if collectionView == planetCollection, let planetCell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as? PlanetCell {
+            planetCell.name = viewModel?.planets[indexPath.row]
+            return planetCell
+        } else if collectionView == starshipCollection, let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
+            starshipCell.name = viewModel?.starships[indexPath.row]
+            return starshipCell
+        } else if collectionView == vehicleCollection, let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
+            vehicleCell.name = viewModel?.starships[indexPath.row]
+            return vehicleCell
+        } else if collectionView == specieCollection, let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
+            specieCell.name = viewModel?.species[indexPath.row]
+            return specieCell
         }
         return UICollectionViewCell()
     }
@@ -98,8 +120,6 @@ extension FilmDetailsViewController: DetailScrollViewProtocol {
             filmIndex = newValue
         }
     }
-    
-    
 }
 
 // Main class
@@ -141,6 +161,17 @@ class FilmDetailsViewModel: ViewModel {
         return result
     }
 
+    var vehicles: [String] {
+        let filmDatas = filmDetailsVC?.filmData
+        var result: [String] = []
+        
+        for vehicle in filmDatas?.vehicles ?? [] {
+            let id = Int(vehicle.string!.components(separatedBy: "/")[5])!
+            result.append(LocalCache.vehicles?[id]?.name ?? "")
+        }
+        return result
+    }
+
     var species: [String] {
         let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
@@ -170,7 +201,11 @@ class FilmDetailsViewModel: ViewModel {
     
     func reloadAllTableAndCollection() {
         guard let vc = filmDetailsVC else { return }
-        vc.characterCollection.reloadData()
+        vc.characterCollection.reloadSections(IndexSet(integer: 0))
+        vc.planetCollection.reloadSections(IndexSet(integer: 0))
+        vc.starshipCollection.reloadSections(IndexSet(integer: 0))
+        vc.vehicleCollection.reloadSections(IndexSet(integer: 0))
+        vc.specieCollection.reloadSections(IndexSet(integer: 0))
     }
 }
 
@@ -185,6 +220,14 @@ class FilmDetailsViewController: UIViewController {
     @IBOutlet weak var filmsImageScrollView: UIScrollView!
 
     @IBOutlet weak var characterCollection: UICollectionView!
+
+    @IBOutlet weak var planetCollection: UICollectionView!
+
+    @IBOutlet weak var starshipCollection: UICollectionView!
+
+    @IBOutlet weak var vehicleCollection: UICollectionView!
+
+    @IBOutlet weak var specieCollection: UICollectionView!
 
     var filmData: Film?
 

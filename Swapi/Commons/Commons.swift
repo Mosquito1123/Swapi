@@ -128,6 +128,30 @@ class Cell: UICollectionViewCell {
     }
 }
 
+class CharacterCell: Cell {
+    // leave this class empty on purpose just for the sake of readability for characterCollection
+}
+
+class PlanetCell: Cell {
+    // leave this class empty on purpose just for the sake of readability for planetCollection
+}
+
+class FilmCell: Cell {
+    // leave this class empty on purpose just for the sake of readability for filmCollection
+}
+
+class SpecieCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for specieCollection
+}
+
+class VehicleCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for vehicleCollection
+}
+
+class StarshipCell: Cell {
+    // leave this class empty on purpose just for the sake of readablility for starshipCollection
+}
+
 enum Router {
 
     // MARK: Routing

@@ -72,7 +72,9 @@ struct Film: Equatable {
     var planets: [JSON]
     
     var starships: [JSON]
-    
+
+    var vehicles: [JSON]
+
     var species: [JSON]
     
     var created: String
