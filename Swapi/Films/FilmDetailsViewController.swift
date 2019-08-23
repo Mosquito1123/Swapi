@@ -263,8 +263,6 @@ class FilmDetailsViewController: UIViewController {
 
     @IBOutlet weak var openingCrawl: UITextView!
 
-    @IBOutlet weak var openingCrawlLabel: UILabel!
-
     @IBOutlet weak var filmInformationCollection: UITableView!
 
     var filmData: Film?
@@ -284,7 +282,7 @@ class FilmDetailsViewController: UIViewController {
         }
         presentDetails()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let backItem = UIBarButtonItem()
@@ -297,16 +295,15 @@ class FilmDetailsViewController: UIViewController {
         viewModel?.scrollViewSetup()
     }
 
-    @IBAction func filmScrollViewRightArrowAction() {
-        if pageIndex < (LocalCache.films?.count ?? 0) - 1 {
-            viewModel?.set(direction: .right)
-            viewModel?.reloadAllTableAndCollection()
-        }
-    }
-
     @IBAction func filmScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
+            viewModel?.reloadAllTableAndCollection()
+        }
+    }
+    @IBAction func filmScrollViewRightArrowAction() {
+        if pageIndex < (LocalCache.films?.count ?? 0) - 1 {
+            viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
         }
     }
