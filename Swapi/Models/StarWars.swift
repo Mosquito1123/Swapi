@@ -19,10 +19,7 @@ struct LocalCache {
 }
 
 struct People: Equatable {
-    static func == (lhs: People, rhs: People) -> Bool {
-        return true
-    }
-    
+
     var name: String
 
     var height: String

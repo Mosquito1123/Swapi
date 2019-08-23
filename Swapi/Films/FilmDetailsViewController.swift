@@ -122,6 +122,36 @@ extension FilmDetailsViewController: DetailScrollViewProtocol {
     }
 }
 
+extension FilmDetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let filmCell = tableView.dequeueReusableCell(withIdentifier: "filmInformation", for: indexPath)
+        if indexPath.row == 0 {
+            filmCell.textLabel?.text = "Director"
+            filmCell.detailTextLabel?.text = filmData?.director
+        } else if indexPath.row == 1 {
+            filmCell.textLabel?.text = "Producer"
+            filmCell.detailTextLabel?.text = filmData?.producer
+        } else if indexPath.row == 2 {
+            filmCell.textLabel?.text = "Episode"
+            filmCell.detailTextLabel?.text = "\(filmData!.episode)"
+        } else if indexPath.row == 3 {
+            filmCell.textLabel?.text = "Release Date"
+            filmCell.detailTextLabel?.text = filmData?.releaseDate
+        }
+        return filmCell
+    }
+    
+
+}
+
+extension FilmDetailsViewController: UITableViewDelegate {
+
+}
+
 // Main class
 
 class FilmDetailsViewModel: ViewModel {
@@ -206,6 +236,8 @@ class FilmDetailsViewModel: ViewModel {
         vc.starshipCollection.reloadSections(IndexSet(integer: 0))
         vc.vehicleCollection.reloadSections(IndexSet(integer: 0))
         vc.specieCollection.reloadSections(IndexSet(integer: 0))
+        vc.filmInformationCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
+        vc.openingCrawl.text = vc.filmData?.openingCrawl
     }
 }
 
@@ -228,6 +260,12 @@ class FilmDetailsViewController: UIViewController {
     @IBOutlet weak var vehicleCollection: UICollectionView!
 
     @IBOutlet weak var specieCollection: UICollectionView!
+
+    @IBOutlet weak var openingCrawl: UITextView!
+
+    @IBOutlet weak var openingCrawlLabel: UILabel!
+
+    @IBOutlet weak var filmInformationCollection: UITableView!
 
     var filmData: Film?
 
@@ -255,6 +293,7 @@ class FilmDetailsViewController: UIViewController {
     }
 
     func presentDetails() {
+        openingCrawl.text = filmData?.openingCrawl
         viewModel?.scrollViewSetup()
     }
 
