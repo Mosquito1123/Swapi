@@ -729,14 +729,14 @@
             <objects>
                 <viewController storyboardIdentifier="FilmDetailsViewController" id="WVU-3f-dba" customClass="FilmDetailsViewController" customModule="Swapi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FIH-tv-2NI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Dz-nQE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="1122"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="1522"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bck-v8-1Yw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1622"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2522"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQZ-s9-NZw">
                                                 <rect key="frame" x="354" y="1" width="60" height="170"/>
@@ -966,10 +966,9 @@
                                                     <outlet property="delegate" destination="WVU-3f-dba" id="oTY-Fs-CRO"/>
                                                 </connections>
                                             </collectionView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EEg-az-OGC">
-                                                <rect key="frame" x="0.0" y="840" width="414" height="352"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEg-az-OGC">
+                                                <rect key="frame" x="0.0" y="840" width="414" height="484"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
@@ -1017,7 +1016,7 @@
                                             <constraint firstItem="Sg5-g8-v6Q" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="nZX-s3-8ti"/>
                                             <constraint firstItem="EEg-az-OGC" firstAttribute="width" secondItem="Bck-v8-1Yw" secondAttribute="width" id="orP-Nz-Qmx"/>
                                             <constraint firstItem="SZt-Il-gSF" firstAttribute="bottom" secondItem="nEj-Bl-zAI" secondAttribute="bottom" constant="58" id="p21-9w-IEQ"/>
-                                            <constraint firstItem="EEg-az-OGC" firstAttribute="bottom" secondItem="0l1-xT-38k" secondAttribute="bottom" constant="360" id="qDo-yn-kmm"/>
+                                            <constraint firstItem="EEg-az-OGC" firstAttribute="bottom" secondItem="0l1-xT-38k" secondAttribute="bottom" constant="492" id="qDo-yn-kmm"/>
                                             <constraint firstItem="4xW-y6-cch" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="qiS-i2-JrL"/>
                                             <constraint firstItem="7Js-BP-tQM" firstAttribute="bottom" secondItem="LQZ-s9-NZw" secondAttribute="bottom" id="rUT-Yi-5UA"/>
                                             <constraint firstItem="e9o-e7-LYR" firstAttribute="height" secondItem="Sg5-g8-v6Q" secondAttribute="height" constant="32" id="rex-8D-mb8"/>
@@ -1035,7 +1034,7 @@
                                 <constraints>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="top" secondItem="AQz-Dz-nQE" secondAttribute="top" id="0uw-Uf-DTu"/>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" id="3hv-Ca-KCp"/>
-                                    <constraint firstItem="Bck-v8-1Yw" firstAttribute="height" secondItem="AQz-Dz-nQE" secondAttribute="height" constant="500" id="9SH-9C-hDg"/>
+                                    <constraint firstItem="Bck-v8-1Yw" firstAttribute="height" secondItem="AQz-Dz-nQE" secondAttribute="height" constant="1000" id="9SH-9C-hDg"/>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="width" secondItem="AQz-Dz-nQE" secondAttribute="width" id="hJl-hj-sKm"/>
                                     <constraint firstAttribute="trailing" secondItem="Bck-v8-1Yw" secondAttribute="trailing" id="rW0-gb-Sp7"/>
                                     <constraint firstAttribute="bottom" secondItem="Bck-v8-1Yw" secondAttribute="bottom" id="vn9-3K-6yk"/>
@@ -1053,7 +1052,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ws8-XQ-2td"/>
                     </view>
-                    <size key="freeformSize" width="414" height="1200"/>
+                    <size key="freeformSize" width="414" height="1600"/>
                     <connections>
                         <outlet property="characterCollection" destination="e9o-e7-LYR" id="tst-AR-n1X"/>
                         <outlet property="filmInformationCollection" destination="4xW-y6-cch" id="XSt-qw-fnn"/>
