@@ -115,6 +115,11 @@ class Cell: UICollectionViewCell {
         label.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     }
     
+    private func setupViewMoreIndicator() {
+        contentView.addSubview(viewMoreIndicator)
+        viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLabel()
@@ -123,8 +128,7 @@ class Cell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupLabel()
-        contentView.addSubview(viewMoreIndicator)
-        viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        setupViewMoreIndicator()
     }
 }
 

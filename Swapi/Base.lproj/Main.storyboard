@@ -622,16 +622,16 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l62-wH-bMC">
-                                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                                            <rect key="frame" x="16" y="13" width="31.5" height="19.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lJH-te-lKj">
-                                                            <rect key="frame" x="236" y="12" width="44" height="20.5"/>
+                                                            <rect key="frame" x="247" y="17" width="33" height="14.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -967,8 +967,8 @@
                                                 </connections>
                                             </collectionView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEg-az-OGC">
-                                                <rect key="frame" x="0.0" y="840" width="414" height="484"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <rect key="frame" x="0.0" y="840" width="414" height="392"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
@@ -1016,7 +1016,7 @@
                                             <constraint firstItem="Sg5-g8-v6Q" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="nZX-s3-8ti"/>
                                             <constraint firstItem="EEg-az-OGC" firstAttribute="width" secondItem="Bck-v8-1Yw" secondAttribute="width" id="orP-Nz-Qmx"/>
                                             <constraint firstItem="SZt-Il-gSF" firstAttribute="bottom" secondItem="nEj-Bl-zAI" secondAttribute="bottom" constant="58" id="p21-9w-IEQ"/>
-                                            <constraint firstItem="EEg-az-OGC" firstAttribute="bottom" secondItem="0l1-xT-38k" secondAttribute="bottom" constant="492" id="qDo-yn-kmm"/>
+                                            <constraint firstItem="EEg-az-OGC" firstAttribute="bottom" secondItem="0l1-xT-38k" secondAttribute="bottom" constant="400" id="qDo-yn-kmm"/>
                                             <constraint firstItem="4xW-y6-cch" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="qiS-i2-JrL"/>
                                             <constraint firstItem="7Js-BP-tQM" firstAttribute="bottom" secondItem="LQZ-s9-NZw" secondAttribute="bottom" id="rUT-Yi-5UA"/>
                                             <constraint firstItem="e9o-e7-LYR" firstAttribute="height" secondItem="Sg5-g8-v6Q" secondAttribute="height" constant="32" id="rex-8D-mb8"/>
@@ -1037,7 +1037,7 @@
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="height" secondItem="AQz-Dz-nQE" secondAttribute="height" constant="1000" id="9SH-9C-hDg"/>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="width" secondItem="AQz-Dz-nQE" secondAttribute="width" id="hJl-hj-sKm"/>
                                     <constraint firstAttribute="trailing" secondItem="Bck-v8-1Yw" secondAttribute="trailing" id="rW0-gb-Sp7"/>
-                                    <constraint firstAttribute="bottom" secondItem="Bck-v8-1Yw" secondAttribute="bottom" id="vn9-3K-6yk"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bck-v8-1Yw" secondAttribute="bottom" constant="-1000" id="vn9-3K-6yk"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
