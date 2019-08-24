@@ -739,22 +739,22 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="2122"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQZ-s9-NZw">
-                                                <rect key="frame" x="354" y="1" width="60" height="170"/>
+                                                <rect key="frame" x="354" y="0.0" width="60" height="170"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <state key="normal" image="arrowRight"/>
                                                 <connections>
                                                     <action selector="filmScrollViewRightArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="CSH-Id-YSb"/>
                                                 </connections>
                                             </button>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lui-E4-tq6">
-                                                <rect key="frame" x="60" y="1" width="294" height="170"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lui-E4-tq6">
+                                                <rect key="frame" x="60" y="0.0" width="294" height="170"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="WVU-3f-dba" id="2gl-a2-vX3"/>
                                                 </connections>
                                             </scrollView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Js-BP-tQM">
-                                                <rect key="frame" x="0.0" y="1" width="63" height="170"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="63" height="170"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="63" id="EwN-Xp-NTa"/>
@@ -770,13 +770,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg5-g8-v6Q">
-                                                <rect key="frame" x="0.0" y="420" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="419" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e9o-e7-LYR">
-                                                <rect key="frame" x="0.0" y="446" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="445" width="414" height="50"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="tYv-gu-TSw">
                                                     <size key="itemSize" width="50" height="50"/>
@@ -800,13 +800,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Planets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uya-5t-qGJ">
-                                                <rect key="frame" x="0.0" y="504" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="503" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-ew-I9j">
-                                                <rect key="frame" x="0.0" y="530" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="529" width="414" height="50"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="qho-Sy-e5N">
                                                     <size key="itemSize" width="50" height="50"/>
@@ -830,13 +830,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starships" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vri-FQ-uHP">
-                                                <rect key="frame" x="0.0" y="588" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="587" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y59-q5-sYn">
-                                                <rect key="frame" x="0.0" y="614" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="613" width="414" height="50"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Q58-fd-ZIT"/>
@@ -863,13 +863,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1w2-it-uSn">
-                                                <rect key="frame" x="0.0" y="179" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="178" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4xW-y6-cch">
-                                                <rect key="frame" x="0.0" y="205" width="414" height="207"/>
+                                                <rect key="frame" x="0.0" y="204" width="414" height="207"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filmInformation" textLabel="nO4-Vw-ocT" detailTextLabel="vOI-jR-nSq" style="IBUITableViewCellStyleValue1" id="jOE-ri-zAQ">
@@ -904,13 +904,13 @@
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEj-Bl-zAI">
-                                                <rect key="frame" x="0.0" y="672" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="671" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SZt-Il-gSF">
-                                                <rect key="frame" x="0.0" y="698" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="697" width="414" height="50"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="syl-Tj-aHR"/>
@@ -937,13 +937,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Species" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90f-cN-Ub4">
-                                                <rect key="frame" x="0.0" y="756" width="414" height="18"/>
+                                                <rect key="frame" x="0.0" y="755" width="414" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0l1-xT-38k">
-                                                <rect key="frame" x="0.0" y="782" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="781" width="414" height="50"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cMD-om-ddr"/>
@@ -970,7 +970,7 @@
                                                 </connections>
                                             </collectionView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEg-az-OGC">
-                                                <rect key="frame" x="0.0" y="840" width="414" height="592"/>
+                                                <rect key="frame" x="0.0" y="839" width="414" height="592"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -1006,7 +1006,7 @@
                                             <constraint firstItem="nEj-Bl-zAI" firstAttribute="bottom" secondItem="y59-q5-sYn" secondAttribute="bottom" constant="26" id="W3q-eY-HNT"/>
                                             <constraint firstItem="uya-5t-qGJ" firstAttribute="width" secondItem="Bck-v8-1Yw" secondAttribute="width" id="Yex-Rg-zfP"/>
                                             <constraint firstItem="0l1-xT-38k" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="ZTF-Iu-qZs"/>
-                                            <constraint firstItem="7Js-BP-tQM" firstAttribute="top" secondItem="Bck-v8-1Yw" secondAttribute="top" constant="1" id="acP-Y8-Ngn"/>
+                                            <constraint firstItem="7Js-BP-tQM" firstAttribute="top" secondItem="Bck-v8-1Yw" secondAttribute="top" id="acP-Y8-Ngn"/>
                                             <constraint firstItem="CF5-ew-I9j" firstAttribute="width" secondItem="Bck-v8-1Yw" secondAttribute="width" id="ag4-4n-6D7"/>
                                             <constraint firstItem="EEg-az-OGC" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="dl9-Xe-h2w"/>
                                             <constraint firstItem="lui-E4-tq6" firstAttribute="centerX" secondItem="Bck-v8-1Yw" secondAttribute="centerX" id="edg-db-7Q7"/>
