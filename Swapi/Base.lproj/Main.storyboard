@@ -736,7 +736,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="1522"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bck-v8-1Yw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2522"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2122"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQZ-s9-NZw">
                                                 <rect key="frame" x="354" y="1" width="60" height="170"/>
@@ -1034,7 +1034,7 @@
                                 <constraints>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="top" secondItem="AQz-Dz-nQE" secondAttribute="top" id="0uw-Uf-DTu"/>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="leading" secondItem="AQz-Dz-nQE" secondAttribute="leading" id="3hv-Ca-KCp"/>
-                                    <constraint firstItem="Bck-v8-1Yw" firstAttribute="height" secondItem="AQz-Dz-nQE" secondAttribute="height" constant="1000" id="9SH-9C-hDg"/>
+                                    <constraint firstItem="Bck-v8-1Yw" firstAttribute="height" secondItem="AQz-Dz-nQE" secondAttribute="height" constant="600" id="9SH-9C-hDg"/>
                                     <constraint firstItem="Bck-v8-1Yw" firstAttribute="width" secondItem="AQz-Dz-nQE" secondAttribute="width" id="hJl-hj-sKm"/>
                                     <constraint firstAttribute="trailing" secondItem="Bck-v8-1Yw" secondAttribute="trailing" id="rW0-gb-Sp7"/>
                                     <constraint firstAttribute="bottom" secondItem="Bck-v8-1Yw" secondAttribute="bottom" id="vn9-3K-6yk"/>
