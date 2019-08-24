@@ -200,3 +200,10 @@ enum Router {
     }
 }
 
+extension UIView {
+    /// - Parameter identifier: The constraint identifier.
+    func constraintWithIdentifier(_ identifier: String) -> NSLayoutConstraint? {
+        return self.constraints.first { $0.identifier == identifier }
+    }
+}
+

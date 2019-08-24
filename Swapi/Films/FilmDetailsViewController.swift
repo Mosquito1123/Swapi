@@ -268,8 +268,6 @@ class FilmDetailsViewController: UIViewController {
     var filmData: Film?
 
     var viewModel: FilmDetailsViewModel?
-    
-    var isDeviceRotate: Bool = false
 
     private var filmIndex: Int?
 
@@ -292,17 +290,11 @@ class FilmDetailsViewController: UIViewController {
         navigationItem.backBarButtonItem = backItem
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        isDeviceRotate = true
-    }
-
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
-            if !isDeviceRotate {
-                filmMainScrollView.contentSize.height += 200
-            } else {
-                filmMainScrollView.contentSize.height += 300
-            }
+            filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 900
+        } else if UIDevice.current.orientation.isPortrait {
+            filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 600
         }
     }
 
