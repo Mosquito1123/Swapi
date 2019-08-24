@@ -746,9 +746,12 @@
                                                     <action selector="filmScrollViewRightArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="CSH-Id-YSb"/>
                                                 </connections>
                                             </button>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lui-E4-tq6">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lui-E4-tq6">
                                                 <rect key="frame" x="60" y="1" width="294" height="170"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="WVU-3f-dba" id="2gl-a2-vX3"/>
+                                                </connections>
                                             </scrollView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Js-BP-tQM">
                                                 <rect key="frame" x="0.0" y="1" width="63" height="170"/>

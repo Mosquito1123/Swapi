@@ -148,10 +148,6 @@ extension FilmDetailsViewController: UITableViewDataSource {
 
 }
 
-extension FilmDetailsViewController: UITableViewDelegate {
-
-}
-
 // Main class
 
 class FilmDetailsViewModel: ViewModel {
