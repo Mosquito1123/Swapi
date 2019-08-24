@@ -86,6 +86,7 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
 extension FilmDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == filmsImageScrollView {
+            print("ldkfj")
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
