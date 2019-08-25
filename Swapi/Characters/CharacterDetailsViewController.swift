@@ -259,7 +259,7 @@ class CharacterDetailsViewModel: ViewModel {
         super.set(direction: direction)
         
         if let vc = characterDetailsVC {
-            vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)[vc.pageIndex]
+            vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[vc.pageIndex]
             vc.title = vc.characterData?.name
         }
     }
@@ -299,7 +299,7 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: control logic
 
-    var characterData: People?
+    var characterData: Character?
 
     var viewModel: CharacterDetailsViewModel?
 
@@ -313,7 +313,7 @@ class CharacterDetailsViewController: UIViewController {
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
   
         if let index = characterIndex {
-            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)[index]
+            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[index]
             title = characterData?.name
         }
         presentDetails()

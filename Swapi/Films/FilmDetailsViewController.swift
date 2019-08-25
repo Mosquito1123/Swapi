@@ -33,7 +33,7 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == characterCollection {
             let characterName = viewModel?.characters[indexPath.row]
-            let characters = Array(LocalCache.characters?.values ?? Dictionary<Int, People>().values)
+            let characters = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)
             for (index, character) in characters.enumerated() {
                 if character.name == characterName {
                     Router.routeTo(from: self, to: .CharacterDetails, param: index)

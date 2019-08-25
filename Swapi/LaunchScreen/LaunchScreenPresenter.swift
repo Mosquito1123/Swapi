@@ -15,7 +15,7 @@ import SwiftyJSON
 
 protocol LaunchScreenPresentationLogic
 {
-    func cachCharacters(response: LaunchScreen.Fetch.Response.People)
+    func cachCharacters(response: LaunchScreen.Fetch.Response.Characters)
     func cachFilms(response: LaunchScreen.Fetch.Response.Films)
     func cachPlanets(response: LaunchScreen.Fetch.Response.Planets)
     func cachSpecies(respones: LaunchScreen.Fetch.Response.Species)
@@ -30,32 +30,32 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
 
     // MARK: Caching data
 
-    func cachCharacters(response: LaunchScreen.Fetch.Response.People) {
-        let peopleDatas = response.people
-        var dict: Dictionary<Int, People> = [Int: People]()
+    func cachCharacters(response: LaunchScreen.Fetch.Response.Characters) {
+        let characterDatas = response.character
+        var dict: Dictionary<Int, Character> = [Int: Character]()
         do {
-            for peopleData in peopleDatas {
-                if peopleData == nil { continue }
-                let json = try JSON(data: peopleData!)
+            for characterData in characterDatas {
+                if characterData == nil { continue }
+                let json = try JSON(data: characterData!)
                 
-                for people in json["results"] {
-                    let id = Int(people.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = People(name: people.1["name"].string ?? "",
-                                      height: people.1["height"].string ?? "",
-                                      mass: people.1["mass"].string ?? "",
-                                      hairColor: people.1["hair_color"].string ?? "",
-                                      skinColor: people.1["skin_color"].string ?? "",
-                                      eyeColor: people.1["eye_color"].string ?? "",
-                                      birthYear: people.1["birth_year"].string ?? "",
-                                      gender: people.1["gender"].string ?? "",
-                                      homeworld: people.1["homeworld"].string ?? "",
-                                      films: people.1["films"].array ?? [],
-                                      vehicles: people.1["vehicles"].array ?? [],
-                                      starships: people.1["starships"].array ?? [],
-                                      species: people.1["species"].array ?? [])
+                for character in json["results"] {
+                    let id = Int(character.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[id] = Character(name: character.1["name"].string ?? "",
+                                      height: character.1["height"].string ?? "",
+                                      mass: character.1["mass"].string ?? "",
+                                      hairColor: character.1["hair_color"].string ?? "",
+                                      skinColor: character.1["skin_color"].string ?? "",
+                                      eyeColor: character.1["eye_color"].string ?? "",
+                                      birthYear: character.1["birth_year"].string ?? "",
+                                      gender: character.1["gender"].string ?? "",
+                                      homeworld: character.1["homeworld"].string ?? "",
+                                      films: character.1["films"].array ?? [],
+                                      vehicles: character.1["vehicles"].array ?? [],
+                                      starships: character.1["starships"].array ?? [],
+                                      species: character.1["species"].array ?? [])
                 }
             }
-            viewController?.cachPeople(viewModel: LaunchScreen.Fetch.ViewModel.Characters(people: dict))
+            viewController?.cachPeople(viewModel: LaunchScreen.Fetch.ViewModel.Characters(characters: dict))
         } catch let error {
             print("Error parsing people: ", error)
         }

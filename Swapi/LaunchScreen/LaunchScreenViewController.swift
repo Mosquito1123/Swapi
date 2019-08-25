@@ -123,7 +123,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
 
     func cachPeople(viewModel: LaunchScreen.Fetch.ViewModel.Characters) {
         print("cach characters")
-        LocalCache.characters = viewModel.people
+        LocalCache.characters = viewModel.characters
     }
 
     func cachFilms(viewModel: LaunchScreen.Fetch.ViewModel.Films) {

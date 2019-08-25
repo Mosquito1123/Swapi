@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct LocalCache {
-    public static var characters: Dictionary<Int, People>?
+    public static var characters: Dictionary<Int, Character>?
     public static var films: Dictionary<Int, Film>?
     public static var planets: Dictionary<Int, Planet>?
     public static var species: Dictionary<Int, Specie>?
@@ -18,7 +18,11 @@ struct LocalCache {
     public static var vehicles: Dictionary<Int, Vehicle>?
 }
 
-struct People: Equatable {
+struct CharacterName {
+    var name: String
+}
+
+struct Character: Equatable {
 
     var name: String
 

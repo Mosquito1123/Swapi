@@ -43,10 +43,10 @@ class CharactersViewController: UITableViewController {
             view.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
     }
-    
+
     // MARK: Table view setup
 
-    var characters: Dictionary<Int, People>? = LocalCache.characters
+    var characters: Dictionary<Int, Character>? = LocalCache.characters
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -61,7 +61,7 @@ class CharactersViewController: UITableViewController {
             return UITableViewCell(style: .default, reuseIdentifier: "CharactersTableViewCell")
         }
 
-        let keysArray = Array(characters?.keys ?? Dictionary<Int, People>().keys)
+        let keysArray = Array(characters?.keys ?? Dictionary<Int, Character>().keys)
         let character = characters?[keysArray[indexPath.row]]
 
         cell.textLabel?.text = character?.name

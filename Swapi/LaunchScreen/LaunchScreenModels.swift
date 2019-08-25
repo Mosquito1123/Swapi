@@ -21,7 +21,7 @@ enum LaunchScreen
             var sequence: Range<Int>
         }
         struct Response {
-            struct People { var people: [Data?] }
+            struct Characters { var character: [Data?] }
             struct Films { var films: Data? }
             struct Planets { var planets: [Data?] }
             struct Species { var species: [Data?] }
@@ -29,7 +29,7 @@ enum LaunchScreen
             struct Vehicles { var vehicles: [Data?] }
         }
         struct ViewModel {
-            struct Characters { var people: Dictionary<Int, People> }
+            struct Characters { var characters: Dictionary<Int, Character> }
             struct Films { var films: Dictionary<Int, Film> }
             struct Planets { var planets: Dictionary<Int, Planet> }
             struct Species { var species: Dictionary<Int, Specie> }

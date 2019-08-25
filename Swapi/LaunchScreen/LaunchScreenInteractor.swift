@@ -36,7 +36,7 @@ class LaunchScreenInteractor: LaunchScreenBusinessLogic, LaunchScreenDataStore
 
     func preFetchCharacters(request: LaunchScreen.Fetch.Request) {
         worker?.preFetchCharacters(request: request) { (datas: [Data?]) in
-            self.presenter?.cachCharacters(response: LaunchScreen.Fetch.Response.People(people: datas))
+            self.presenter?.cachCharacters(response: LaunchScreen.Fetch.Response.Characters(character: datas))
         }
     }
 
