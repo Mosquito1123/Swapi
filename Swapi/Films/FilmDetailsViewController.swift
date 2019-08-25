@@ -29,7 +29,7 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
 
         return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == characterCollection {
             let characterName = viewModel?.characters[indexPath.row]
@@ -59,7 +59,7 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
         }
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == characterCollection, let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             characterCell.name = viewModel?.characters[indexPath.row]
@@ -79,13 +79,10 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
         }
         return UICollectionViewCell()
     }
-    
-    
 }
 
 extension FilmDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("ldfjlkd")
         if scrollView == filmsImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
@@ -100,19 +97,19 @@ extension FilmDetailsViewController: DetailScrollViewProtocol {
     var mainScrollView: UIScrollView {
         return filmMainScrollView
     }
-    
+
     var imageScrollView: UIScrollView {
         return filmsImageScrollView
     }
-    
+
     var leftArrow: UIButton {
         return filmScrollViewLeftArrow
     }
-    
+
     var rightArrow: UIButton {
         return filmScrollViewRightArrow
     }
-    
+
     var pageIndex: Int {
         get {
             return filmIndex ?? 0
@@ -127,7 +124,7 @@ extension FilmDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let filmCell = tableView.dequeueReusableCell(withIdentifier: "filmInformation", for: indexPath)
         if indexPath.row == 0 {
@@ -145,8 +142,6 @@ extension FilmDetailsViewController: UITableViewDataSource {
         }
         return filmCell
     }
-    
-
 }
 
 // Main class
@@ -209,7 +204,7 @@ class FilmDetailsViewModel: ViewModel {
         }
         return result
     }
-    
+
     init(filmDetailsVC: FilmDetailsViewController) {
         super.init(detailScrollViewProtocol: filmDetailsVC, detailVC: filmDetailsVC)
         self.filmDetailsVC = filmDetailsVC
@@ -286,7 +281,7 @@ class FilmDetailsViewController: UIViewController {
         backItem.title = title
         navigationItem.backBarButtonItem = backItem
     }
-    
+
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
             filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 900
@@ -306,6 +301,7 @@ class FilmDetailsViewController: UIViewController {
             viewModel?.reloadAllTableAndCollection()
         }
     }
+
     @IBAction func filmScrollViewRightArrowAction() {
         if pageIndex < (LocalCache.films?.count ?? 0) - 1 {
             viewModel?.set(direction: .right)

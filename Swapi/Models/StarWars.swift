@@ -18,10 +18,6 @@ struct LocalCache {
     public static var vehicles: Dictionary<Int, Vehicle>?
 }
 
-struct CharacterName {
-    var name: String
-}
-
 struct Character: Equatable {
 
     var name: String
