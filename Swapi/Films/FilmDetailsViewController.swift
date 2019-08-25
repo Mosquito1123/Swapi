@@ -214,10 +214,10 @@ class FilmDetailsViewModel: ViewModel {
                     if film.title == filmTitle[vc.pageIndex] {
                         vc.filmData = film
                         break
-                    } else {
-                        vc.filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[vc.pageIndex]
                     }
                 }
+            } else {
+                vc.filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[vc.pageIndex]
             }
             vc.title = vc.filmData?.title
         }
@@ -311,6 +311,7 @@ class FilmDetailsViewController: UIViewController {
 
     @IBAction func filmScrollViewLeftArrowAction() {
         if pageIndex > 0 {
+            print("shit")
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
