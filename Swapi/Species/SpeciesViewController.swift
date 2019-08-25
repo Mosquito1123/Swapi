@@ -67,8 +67,7 @@ class SpeciesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(species?.keys ?? Dictionary<Int, Specie>().keys)
-        Router.routeTo(from: self, to: .SpecieDetails, param: species?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: nil)
     }
     
 }

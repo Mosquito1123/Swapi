@@ -94,18 +94,10 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
 
         return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmsCollection {
-            let filmTitle = viewModel?.films[indexPath.row]
-            let films = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)
-            
-            for (index, film) in films.enumerated() {
-                if filmTitle == film.title {
-                    Router.routeTo(from: self, to: .FilmDetails, param: index)
-                    break
-                }
-            }
+            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
         }
     }
 
@@ -178,92 +170,101 @@ class CharacterDetailsViewModel: ViewModel {
     weak var characterDetailsVC: CharacterDetailsViewController?
     
     // MARK: data manipulation
-    
+
     var height: String {
         let characterDatas = characterDetailsVC?.characterData
         let meter = characterDatas?.height == "unknown" ? "" : "meter"
         return "\(characterDatas?.height ?? String(0)) \(meter)"
     }
-    
+
     var mass: String {
         let characterDatas = characterDetailsVC?.characterData
         let kg = characterDatas?.mass == "unknown" ? "" : "kg"
         return "\(characterDatas?.mass ?? String(0)) \(kg)"
     }
-    
+
     var homeworld: String {
         let characterDatas = characterDetailsVC?.characterData
 
         let id = Int(characterDatas!.homeworld.components(separatedBy: "/")[5])!
-
         return LocalCache.planets?[id]?.name ?? ""
     }
-    
+
     var films: [String] {
         let characterDatas = characterDetailsVC?.characterData
         var result: [String] = []
-        
+
         for film in characterDatas?.films ?? [] {
             let id = Int(film.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.films?[id]?.title ?? "")
         }
-        
+
         return result
     }
-    
+
     var vehicles: [String] {
         let characterDatas = characterDetailsVC?.characterData
         var result: [String] = []
-        
+
         for vehicle in characterDatas?.vehicles ?? [] {
             let id = Int(vehicle.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.vehicles?[id]?.name ?? "")
         }
         return result
     }
-    
+
     var starships: [String] {
         let characterDatas = characterDetailsVC?.characterData
         var result: [String] = []
-        
+
         for starship in characterDatas?.starships ?? [] {
             let id = Int(starship.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.starships?[id]?.name ?? "")
         }
-        
+
         return result
     }
-    
+
     var species: [String] {
         let characterDatas = characterDetailsVC?.characterData
         var result: [String] = []
-        
+
         for specie in characterDatas?.species ?? [] {
             let id = Int(specie.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.species?[id]?.name ?? "")
         }
-        
+
         return result
     }
-    
+
     // MARK: initialization
     
     init(characterDetailsVC: CharacterDetailsViewController) {
-        super.init(detailScrollViewProtocol: characterDetailsVC, detailVC: characterDetailsVC)
+        super.init(detailScrollViewProtocol: characterDetailsVC)
         self.characterDetailsVC = characterDetailsVC
     }
-    
+
     // MARK: view logic
-    
+
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
         
         if let vc = characterDetailsVC {
-            vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[vc.pageIndex]
+            if let characterNames = vc.characterNames {
+                for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
+                    print(vc.pageIndex)
+                    if character.name == characterNames[vc.pageIndex] {
+                        vc.characterData = character
+                        break
+                    }
+                }
+            } else {
+                vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[vc.pageIndex]
+            }
             vc.title = vc.characterData?.name
         }
     }
-    
+
     func reloadAllTableAndCollection() {
         guard let vc = characterDetailsVC else { return }
         vc.filmsCollection.reloadSections(IndexSet(integer: 0))
@@ -302,6 +303,8 @@ class CharacterDetailsViewController: UIViewController {
     var characterData: Character?
 
     var viewModel: CharacterDetailsViewModel?
+    
+    var characterNames: [String]?
 
     private var characterIndex: Int?
 
@@ -309,13 +312,6 @@ class CharacterDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-  
-        if let index = characterIndex {
-            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[index]
-            title = characterData?.name
-        }
         presentDetails()
     }
 
@@ -327,18 +323,34 @@ class CharacterDetailsViewController: UIViewController {
     }
 
     func presentDetails() {
-       viewModel?.scrollViewSetup()
+        if let index = characterIndex {
+            if let characterNames = characterNames {
+                for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
+                    if character.name == characterNames[index] {
+                        characterData = character
+                        break
+                    }
+                }
+            } else {
+                characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[pageIndex]
+            }
+            title = characterData?.name
+        }
+        
+        viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
+        viewModel?.scrollViewSetup()
     }
 
     // MARK: Character scroll view logic
 
     @IBAction func characterScrollViewRightArrowAction() {
-        if pageIndex < (LocalCache.characters?.count ?? 0) - 1  {
+        let totalPage = characterNames == nil ? LocalCache.characters?.count ?? 0 : characterNames?.count ?? 0
+        if pageIndex < totalPage - 1  {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
         }
     }
-    
+
     @IBAction func characterScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)

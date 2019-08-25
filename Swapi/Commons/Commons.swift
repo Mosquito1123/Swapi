@@ -37,8 +37,6 @@ protocol DetailScrollViewProtocol {
 class ViewModel {
 
     var detailScrollViewProtocol: DetailScrollViewProtocol
-
-    var detailsVC: UIViewController
     
     var previousImageViewContentOffset: CGPoint = .zero
 
@@ -50,9 +48,8 @@ class ViewModel {
 
     // MARK: initialization
 
-    init(detailScrollViewProtocol: DetailScrollViewProtocol, detailVC: UIViewController) {
+    init(detailScrollViewProtocol: DetailScrollViewProtocol) {
         self.detailScrollViewProtocol = detailScrollViewProtocol
-        self.detailsVC = detailVC
     }
 
     // MARK: view logic
@@ -168,32 +165,34 @@ enum Router {
         case StarshipDetails
         case VehicleDetails
     }
-    static func routeTo(from: UIViewController, to route: Router.Route, param: Any?) {
+    static func routeTo(from: UIViewController, to route: Router.Route, page: Int, entityName: [String]?) {
         var toVC: UIViewController = UIViewController()
         switch route {
         case .CharacterDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "CharacterDetailsViewController")
-            (toVC as! CharacterDetailsViewController).pageIndex = param as? Int ?? 0
+            (toVC as! CharacterDetailsViewController).pageIndex = page
+            if entityName != nil {
+                (toVC as! CharacterDetailsViewController).characterNames = entityName
+            }
             break
         case .FilmDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "FilmDetailsViewController")
-            (toVC as! FilmDetailsViewController).pageIndex = param as? Int ?? 0
+            (toVC as! FilmDetailsViewController).pageIndex = page
+            if entityName != nil {
+                (toVC as! FilmDetailsViewController).filmTitles = entityName
+            }
             break
         case .PlanetDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")
-            (toVC as! PlanetDetailsViewController).routePlanetData = param as? Planet
             break
         case .SpecieDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "SpecieDetailsViewController")
-            (toVC as! SpecieDetailsViewController).routeSpecieData = param as? Specie
             break
         case .StarshipDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "StarshipDetailsViewController")
-            (toVC as! StarshipDetailsViewController).routeStarshipData = param as? Starship
             break
         case .VehicleDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "VehicleDetailsViewController")
-            (toVC as! VehicleDetailsViewController).routeVehiclepData = param as? Vehicle
             break
         }
         from.show(toVC, sender: nil)

@@ -71,9 +71,6 @@ class VehiclesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(vehicles!.keys)
-        Router.routeTo(from: self, to: .VehicleDetails, param: vehicles?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .VehicleDetails, page: indexPath.row, entityName: nil)
     }
-    
-
 }

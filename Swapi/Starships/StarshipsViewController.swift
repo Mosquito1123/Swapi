@@ -64,9 +64,6 @@ class StarshipsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(starships?.keys ?? Dictionary<Int, Starship>().keys)
-        Router.routeTo(from: self, to: .StarshipDetails, param: starships?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: nil)
     }
-    
-
 }

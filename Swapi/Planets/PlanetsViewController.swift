@@ -68,7 +68,6 @@ class PlanetsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
-        Router.routeTo(from: self, to: .PlanetDetails, param: planets?[keysArray[indexPath.row]])
+        Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: nil)
     }
 }

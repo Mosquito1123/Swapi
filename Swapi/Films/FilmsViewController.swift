@@ -68,6 +68,6 @@ class FilmsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .FilmDetails, param: indexPath.row)
+        Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: nil)
     }
 }

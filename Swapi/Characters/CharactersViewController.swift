@@ -74,6 +74,6 @@ class CharactersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .CharacterDetails, param: indexPath.row)
+        Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: nil)
     }
 }
