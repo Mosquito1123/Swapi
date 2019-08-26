@@ -124,7 +124,7 @@ struct Specie: Equatable {
 
     var averageLifespan: String
 
-    var homeworld: [JSON]
+    var homeworld: String
 
     var language: String
 

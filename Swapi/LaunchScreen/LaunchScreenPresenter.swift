@@ -141,7 +141,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                       hairColors: specie.1["hair_colors"].string ?? "",
                                       eyeColors: specie.1["eye_colors"].string ?? "",
                                       averageLifespan: specie.1["average_lifespan"].string ?? "",
-                                      homeworld: specie.1["homeworld"].array ?? [],
+                                      homeworld: specie.1["homeworld"].string ?? "",
                                       language: specie.1["language"].string ?? "",
                                       people: specie.1["peoplen"].array ?? [],
                                       films: specie.1["films"].array ?? [],

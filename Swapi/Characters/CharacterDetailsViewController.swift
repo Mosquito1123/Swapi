@@ -113,10 +113,6 @@ extension CharacterDetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "attribute", for: indexPath)
-        let rightAccesory = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-
-        rightAccesory.textAlignment = .right
-        cell.accessoryType = .none
 
         if indexPath.row == 0 {
             cell.textLabel?.text = "Height"
