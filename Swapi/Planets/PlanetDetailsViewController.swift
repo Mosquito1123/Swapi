@@ -67,7 +67,7 @@ extension PlanetDetailsViewController: UITableViewDataSource {
             planetCell.textLabel?.text = "Climate"
             planetCell.detailTextLabel?.text = planetData?.climate
         } else if indexPath.row == 4 {
-            planetCell.textLabel?.text = "Gravit"
+            planetCell.textLabel?.text = "Gravity"
             planetCell.detailTextLabel?.text = planetData?.gravity
         } else if indexPath.row == 5 {
             planetCell.textLabel?.text = "Terrain"

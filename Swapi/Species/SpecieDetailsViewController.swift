@@ -99,6 +99,56 @@ extension SpecieDetailsViewController: UIScrollViewDelegate {
     }
 }
 
+extension SpecieDetailsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == ownByCharacterCollection {
+            return viewModel?.characters.count ?? 0
+        } else if collectionView == filmCollection {
+            return viewModel?.films.count ?? 0
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == ownByCharacterCollection, let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+
+            characterCell.name = viewModel?.characters[indexPath.row]
+            return characterCell
+
+        } else if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+
+            filmCell.name = viewModel?.films[indexPath.row]
+            return filmCell
+
+        }
+
+        return UICollectionViewCell()
+    }
+}
+
+extension SpecieDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel()
+        if collectionView == ownByCharacterCollection {
+            label.text = viewModel?.characters[indexPath.row]
+        } else if collectionView == filmCollection {
+            label.text = viewModel?.films[indexPath.row]
+        }
+        
+        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == ownByCharacterCollection {
+            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.characters)
+        } else if collectionView == filmCollection {
+            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+        }
+    }
+}
+
 class SpecieDetailsViewModel: ViewModel {
     weak var specieDetailsVC: SpecieDetailsViewController?
 
@@ -115,7 +165,7 @@ class SpecieDetailsViewModel: ViewModel {
     var characters: [String] {
         let specieDatas = specieDetailsVC?.specieData
         var result: [String] = []
-        for character in specieDatas?.people ?? [] {
+        for character in specieDatas?.characters ?? [] {
             let id = Int(character.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.characters?[id]?.name ?? "")
         }
@@ -141,6 +191,7 @@ class SpecieDetailsViewModel: ViewModel {
     func reloadAllTableAndCollection() {
         guard let vc = specieDetailsVC else { return }
         vc.specieInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
+        vc.ownByCharacterCollection.reloadSections(IndexSet(integer: 0))
     }
     
     override func set(direction: ViewModel.PageDirection) {
@@ -161,6 +212,10 @@ class SpecieDetailsViewController: UIViewController {
     @IBOutlet weak var specieScrollViewRightArrow: UIButton!
 
     @IBOutlet weak var specieImageScrollView: UIScrollView!
+
+    @IBOutlet weak var ownByCharacterCollection: UICollectionView!
+
+    @IBOutlet weak var filmCollection: UICollectionView!
 
     var specieData: Specie?
     

@@ -128,7 +128,7 @@ struct Specie: Equatable {
 
     var language: String
 
-    var people: [JSON]
+    var characters: [JSON]
 
     var films: [JSON]
 

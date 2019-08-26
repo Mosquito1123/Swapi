@@ -143,7 +143,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                       averageLifespan: specie.1["average_lifespan"].string ?? "",
                                       homeworld: specie.1["homeworld"].string ?? "",
                                       language: specie.1["language"].string ?? "",
-                                      people: specie.1["peoplen"].array ?? [],
+                                      characters: specie.1["people"].array ?? [],
                                       films: specie.1["films"].array ?? [],
                                       created: specie.1["created"].string ?? "",
                                       edited: specie.1["edited"].string ?? "")
