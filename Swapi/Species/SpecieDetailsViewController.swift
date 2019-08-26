@@ -38,7 +38,7 @@ extension SpecieDetailsViewController: DetailScrollViewProtocol {
 extension SpecieDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 8 {
-            Router.routeTo(from: self, to: .PlanetDetails, page: 0, entityName: [viewModel?.homeWorlds ?? ""])
+            Router.routeTo(from: self, to: .PlanetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
         }
     }
 }
@@ -77,9 +77,11 @@ extension SpecieDetailsViewController: UITableViewDataSource {
             specieCell.detailTextLabel?.text = specieData?.language
         } else if indexPath.row == 8 {
             specieCell.textLabel?.text = "Homeworld"
+            specieCell.isUserInteractionEnabled = viewModel?.homeworld == "unknown" ? false : true
+            specieCell.accessoryType = viewModel?.homeworld == "unknown" ? .none : .disclosureIndicator
             specieCell.selectionStyle = .gray
-            specieCell.detailTextLabel?.text = viewModel?.homeWorlds
-            specieCell.accessoryType = .disclosureIndicator
+            specieCell.detailTextLabel?.text = viewModel?.homeworld
+
         }
         return specieCell
     }
@@ -100,7 +102,7 @@ extension SpecieDetailsViewController: UIScrollViewDelegate {
 class SpecieDetailsViewModel: ViewModel {
     weak var specieDetailsVC: SpecieDetailsViewController?
 
-    var homeWorlds: String {
+    var homeworld: String {
         guard let specieDatas = specieDetailsVC?.specieData else { return "" }
 
         let id = Int(specieDatas.homeworld.components(separatedBy: "/")[5])!
