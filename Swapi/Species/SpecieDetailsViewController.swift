@@ -104,10 +104,12 @@ class SpecieDetailsViewModel: ViewModel {
 
     var homeworld: String {
         guard let specieDatas = specieDetailsVC?.specieData else { return "" }
+        if specieDatas.homeworld != "" {
+            let id = Int(specieDatas.homeworld.components(separatedBy: "/")[5])!
+            return LocalCache.planets?[id]?.name ?? ""
+        }
 
-        let id = Int(specieDatas.homeworld.components(separatedBy: "/")[5])!
-
-        return LocalCache.planets?[id]?.name ?? ""
+        return "unknown"
     }
 
     var characters: [String] {
