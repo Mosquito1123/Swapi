@@ -114,7 +114,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="jaz-cI-6H2" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="C3G-tt-4jl"/>
+                                    <segue destination="sIr-iM-45Z" kind="show" customClass="SWRevealViewControllerSeguePushController" id="krl-wE-Quj"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Species" id="bhE-cJ-TNY">
@@ -308,12 +308,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axG-fg-ZVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1413" y="-1581"/>
+            <point key="canvasLocation" x="-549" y="-2094"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Planet-->
         <scene sceneID="kZE-mw-66D">
             <objects>
                 <navigationController id="jaz-cI-6H2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Planet" image="planet" landscapeImage="planet" id="4md-M6-LaO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xvk-6m-9Fg">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -324,7 +325,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GnK-Ia-qdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2246" y="-1581"/>
+            <point key="canvasLocation" x="-1384" y="-2094"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Yrl-BZ-cN2">
+            <objects>
+                <tabBarController id="sIr-iM-45Z" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eA6-d2-FoZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jaz-cI-6H2" kind="relationship" relationship="viewControllers" id="vY7-au-FfO"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="COX-u5-G6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2330" y="-2095"/>
         </scene>
         <!--Species-->
         <scene sceneID="9Dk-Lm-2AF">
@@ -369,7 +389,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITe-qF-1vG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1404" y="-2312"/>
+            <point key="canvasLocation" x="-1399" y="-3028"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PVH-iK-eJi">
@@ -385,7 +405,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZt-dc-yFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2238" y="-2312"/>
+            <point key="canvasLocation" x="-2233" y="-3028"/>
         </scene>
         <!--Launch Screen View Controller-->
         <scene sceneID="i3e-Ue-Z2a">
@@ -443,7 +463,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5k-IY-mkm">
-                                <rect key="frame" x="0.0" y="49" width="414" height="1100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1100"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-Gq-c9M">
                                         <rect key="frame" x="59" y="0.0" width="296" height="170"/>
@@ -733,10 +753,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Dz-nQE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="1522"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="1429"/>
                                 <subviews>
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bck-v8-1Yw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2122"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2029"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQZ-s9-NZw">
                                                 <rect key="frame" x="354" y="0.0" width="60" height="170"/>
@@ -1048,7 +1068,7 @@
                         <constraints>
                             <constraint firstItem="AQz-Dz-nQE" firstAttribute="leading" secondItem="FIH-tv-2NI" secondAttribute="leading" id="2i7-qA-ICU"/>
                             <constraint firstItem="AQz-Dz-nQE" firstAttribute="centerY" secondItem="ws8-XQ-2td" secondAttribute="centerY" id="A3V-g4-2RV"/>
-                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="leading" secondItem="ws8-XQ-2td" secondAttribute="leading" id="JtU-IX-tXd"/>
+                            <constraint firstItem="AQz-Dz-nQE" firstAttribute="leading" secondItem="FIH-tv-2NI" secondAttribute="leading" id="JtU-IX-tXd"/>
                             <constraint firstItem="AQz-Dz-nQE" firstAttribute="bottom" secondItem="ws8-XQ-2td" secondAttribute="bottom" id="fIT-MY-t4L"/>
                             <constraint firstItem="AQz-Dz-nQE" firstAttribute="centerX" secondItem="ws8-XQ-2td" secondAttribute="centerX" id="rdx-F1-AfE"/>
                             <constraint firstItem="AQz-Dz-nQE" firstAttribute="top" secondItem="ws8-XQ-2td" secondAttribute="top" id="z9w-NC-S9M"/>
@@ -1082,13 +1102,83 @@
                     <view key="view" contentMode="scaleToFill" id="2ER-La-feQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpD-zr-l9A">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttt-mE-G4b">
+                                        <rect key="frame" x="60" y="0.0" width="294" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Mjw-SG-eGU" id="ifr-Yn-hgR"/>
+                                        </connections>
+                                    </scrollView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-uv-5Cd">
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="GXx-3M-AFe"/>
+                                            <constraint firstAttribute="width" constant="63" id="Ir2-vA-FYL"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowLeft"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="charactersLeftScrollViewButton"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="characterScrollViewLeftArrowAction" destination="0c6-WH-hdv" eventType="touchUpInside" id="B5r-xq-AzR"/>
+                                            <action selector="filmScrollViewLeftArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="pmt-JI-UDF"/>
+                                            <action selector="planetScrollViewLeftArrowAction" destination="Mjw-SG-eGU" eventType="touchUpInside" id="hP6-5D-Wu1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9k-Tj-rKs">
+                                        <rect key="frame" x="351" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="63" id="frC-zt-rnZ"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowRight"/>
+                                        <connections>
+                                            <action selector="filmScrollViewRightArrowAction" destination="WVU-3f-dba" eventType="touchUpInside" id="9gm-UC-shO"/>
+                                            <action selector="planetScrollViewRightArrowAction" destination="Mjw-SG-eGU" eventType="touchUpInside" id="11v-tH-NuA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ttt-mE-G4b" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" id="0x4-Ag-dhp"/>
+                                    <constraint firstAttribute="bottom" secondItem="O9k-Tj-rKs" secondAttribute="bottom" constant="555" id="CFK-Fj-JcW"/>
+                                    <constraint firstItem="O9k-Tj-rKs" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" id="JUt-tq-k4y"/>
+                                    <constraint firstItem="ttt-mE-G4b" firstAttribute="bottom" secondItem="G2R-uv-5Cd" secondAttribute="bottom" id="KuO-ZE-34P"/>
+                                    <constraint firstItem="ttt-mE-G4b" firstAttribute="leading" secondItem="vpD-zr-l9A" secondAttribute="leading" constant="60" id="Sc3-uX-dod"/>
+                                    <constraint firstAttribute="trailing" secondItem="O9k-Tj-rKs" secondAttribute="trailing" id="YeQ-eL-bkT"/>
+                                    <constraint firstAttribute="bottom" secondItem="ttt-mE-G4b" secondAttribute="bottom" constant="555" id="gns-73-kDZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="ttt-mE-G4b" secondAttribute="trailing" constant="60" id="gqq-6I-wPK"/>
+                                    <constraint firstItem="G2R-uv-5Cd" firstAttribute="leading" secondItem="vpD-zr-l9A" secondAttribute="leading" id="maz-Hf-mu4"/>
+                                    <constraint firstItem="ttt-mE-G4b" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="p4h-2W-WXn"/>
+                                    <constraint firstItem="ttt-mE-G4b" firstAttribute="top" secondItem="G2R-uv-5Cd" secondAttribute="top" id="vPw-nK-Osi"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vpD-zr-l9A" secondAttribute="trailing" id="M4p-kf-Mc4"/>
+                            <constraint firstItem="vpD-zr-l9A" firstAttribute="top" secondItem="4IJ-FQ-OkO" secondAttribute="top" id="OGk-xl-cry"/>
+                            <constraint firstItem="vpD-zr-l9A" firstAttribute="width" secondItem="2ER-La-feQ" secondAttribute="width" id="Xwr-hx-PiW"/>
+                            <constraint firstItem="vpD-zr-l9A" firstAttribute="centerX" secondItem="4IJ-FQ-OkO" secondAttribute="centerX" id="fZO-Mk-Vdt"/>
+                            <constraint firstItem="vpD-zr-l9A" firstAttribute="leading" secondItem="2ER-La-feQ" secondAttribute="leading" id="gUh-mO-MMK"/>
+                            <constraint firstItem="vpD-zr-l9A" firstAttribute="centerY" secondItem="4IJ-FQ-OkO" secondAttribute="centerY" id="jjq-mK-S7W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4IJ-FQ-OkO"/>
                     </view>
+                    <connections>
+                        <outlet property="planetMainScrollView" destination="vpD-zr-l9A" id="kw5-aS-pbe"/>
+                        <outlet property="planetScrollViewLeftArrow" destination="G2R-uv-5Cd" id="pbv-1H-3qU"/>
+                        <outlet property="planetScrollViewRightArrow" destination="O9k-Tj-rKs" id="F5I-7t-dZh"/>
+                        <outlet property="planetsImageScrollView" destination="ttt-mE-G4b" id="W0S-qE-X28"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbv-8a-bc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-588" y="-1581"/>
+            <point key="canvasLocation" x="273.91304347826087" y="-2094.6428571428569"/>
         </scene>
         <!--Specie Details View Controller-->
         <scene sceneID="gjY-Uz-nLa">
@@ -1103,7 +1193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GC7-VL-AKU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-580" y="-2312"/>
+            <point key="canvasLocation" x="-575" y="-3029"/>
         </scene>
         <!--Starships-->
         <scene sceneID="Uv1-gd-Egg">
@@ -1264,10 +1354,11 @@
         <image name="darthVader" width="30" height="30"/>
         <image name="films" width="30" height="30"/>
         <image name="menu" width="30" height="30"/>
+        <image name="planet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oqM-Pr-ldJ"/>
-        <segue reference="OcR-K0-4Rq"/>
+        <segue reference="w2V-tt-kDi"/>
+        <segue reference="jJ6-hS-afP"/>
         <segue reference="bFe-KV-bdZ"/>
     </inferredMetricsTieBreakers>
 </document>

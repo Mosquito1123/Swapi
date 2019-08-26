@@ -184,6 +184,7 @@ enum Router {
             break
         case .PlanetDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")
+            (toVC as! PlanetDetailsViewController).pageIndex = page
             break
         case .SpecieDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "SpecieDetailsViewController")

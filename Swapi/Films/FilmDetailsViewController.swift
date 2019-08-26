@@ -311,7 +311,6 @@ class FilmDetailsViewController: UIViewController {
 
     @IBAction func filmScrollViewLeftArrowAction() {
         if pageIndex > 0 {
-            print("shit")
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
