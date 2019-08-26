@@ -199,7 +199,7 @@ class SpecieDetailsViewController: UIViewController {
     }
 
     @IBAction func specieScrollViewRightArrowAction() {
-        let totalPage = specieNames == nil ? LocalCache.planets?.count ?? 0 : specieNames?.count ?? 0
+        let totalPage = specieNames == nil ? LocalCache.species?.count ?? 0 : specieNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
