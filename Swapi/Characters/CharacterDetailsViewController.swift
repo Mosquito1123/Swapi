@@ -98,6 +98,8 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmsCollection {
             Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+        } else if collectionView == specieCollection {
+            Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
         }
     }
 }

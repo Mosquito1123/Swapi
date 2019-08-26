@@ -161,6 +161,8 @@ class SpecieDetailsViewController: UIViewController {
     @IBOutlet weak var specieImageScrollView: UIScrollView!
 
     var specieData: Specie?
+    
+    var specieNames: [String]?
 
     var specieIndex: Int?
 
@@ -176,7 +178,16 @@ class SpecieDetailsViewController: UIViewController {
     }
 
     func presentDetails() {
-        specieData = Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values)[pageIndex]
+        if let specieNames = specieNames {
+            for specie in Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values) {
+                if specie.name == specieNames[pageIndex] {
+                    specieData = specie
+                    break
+                }
+            }
+        } else {
+            specieData = Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values)[pageIndex]
+        }
         title = specieData?.name
     }
 
@@ -188,7 +199,7 @@ class SpecieDetailsViewController: UIViewController {
     }
 
     @IBAction func specieScrollViewRightArrowAction() {
-        let totalPage = LocalCache.planets?.count ?? 0
+        let totalPage = specieNames == nil ? LocalCache.planets?.count ?? 0 : specieNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()

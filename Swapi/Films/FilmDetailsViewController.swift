@@ -35,6 +35,8 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
             Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.characters)
         } else if collectionView == planetCollection {
             Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: viewModel?.planets)
+        } else if collectionView == specieCollection {
+            Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
         }
     }
 }

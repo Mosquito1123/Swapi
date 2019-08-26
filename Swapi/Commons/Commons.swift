@@ -170,28 +170,27 @@ enum Router {
         switch route {
         case .CharacterDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "CharacterDetailsViewController")
-            (toVC as! CharacterDetailsViewController).pageIndex = page
-            if entityName != nil {
-                (toVC as! CharacterDetailsViewController).characterNames = entityName
-            }
+            let characterDetailsVC = toVC as! CharacterDetailsViewController
+            characterDetailsVC.pageIndex = page
+            characterDetailsVC.characterNames = entityName
             break
         case .FilmDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "FilmDetailsViewController")
-            (toVC as! FilmDetailsViewController).pageIndex = page
-            if entityName != nil {
-                (toVC as! FilmDetailsViewController).filmTitles = entityName
-            }
+            let filmDetailsVC = toVC as! FilmDetailsViewController
+            filmDetailsVC.pageIndex = page
+            filmDetailsVC.filmTitles = entityName
             break
         case .PlanetDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")
-            (toVC as! PlanetDetailsViewController).pageIndex = page
-            if entityName != nil {
-                (toVC as! PlanetDetailsViewController).planetNames = entityName
-            }
+            let planetDetailsVC = toVC as! PlanetDetailsViewController
+            planetDetailsVC.pageIndex = page
+            planetDetailsVC.planetNames = entityName
             break
         case .SpecieDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "SpecieDetailsViewController")
-            (toVC as! SpecieDetailsViewController).pageIndex = page
+            let specieDetailsVC = toVC as! SpecieDetailsViewController
+            specieDetailsVC.pageIndex = page
+            specieDetailsVC.specieNames = entityName
             break
         case .StarshipDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "StarshipDetailsViewController")
