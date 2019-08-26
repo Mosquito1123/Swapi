@@ -1184,10 +1184,84 @@
                                             <outlet property="delegate" destination="Mjw-SG-eGU" id="7AE-iJ-U9R"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appear in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hU6-Qk-IZo">
+                                        <rect key="frame" x="0.0" y="490" width="414" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wVL-Qq-dH8">
+                                        <rect key="frame" x="0.0" y="516" width="414" height="50"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="aef-0J-PKb"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="JSf-60-6Pl">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filmCell" id="rWX-9O-hnd" customClass="FilmCell" customModule="Swapi" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Mjw-SG-eGU" id="o35-KT-6cT"/>
+                                            <outlet property="delegate" destination="Mjw-SG-eGU" id="6hc-Ua-2GM"/>
+                                        </connections>
+                                    </collectionView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inhabitants" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OY-6M-azr">
+                                        <rect key="frame" x="0.0" y="574" width="414" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8i9-Gf-92U">
+                                        <rect key="frame" x="0.0" y="600" width="414" height="50"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ZIY-Xo-SGm"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="mnk-f4-icO">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="characterCell" id="Xox-ws-zYU" customClass="CharacterCell" customModule="Swapi" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Mjw-SG-eGU" id="unp-rI-dnX"/>
+                                            <outlet property="delegate" destination="Mjw-SG-eGU" id="day-Q1-m5l"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ttt-mE-G4b" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" id="0x4-Ag-dhp"/>
+                                    <constraint firstItem="hU6-Qk-IZo" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" constant="490" id="3RI-fF-Ul2"/>
+                                    <constraint firstItem="hU6-Qk-IZo" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="4mi-uN-nsW"/>
+                                    <constraint firstItem="3OY-6M-azr" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="4ml-7V-gSC"/>
+                                    <constraint firstItem="wVL-Qq-dH8" firstAttribute="width" secondItem="vpD-zr-l9A" secondAttribute="width" id="5Mh-7B-9kz"/>
+                                    <constraint firstItem="wVL-Qq-dH8" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" constant="516" id="7bN-Dw-vTx"/>
+                                    <constraint firstItem="3OY-6M-azr" firstAttribute="width" secondItem="vpD-zr-l9A" secondAttribute="width" id="BPE-dc-E1U"/>
                                     <constraint firstAttribute="bottom" secondItem="O9k-Tj-rKs" secondAttribute="bottom" constant="555" id="CFK-Fj-JcW"/>
+                                    <constraint firstItem="8i9-Gf-92U" firstAttribute="width" secondItem="vpD-zr-l9A" secondAttribute="width" id="EYf-IR-baP"/>
+                                    <constraint firstItem="8i9-Gf-92U" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" constant="600" id="FsU-ES-TQA"/>
                                     <constraint firstAttribute="bottom" secondItem="JVd-gO-qAZ" secondAttribute="bottom" constant="243" id="IzD-PC-7V3"/>
                                     <constraint firstItem="O9k-Tj-rKs" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" id="JUt-tq-k4y"/>
                                     <constraint firstItem="ttt-mE-G4b" firstAttribute="bottom" secondItem="G2R-uv-5Cd" secondAttribute="bottom" id="KuO-ZE-34P"/>
@@ -1198,10 +1272,14 @@
                                     <constraint firstItem="ttt-mE-G4b" firstAttribute="leading" secondItem="vpD-zr-l9A" secondAttribute="leading" constant="60" id="Sc3-uX-dod"/>
                                     <constraint firstAttribute="trailing" secondItem="O9k-Tj-rKs" secondAttribute="trailing" id="YeQ-eL-bkT"/>
                                     <constraint firstItem="JVd-gO-qAZ" firstAttribute="width" secondItem="vpD-zr-l9A" secondAttribute="width" id="beg-t4-qrh"/>
+                                    <constraint firstItem="wVL-Qq-dH8" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="d2B-4L-uah"/>
+                                    <constraint firstItem="8i9-Gf-92U" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="fTo-o5-pdG"/>
                                     <constraint firstAttribute="bottom" secondItem="ttt-mE-G4b" secondAttribute="bottom" constant="555" id="gns-73-kDZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ttt-mE-G4b" secondAttribute="trailing" constant="60" id="gqq-6I-wPK"/>
                                     <constraint firstItem="G2R-uv-5Cd" firstAttribute="leading" secondItem="vpD-zr-l9A" secondAttribute="leading" id="maz-Hf-mu4"/>
                                     <constraint firstItem="ttt-mE-G4b" firstAttribute="centerX" secondItem="vpD-zr-l9A" secondAttribute="centerX" id="p4h-2W-WXn"/>
+                                    <constraint firstItem="hU6-Qk-IZo" firstAttribute="width" secondItem="vpD-zr-l9A" secondAttribute="width" id="qrL-HX-Cih"/>
+                                    <constraint firstItem="3OY-6M-azr" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" constant="574" id="rzH-DS-jbE"/>
                                     <constraint firstItem="ttt-mE-G4b" firstAttribute="top" secondItem="G2R-uv-5Cd" secondAttribute="top" id="vPw-nK-Osi"/>
                                     <constraint firstItem="rsG-ci-luM" firstAttribute="top" secondItem="vpD-zr-l9A" secondAttribute="top" constant="178" id="zhk-Hd-bqi"/>
                                 </constraints>
@@ -1219,6 +1297,8 @@
                         <viewLayoutGuide key="safeArea" id="4IJ-FQ-OkO"/>
                     </view>
                     <connections>
+                        <outlet property="filmCollection" destination="wVL-Qq-dH8" id="UsH-Ug-Bwd"/>
+                        <outlet property="inhabitantCollection" destination="8i9-Gf-92U" id="Arr-ia-cNx"/>
                         <outlet property="planetInformation" destination="JVd-gO-qAZ" id="wZ0-8w-3SK"/>
                         <outlet property="planetMainScrollView" destination="vpD-zr-l9A" id="kw5-aS-pbe"/>
                         <outlet property="planetScrollViewLeftArrow" destination="G2R-uv-5Cd" id="pbv-1H-3qU"/>

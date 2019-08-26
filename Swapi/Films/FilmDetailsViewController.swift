@@ -33,6 +33,8 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == characterCollection {
             Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.characters)
+        } else if collectionView == planetCollection {
+            Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: viewModel?.planets)
         }
     }
 }
@@ -209,17 +211,7 @@ class FilmDetailsViewModel: ViewModel {
         super.set(direction: direction)
 
         if let vc = filmDetailsVC {
-            if let filmTitle = vc.filmTitles {
-                for film in Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values) {
-                    if film.title == filmTitle[vc.pageIndex] {
-                        vc.filmData = film
-                        break
-                    }
-                }
-            } else {
-                vc.filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[vc.pageIndex]
-            }
-            vc.title = vc.filmData?.title
+            vc.presentDetails()
         }
     }
     
@@ -271,6 +263,11 @@ class FilmDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         presentDetails()
+
+        openingCrawl.text = filmData?.openingCrawl
+
+        viewModel = FilmDetailsViewModel(filmDetailsVC: self)
+        viewModel?.scrollViewSetup()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -289,24 +286,17 @@ class FilmDetailsViewController: UIViewController {
     }
 
     func presentDetails() {
-        if let index = filmIndex {
-            if let filmTitles = filmTitles {
-                for film in Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values) {
-                    if film.title == filmTitles[pageIndex] {
-                        filmData = film
-                        break
-                    }
+        if let filmTitles = filmTitles {
+            for film in Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values) {
+                if film.title == filmTitles[pageIndex] {
+                    filmData = film
+                    break
                 }
-            } else {
-                filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[index]
             }
-            title = filmData?.title
+        } else {
+            filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[pageIndex]
         }
-
-        openingCrawl.text = filmData?.openingCrawl
-        
-        viewModel = FilmDetailsViewModel(filmDetailsVC: self)
-        viewModel?.scrollViewSetup()
+        title = filmData?.title
     }
 
     @IBAction func filmScrollViewLeftArrowAction() {

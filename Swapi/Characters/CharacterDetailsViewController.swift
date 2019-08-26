@@ -100,18 +100,17 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
             Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
         }
     }
-
 }
 
 extension CharacterDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "attribute", for: indexPath)
         let rightAccesory = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
@@ -148,6 +147,14 @@ extension CharacterDetailsViewController: UITableViewDataSource {
             return cell
         }
         return cell
+    }
+}
+
+extension CharacterDetailsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == attributeCollection && indexPath.row == 7  {
+            Router.routeTo(from: self, to: .PlanetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
+        }
     }
 }
 
@@ -248,20 +255,9 @@ class CharacterDetailsViewModel: ViewModel {
 
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
-        
+
         if let vc = characterDetailsVC {
-            if let characterNames = vc.characterNames {
-                for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
-                    print(vc.pageIndex)
-                    if character.name == characterNames[vc.pageIndex] {
-                        vc.characterData = character
-                        break
-                    }
-                }
-            } else {
-                vc.characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[vc.pageIndex]
-            }
-            vc.title = vc.characterData?.name
+            vc.presentDetails()
         }
     }
 
@@ -274,7 +270,6 @@ class CharacterDetailsViewModel: ViewModel {
         vc.attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
-
 
 class CharacterDetailsViewController: UIViewController {
 
@@ -312,7 +307,11 @@ class CharacterDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         presentDetails()
+
+        viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
+        viewModel?.scrollViewSetup()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -323,22 +322,17 @@ class CharacterDetailsViewController: UIViewController {
     }
 
     func presentDetails() {
-        if let index = characterIndex {
-            if let characterNames = characterNames {
-                for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
-                    if character.name == characterNames[index] {
-                        characterData = character
-                        break
-                    }
+        if let characterNames = characterNames {
+            for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
+                if character.name == characterNames[pageIndex] {
+                    characterData = character
+                    break
                 }
-            } else {
-                characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[pageIndex]
             }
-            title = characterData?.name
+        } else {
+            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[pageIndex]
         }
-        
-        viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-        viewModel?.scrollViewSetup()
+        title = characterData?.name
     }
 
     // MARK: Character scroll view logic

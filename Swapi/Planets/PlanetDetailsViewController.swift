@@ -84,15 +84,61 @@ extension PlanetDetailsViewController: UITableViewDataSource {
     }
 }
 
+extension PlanetDetailsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == filmCollection {
+            return viewModel?.films.count ?? 0
+        } else if collectionView == inhabitantCollection {
+            return viewModel?.inhabitants.count ?? 0
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+            filmCell.name = viewModel?.films[indexPath.row]
+            return filmCell
+        } else if collectionView == inhabitantCollection, let inhabitantCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+            inhabitantCell.name = viewModel?.inhabitants[indexPath.row]
+            return inhabitantCell
+        }
+        
+        return UICollectionViewCell()
+    }
+}
+
+extension PlanetDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel()
+        if collectionView == filmCollection {
+            label.text = viewModel?.films[indexPath.row]
+        } else if collectionView == inhabitantCollection {
+            label.text = viewModel?.inhabitants[indexPath.row]
+        }
+
+        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == filmCollection {
+            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+        } else if collectionView == inhabitantCollection {
+            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.inhabitants)
+        }
+    }
+}
+
 class PlanetDetailsViewModel: ViewModel {
     weak var planetDetailsVC: PlanetDetailsViewController?
 
-    var residents: [String] {
+    var inhabitants: [String] {
         let planetDatas = planetDetailsVC?.planetData
         var result: [String] = []
 
-        for resident in planetDatas?.residents ?? [] {
-            let id = Int(resident.string!.components(separatedBy: "/")[5])!
+        for inhabitant in planetDatas?.residents ?? [] {
+            let id = Int(inhabitant.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.characters?[id]?.name ?? "")
         }
         return result
@@ -116,21 +162,23 @@ class PlanetDetailsViewModel: ViewModel {
     
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
-        
+
         if let vc = planetDetailsVC {
-            vc.planetData = Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values)[vc.pageIndex]
-            vc.title = vc.planetData?.name
+            vc.presentDetails()
         }
     }
     
     func reloadAllTableAndCollection() {
         guard let vc = planetDetailsVC else { return }
         vc.planetInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
+        vc.filmCollection.reloadSections(IndexSet(integer: 0))
+        vc.inhabitantCollection.reloadSections(IndexSet(integer: 0))
     }
 }
 
 class PlanetDetailsViewController: UIViewController {
-    var planetData: Planet?
+
+    @IBOutlet weak var filmCollection: UICollectionView!
 
     @IBOutlet weak var planetMainScrollView: UIScrollView!
 
@@ -142,22 +190,35 @@ class PlanetDetailsViewController: UIViewController {
 
     @IBOutlet weak var planetInformation: UITableView!
 
+    @IBOutlet weak var inhabitantCollection: UICollectionView!
+
+    var planetData: Planet?
+
     var viewModel: PlanetDetailsViewModel?
 
     private var planetIndex: Int?
 
+    var planetNames: [String]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presentDetails()
+        viewModel = PlanetDetailsViewModel(planetDetailsVC: self)
+        viewModel?.scrollViewSetup()
     }
 
     func presentDetails() {
-        if let index = planetIndex {
-            planetData = Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values)[index]
-            title = planetData?.name
+        if let planetNames = planetNames {
+            for planet in Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values) {
+                if planet.name == planetNames[pageIndex] {
+                    planetData = planet
+                    break
+                }
+            }
+        } else {
+            planetData = Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values)[pageIndex]
         }
-        viewModel = PlanetDetailsViewModel(planetDetailsVC: self)
-        viewModel?.scrollViewSetup()
+        title = planetData?.name
     }
 
     @IBAction func planetScrollViewLeftArrowAction() {
@@ -166,8 +227,9 @@ class PlanetDetailsViewController: UIViewController {
             viewModel?.reloadAllTableAndCollection()
         }
     }
+
     @IBAction func planetScrollViewRightArrowAction() {
-        let totalPage = LocalCache.planets?.count ?? 0
+        let totalPage = planetNames == nil ? LocalCache.planets?.count ?? 0 : planetNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
