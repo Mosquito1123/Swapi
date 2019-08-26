@@ -47,6 +47,43 @@ extension PlanetDetailsViewController: UIScrollViewDelegate {
     }
 }
 
+extension PlanetDetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let planetCell = tableView.dequeueReusableCell(withIdentifier: "planetInformation", for: indexPath)
+        if indexPath.row == 0 {
+            planetCell.textLabel?.text = "Rotation period"
+            planetCell.detailTextLabel?.text = planetData?.rotationPeriod
+        } else if indexPath.row == 1 {
+            planetCell.textLabel?.text = "Orbital period"
+            planetCell.detailTextLabel?.text = planetData?.orbitalPeriod
+        } else if indexPath.row == 2 {
+            planetCell.textLabel?.text = "Diameter"
+            planetCell.detailTextLabel?.text = planetData?.diameter
+        } else if indexPath.row == 3 {
+            planetCell.textLabel?.text = "Climate"
+            planetCell.detailTextLabel?.text = planetData?.climate
+        } else if indexPath.row == 4 {
+            planetCell.textLabel?.text = "Gravit"
+            planetCell.detailTextLabel?.text = planetData?.gravity
+        } else if indexPath.row == 5 {
+            planetCell.textLabel?.text = "Terrain"
+            planetCell.detailTextLabel?.text = planetData?.terrain
+        } else if indexPath.row == 3 {
+            planetCell.textLabel?.text = "Surface water"
+            planetCell.detailTextLabel?.text = planetData?.surfaceWater
+        } else if indexPath.row == 3 {
+            planetCell.textLabel?.text = "Population"
+            planetCell.detailTextLabel?.text = planetData?.population
+        }
+
+        return planetCell
+    }
+}
+
 class PlanetDetailsViewModel: ViewModel {
     weak var planetDetailsVC: PlanetDetailsViewController?
 
@@ -87,7 +124,8 @@ class PlanetDetailsViewModel: ViewModel {
     }
     
     func reloadAllTableAndCollection() {
-
+        guard let vc = planetDetailsVC else { return }
+        vc.planetInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
 
@@ -101,6 +139,8 @@ class PlanetDetailsViewController: UIViewController {
     @IBOutlet weak var planetScrollViewLeftArrow: UIButton!
 
     @IBOutlet weak var planetsImageScrollView: UIScrollView!
+
+    @IBOutlet weak var planetInformation: UITableView!
 
     var viewModel: PlanetDetailsViewModel?
 
