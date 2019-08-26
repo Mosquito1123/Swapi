@@ -115,7 +115,7 @@ extension CharacterDetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "attribute", for: indexPath)
-
+        cell.accessoryType = .none
         if indexPath.row == 0 {
             cell.textLabel?.text = "Height"
             cell.detailTextLabel?.text = viewModel?.height

@@ -50,7 +50,7 @@ extension SpecieDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let specieCell = tableView.dequeueReusableCell(withIdentifier: "specieInformation", for: indexPath)
-
+        specieCell.accessoryType = .none
         if indexPath.row == 0 {
             specieCell.textLabel?.text = "Classification"
             specieCell.detailTextLabel?.text = specieData?.classification
