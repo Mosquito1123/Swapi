@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Extension
+// MARK: Extension
 
 extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
@@ -91,20 +91,8 @@ extension FilmDetailsViewController: UIScrollViewDelegate {
 }
 
 extension FilmDetailsViewController: DetailScrollViewProtocol {
-    var mainScrollView: UIScrollView {
-        return filmMainScrollView
-    }
-
     var imageScrollView: UIScrollView {
         return filmsImageScrollView
-    }
-
-    var leftArrow: UIButton {
-        return filmScrollViewLeftArrow
-    }
-
-    var rightArrow: UIButton {
-        return filmScrollViewRightArrow
     }
 
     var pageIndex: Int {
@@ -143,6 +131,10 @@ extension FilmDetailsViewController: UITableViewDataSource {
 
 // Main class
 
+/**
+ ViewModel responsible for parsing and manipulate
+ data from LocalCache
+ **/
 class FilmDetailsViewModel: ViewModel {
 
     weak var filmDetailsVC: FilmDetailsViewController?
@@ -229,7 +221,15 @@ class FilmDetailsViewModel: ViewModel {
     }
 }
 
+/**
+ Detail View Controller instantiate inside Router.routTo function
+ from storyboard view controller's identifier. The design pattern
+ is Model-ViewModel-Controller in order to keep the main view controller
+ substantially small
+ **/
 class FilmDetailsViewController: UIViewController {
+
+    // MARK: View properties
 
     @IBOutlet weak var filmMainScrollView: UIScrollView!
 
@@ -253,6 +253,8 @@ class FilmDetailsViewController: UIViewController {
 
     @IBOutlet weak var filmInformationCollection: UITableView!
 
+    // MARK: Control logic
+
     var filmData: Film?
 
     var filmTitles: [String]?
@@ -260,6 +262,8 @@ class FilmDetailsViewController: UIViewController {
     var viewModel: FilmDetailsViewModel?
 
     private var filmIndex: Int?
+
+    // MARK: Functionalities
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -287,6 +291,7 @@ class FilmDetailsViewController: UIViewController {
         }
     }
 
+    /// This function is call for initial setup and is called before reloading all tableview and collection
     func presentDetails() {
         if let filmTitles = filmTitles {
             for film in Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values) {

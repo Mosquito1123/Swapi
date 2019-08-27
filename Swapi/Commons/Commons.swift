@@ -11,6 +11,8 @@
 
 import Foundation
 
+// MARK: Common functionns
+
 func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
     guard image != nil else {
         return nil
@@ -25,14 +27,18 @@ func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
     return scaledImage
 }
 
-
+/**
+ Common Image scroll view for detail view controller. CharacterDetailViewController
+ **/
 protocol DetailScrollViewProtocol {
-    var mainScrollView: UIScrollView { get }
     var imageScrollView: UIScrollView { get }
-    var leftArrow: UIButton { get }
-    var rightArrow: UIButton { get }
     var pageIndex: Int { get set }
 }
+
+/**
+ Subclass ViewModel for common functionality like setting up image sceollview
+ contentsize and set new page number for image scroll view upon user interaction
+ **/
 
 class ViewModel {
 
@@ -81,6 +87,10 @@ class ViewModel {
     }
 }
 
+/**
+ This class is for reusable uicollection view cell with "detail"
+ arrow indicator on the right
+ **/
 class Cell: UICollectionViewCell {
     var name: String? {
         didSet {
@@ -130,29 +140,32 @@ class Cell: UICollectionViewCell {
 }
 
 class CharacterCell: Cell {
-    // leave this class empty on purpose just for the sake of readability for characterCollection
+    // leave this class empty on purpose just for the sake of readability for characterCollection cell
 }
 
 class PlanetCell: Cell {
-    // leave this class empty on purpose just for the sake of readability for planetCollection
+    // leave this class empty on purpose just for the sake of readability for planetCollection cell
 }
 
 class FilmCell: Cell {
-    // leave this class empty on purpose just for the sake of readability for filmCollection
+    // leave this class empty on purpose just for the sake of readability for filmCollection cell
 }
 
 class SpecieCell: Cell {
-    // leave this class empty on purpose just for the sake of readablility for specieCollection
+    // leave this class empty on purpose just for the sake of readablility for specieCollection cell
 }
 
 class VehicleCell: Cell {
-    // leave this class empty on purpose just for the sake of readablility for vehicleCollection
+    // leave this class empty on purpose just for the sake of readablility for vehicleCollection cell
 }
 
 class StarshipCell: Cell {
-    // leave this class empty on purpose just for the sake of readablility for starshipCollection
+    // leave this class empty on purpose just for the sake of readablility for starshipCollection cell
 }
 
+/**
+ This is responsible for routing from one uiviewcontroller to another
+ **/
 enum Router {
 
     // MARK: Routing

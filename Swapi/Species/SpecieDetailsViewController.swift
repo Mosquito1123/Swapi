@@ -8,23 +8,14 @@
 
 import Foundation
 
+// MARK: Extension
+
 extension SpecieDetailsViewController: DetailScrollViewProtocol {
-    var mainScrollView: UIScrollView {
-        return specieMainScrollView
-    }
-    
+
     var imageScrollView: UIScrollView {
         return specieImageScrollView
     }
-    
-    var leftArrow: UIButton {
-        return specieScrollViewLeftArrow
-    }
-    
-    var rightArrow: UIButton {
-        return specieScrollViewRightArrow
-    }
-    
+
     var pageIndex: Int {
         get {
             return specieIndex ?? 0
@@ -149,6 +140,12 @@ extension SpecieDetailsViewController: UICollectionViewDelegate, UICollectionVie
     }
 }
 
+// MARK: Main class
+
+/**
+ ViewModel responsible for parsing and manipulate
+ data from LocalCache
+**/
 class SpecieDetailsViewModel: ViewModel {
     weak var specieDetailsVC: SpecieDetailsViewController?
 
@@ -201,6 +198,12 @@ class SpecieDetailsViewModel: ViewModel {
     }
 }
 
+/**
+ Detail View Controller instantiate inside Router.routTo function
+ from storyboard view controller's identifier. The design pattern
+ is Model-ViewModel-Controller in order to keep the main view controller
+ substantially small
+**/
 class SpecieDetailsViewController: UIViewController {
 
     @IBOutlet weak var specieInformation: UITableView!

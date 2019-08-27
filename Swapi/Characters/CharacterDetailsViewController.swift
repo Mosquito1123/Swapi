@@ -8,23 +8,11 @@
 
 import Foundation
 
-// Extension
+// MARK: Extension
 
 extension CharacterDetailsViewController: DetailScrollViewProtocol {
-    var mainScrollView: UIScrollView {
-        return characterMainScrollView
-    }
-
     var imageScrollView: UIScrollView {
         return charactersImageScrollView
-    }
-
-    var leftArrow: UIButton {
-        return characterScrollViewLeftArrow
-    }
-
-    var rightArrow: UIButton {
-        return characterScrollViewRightArrow
     }
 
     var pageIndex: Int {
@@ -170,6 +158,11 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
 
 // Main class
 
+/**
+ ViewModel responsible for parsing and manipulate
+ data from LocalCache
+ **/
+
 class CharacterDetailsViewModel: ViewModel {
     
     weak var characterDetailsVC: CharacterDetailsViewController?
@@ -269,6 +262,12 @@ class CharacterDetailsViewModel: ViewModel {
     }
 }
 
+/**
+ Detail View Controller instantiate inside Router.routTo function
+ from storyboard view controller's identifier. The design pattern
+ is Model-ViewModel-Controller in order to keep the main view controller
+ substantially small
+ **/
 class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties

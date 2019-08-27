@@ -8,23 +8,13 @@
 
 import Foundation
 
+// MARK: Extension
+
 extension PlanetDetailsViewController: DetailScrollViewProtocol {
-    var mainScrollView: UIScrollView {
-        return planetMainScrollView
-    }
-    
     var imageScrollView: UIScrollView {
         return planetsImageScrollView
     }
-    
-    var leftArrow: UIButton {
-        return planetScrollViewLeftArrow
-    }
-    
-    var rightArrow: UIButton {
-        return planetScrollViewRightArrow
-    }
-    
+
     var pageIndex: Int {
         get {
             return planetIndex ?? 0
@@ -130,6 +120,12 @@ extension PlanetDetailsViewController: UICollectionViewDelegate, UICollectionVie
     }
 }
 
+// MARK: Main class
+
+/**
+ ViewModel responsible for parsing and manipulate
+ data from LocalCache
+ **/
 class PlanetDetailsViewModel: ViewModel {
     weak var planetDetailsVC: PlanetDetailsViewController?
 
@@ -176,7 +172,15 @@ class PlanetDetailsViewModel: ViewModel {
     }
 }
 
+/**
+ Detail View Controller instantiate inside Router.routTo function
+ from storyboard view controller's identifier. The design pattern
+ is Model-ViewModel-Controller in order to keep the main view controller
+ substantially small
+ **/
 class PlanetDetailsViewController: UIViewController {
+
+    // MARK: View properties
 
     @IBOutlet weak var filmCollection: UICollectionView!
 
@@ -192,6 +196,8 @@ class PlanetDetailsViewController: UIViewController {
 
     @IBOutlet weak var inhabitantCollection: UICollectionView!
 
+    // MARK: Control logic
+
     var planetData: Planet?
 
     var viewModel: PlanetDetailsViewModel?
@@ -199,6 +205,8 @@ class PlanetDetailsViewController: UIViewController {
     private var planetIndex: Int?
 
     var planetNames: [String]?
+
+    // MARK: Functionalities
 
     override func viewDidLoad() {
         super.viewDidLoad()
