@@ -227,7 +227,7 @@ class StarshipDetailsViewController: UIViewController {
         if UIDevice.current.orientation.isLandscape {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600
         } else if UIDevice.current.orientation.isPortrait {
-            starshipMainScrollView.constraintWithIdentifier("starshipMainScrollViewBottom")?.constant = 300
+            starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 300
         }
     }
 
