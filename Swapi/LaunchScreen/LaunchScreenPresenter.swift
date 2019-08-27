@@ -166,12 +166,12 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                     let id = Int(starship.1["url"].string!.components(separatedBy: "/")[5])!
                     dict[id] = Starship(name: starship.1["name"].string ?? "",
                                         model: starship.1["model"].string ?? "",
-                                        manufacturer: starship.1["manufactuer"].string ?? "",
+                                        manufacturer: starship.1["manufacturer"].string ?? "",
                                         costInCredits: starship.1["cost_in_credits"].string ?? "",
                                         length: starship.1["length"].string ?? "",
                                         maxAtmospheringSpeed: starship.1["max_atmosphering_speed"].string ?? "",
                                         crew: starship.1["crew"].string ?? "",
-                                        passenger: starship.1["passenger"].string ?? "",
+                                        passenger: starship.1["passengers"].string ?? "",
                                         cargoCapacity: starship.1["cargo_capacity"].string ?? "",
                                         consumables: starship.1["consumables"].string ?? "",
                                         vehicleClass: starship.1["vehicle_class"].string ?? "",
@@ -179,8 +179,8 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                         films: starship.1["films"].array ?? [],
                                         created: starship.1["created"].string ?? "",
                                         edited: starship.1["edited"].string ?? "",
-                                        heperdriveRating: starship.1["heperdriveRating"].string ?? "",
-                                        mglt: starship.1["mglt"].string ?? "",
+                                        heperdriveRating: starship.1["hyperdrive_rating"].string ?? "",
+                                        mglt: starship.1["MGLT"].string ?? "",
                                         starshipClass: starship.1["starship_class"].string ?? "")
                 }
             }

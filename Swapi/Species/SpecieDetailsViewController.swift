@@ -190,11 +190,18 @@ class SpecieDetailsViewModel: ViewModel {
         vc.specieInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
         vc.ownByCharacterCollection.reloadSections(IndexSet(integer: 0))
     }
-    
+
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
         guard let vc = specieDetailsVC else { return }
         vc.presentDetails()
+    }
+
+    override func scrollViewSetup() {
+        super.scrollViewSetup()
+        if let vc = specieDetailsVC {
+            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 37, height: 0)
+        }
     }
 }
 
@@ -207,12 +214,6 @@ class SpecieDetailsViewModel: ViewModel {
 class SpecieDetailsViewController: UIViewController {
 
     @IBOutlet weak var specieInformation: UITableView!
-
-    @IBOutlet weak var specieMainScrollView: UIScrollView!
-
-    @IBOutlet weak var specieScrollViewLeftArrow: UIButton!
-
-    @IBOutlet weak var specieScrollViewRightArrow: UIButton!
 
     @IBOutlet weak var specieImageScrollView: UIScrollView!
 

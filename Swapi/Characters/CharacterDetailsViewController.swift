@@ -88,6 +88,8 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
             Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
         } else if collectionView == specieCollection {
             Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
+        } else if collectionView == starshipCollection {
+            Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: viewModel?.starships)
         }
     }
 }
@@ -252,6 +254,13 @@ class CharacterDetailsViewModel: ViewModel {
         }
     }
 
+    override func scrollViewSetup() {
+        super.scrollViewSetup()
+        if let vc = characterDetailsVC {
+            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 87, height: 0)
+        }
+    }
+
     func reloadAllTableAndCollection() {
         guard let vc = characterDetailsVC else { return }
         vc.filmsCollection.reloadSections(IndexSet(integer: 0))
@@ -282,13 +291,7 @@ class CharacterDetailsViewController: UIViewController {
 
     @IBOutlet weak var filmsCollection: UICollectionView!
 
-    @IBOutlet weak var characterMainScrollView: UIScrollView!
-
     @IBOutlet weak var charactersImageScrollView: UIScrollView!
-
-    @IBOutlet weak var characterScrollViewLeftArrow: UIButton!
-
-    @IBOutlet weak var characterScrollViewRightArrow: UIButton!
 
     // MARK: control logic
 

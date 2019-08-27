@@ -37,6 +37,8 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
             Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: viewModel?.planets)
         } else if collectionView == specieCollection {
             Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
+        } else if collectionView == starshipCollection {
+            Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: viewModel?.starships)
         }
     }
 }
@@ -208,7 +210,14 @@ class FilmDetailsViewModel: ViewModel {
             vc.presentDetails()
         }
     }
-    
+
+    override func scrollViewSetup() {
+        super.scrollViewSetup()
+        if let vc = filmDetailsVC {
+            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 7, height: 0)
+        }
+    }
+
     func reloadAllTableAndCollection() {
         guard let vc = filmDetailsVC else { return }
         vc.characterCollection.reloadSections(IndexSet(integer: 0))
@@ -232,10 +241,6 @@ class FilmDetailsViewController: UIViewController {
     // MARK: View properties
 
     @IBOutlet weak var filmMainScrollView: UIScrollView!
-
-    @IBOutlet weak var filmScrollViewLeftArrow: UIButton!
-
-    @IBOutlet weak var filmScrollViewRightArrow: UIButton!
 
     @IBOutlet weak var filmsImageScrollView: UIScrollView!
 

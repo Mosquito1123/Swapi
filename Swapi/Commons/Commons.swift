@@ -62,7 +62,6 @@ class ViewModel {
 
     func scrollViewSetup() {
         set(direction: .same)
-        detailScrollViewProtocol.imageScrollView.contentSize = CGSize(width: detailScrollViewProtocol.imageScrollView.frame.width * 87, height: 0)
     }
 
     func set(direction: PageDirection) {
@@ -207,6 +206,9 @@ enum Router {
             break
         case .StarshipDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "StarshipDetailsViewController")
+            let starshipDetailsVC = toVC as! StarshipDetailsViewController
+            starshipDetailsVC.pageIndex = page
+            starshipDetailsVC.starshipNames = entityName
             break
         case .VehicleDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "VehicleDetailsViewController")

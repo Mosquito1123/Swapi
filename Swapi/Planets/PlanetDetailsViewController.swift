@@ -163,7 +163,14 @@ class PlanetDetailsViewModel: ViewModel {
             vc.presentDetails()
         }
     }
-    
+
+    override func scrollViewSetup() {
+        super.scrollViewSetup()
+        if let vc = planetDetailsVC {
+            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 61, height: 0)
+        }
+    }
+
     func reloadAllTableAndCollection() {
         guard let vc = planetDetailsVC else { return }
         vc.planetInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
@@ -183,12 +190,6 @@ class PlanetDetailsViewController: UIViewController {
     // MARK: View properties
 
     @IBOutlet weak var filmCollection: UICollectionView!
-
-    @IBOutlet weak var planetMainScrollView: UIScrollView!
-
-    @IBOutlet weak var planetScrollViewRightArrow: UIButton!
-
-    @IBOutlet weak var planetScrollViewLeftArrow: UIButton!
 
     @IBOutlet weak var planetsImageScrollView: UIScrollView!
 

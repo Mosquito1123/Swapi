@@ -136,7 +136,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="kmM-rM-wei" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="AT0-yB-Awh"/>
+                                    <segue destination="gW7-GH-etN" kind="show" customClass="SWRevealViewControllerSeguePushController" id="Tc0-WY-RyI"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Vehicles" id="aI0-Rp-LKT">
@@ -750,9 +750,6 @@
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
                         <outlet property="attributeCollection" destination="MYS-EI-dxX" id="hJs-dz-1Sk"/>
-                        <outlet property="characterMainScrollView" destination="g5k-IY-mkm" id="6tY-V5-yoH"/>
-                        <outlet property="characterScrollViewLeftArrow" destination="ppX-n7-ebc" id="31S-Nt-2nA"/>
-                        <outlet property="characterScrollViewRightArrow" destination="eJZ-WZ-l9c" id="0hg-ue-9fo"/>
                         <outlet property="charactersImageScrollView" destination="vQt-Gq-c9M" id="TYg-HX-UTm"/>
                         <outlet property="filmsCollection" destination="7jQ-JR-rJH" id="iBb-cr-OU7"/>
                         <outlet property="specieCollection" destination="BJb-4z-9Yy" id="59E-LZ-Us1"/>
@@ -1100,9 +1097,7 @@
                     <connections>
                         <outlet property="characterCollection" destination="e9o-e7-LYR" id="tst-AR-n1X"/>
                         <outlet property="filmInformationCollection" destination="4xW-y6-cch" id="XSt-qw-fnn"/>
-                        <outlet property="filmMainScrollView" destination="AQz-Dz-nQE" id="QNn-7d-djK"/>
-                        <outlet property="filmScrollViewLeftArrow" destination="7Js-BP-tQM" id="0wG-ib-jvF"/>
-                        <outlet property="filmScrollViewRightArrow" destination="LQZ-s9-NZw" id="FsU-vj-150"/>
+                        <outlet property="filmMainScrollView" destination="AQz-Dz-nQE" id="rf9-Ys-IqC"/>
                         <outlet property="filmsImageScrollView" destination="lui-E4-tq6" id="2Ae-FH-q7D"/>
                         <outlet property="openingCrawl" destination="EEg-az-OGC" id="YOF-sH-dQD"/>
                         <outlet property="planetCollection" destination="CF5-ew-I9j" id="SaE-tQ-GaD"/>
@@ -1320,9 +1315,6 @@
                         <outlet property="filmCollection" destination="wVL-Qq-dH8" id="UsH-Ug-Bwd"/>
                         <outlet property="inhabitantCollection" destination="8i9-Gf-92U" id="Arr-ia-cNx"/>
                         <outlet property="planetInformation" destination="JVd-gO-qAZ" id="wZ0-8w-3SK"/>
-                        <outlet property="planetMainScrollView" destination="vpD-zr-l9A" id="kw5-aS-pbe"/>
-                        <outlet property="planetScrollViewLeftArrow" destination="G2R-uv-5Cd" id="pbv-1H-3qU"/>
-                        <outlet property="planetScrollViewRightArrow" destination="O9k-Tj-rKs" id="F5I-7t-dZh"/>
                         <outlet property="planetsImageScrollView" destination="ttt-mE-G4b" id="W0S-qE-X28"/>
                     </connections>
                 </viewController>
@@ -1534,9 +1526,6 @@
                         <outlet property="ownByCharacterCollection" destination="6LR-Ic-wh4" id="ZcL-pP-1rD"/>
                         <outlet property="specieImageScrollView" destination="hw4-OG-aAE" id="IKX-KK-ZDR"/>
                         <outlet property="specieInformation" destination="5lA-EL-0C5" id="Bs4-hb-g6z"/>
-                        <outlet property="specieMainScrollView" destination="vuu-wO-Yom" id="xx3-kG-9bX"/>
-                        <outlet property="specieScrollViewLeftArrow" destination="j8j-Pp-Rhq" id="Y6Z-oX-Cej"/>
-                        <outlet property="specieScrollViewRightArrow" destination="ukr-Sd-Ylf" id="cEt-qJ-BrB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GC7-VL-AKU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1586,12 +1575,32 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHn-jX-4Ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1413" y="800"/>
+            <point key="canvasLocation" x="-1377" y="1108"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="Hl8-rU-orn">
+            <objects>
+                <tabBarController id="gW7-GH-etN" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TWW-Tc-YG1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="kmM-rM-wei" kind="relationship" relationship="viewControllers" id="AP3-ex-nRm"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1c-OL-mwR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3043" y="1108"/>
+        </scene>
+        <!--Starship-->
         <scene sceneID="ibd-N4-HLV">
             <objects>
                 <navigationController id="kmM-rM-wei" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Starship" image="starship" landscapeImage="starship" id="YQ2-bq-paj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gcO-NW-n9Q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1602,7 +1611,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WID-Bm-IO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2246" y="800"/>
+            <point key="canvasLocation" x="-2210" y="1108"/>
         </scene>
         <!--Vehicles-->
         <scene sceneID="cC6-Zf-A62">
@@ -1647,7 +1656,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBz-AG-Sx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1404" y="1506"/>
+            <point key="canvasLocation" x="-1378" y="2069"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UgT-2m-Q2d">
@@ -1663,7 +1672,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmX-Ff-Z79" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2239" y="1505"/>
+            <point key="canvasLocation" x="-2213" y="2069"/>
         </scene>
         <!--Starship Details View Controller-->
         <scene sceneID="5Uo-HU-CnJ">
@@ -1672,13 +1681,133 @@
                     <view key="view" contentMode="scaleToFill" id="jcF-ps-WVX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOA-CS-rid">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plf-wc-Slv">
+                                        <rect key="frame" x="59" y="0.0" width="296" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="3xa-xC-m99"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="aCk-wd-Rzx" id="h8d-cw-kOJ"/>
+                                        </connections>
+                                    </scrollView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zrq-qe-vC8">
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="M5k-UG-PVr"/>
+                                            <constraint firstAttribute="width" constant="63" id="twE-T0-NP3"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowLeft"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="charactersLeftScrollViewButton"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="characterScrollViewLeftArrowAction" destination="0c6-WH-hdv" eventType="touchUpInside" id="KnY-Yl-imd"/>
+                                            <action selector="starshipScrollViewLeftArrowAction" destination="aCk-wd-Rzx" eventType="touchUpInside" id="O8B-YT-bQd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKB-kP-Ztn">
+                                        <rect key="frame" x="351" y="0.0" width="63" height="170"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="Gke-nq-4rr"/>
+                                            <constraint firstAttribute="width" constant="63" id="Z7h-hc-8M3"/>
+                                        </constraints>
+                                        <state key="normal" image="arrowRight"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="charactersLeftScrollViewButton"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="characterScrollViewLeftArrowAction" destination="0c6-WH-hdv" eventType="touchUpInside" id="Eco-B4-Oy2"/>
+                                            <action selector="starshipScrollViewRightArrowAction" destination="aCk-wd-Rzx" eventType="touchUpInside" id="2KH-Ku-hR5"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attributes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uqk-GB-5s4">
+                                        <rect key="frame" x="0.0" y="178" width="414" height="18"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zsT-V3-zRI">
+                                        <rect key="frame" x="0.0" y="204" width="414" height="546"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="starshipInformation" textLabel="Jj3-gE-PjG" detailTextLabel="2zU-h9-hoD" style="IBUITableViewCellStyleValue1" id="2JA-8E-qW6">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2JA-8E-qW6" id="PJD-7B-uqj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jj3-gE-PjG">
+                                                            <rect key="frame" x="20" y="13" width="31.5" height="19.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2zU-h9-hoD">
+                                                            <rect key="frame" x="361" y="17" width="33" height="14.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="aCk-wd-Rzx" id="MjM-6X-Ymg"/>
+                                            <outlet property="delegate" destination="0c6-WH-hdv" id="p4M-V7-MYH"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Plf-wc-Slv" secondAttribute="trailing" constant="59" id="6ew-qq-rOC"/>
+                                    <constraint firstItem="Plf-wc-Slv" firstAttribute="top" secondItem="sOA-CS-rid" secondAttribute="top" id="8NO-Ga-Zti"/>
+                                    <constraint firstAttribute="bottom" secondItem="Plf-wc-Slv" secondAttribute="bottom" constant="630" id="8ST-JV-yc8"/>
+                                    <constraint firstItem="Zrq-qe-vC8" firstAttribute="leading" secondItem="sOA-CS-rid" secondAttribute="leading" id="8v6-BS-h6c"/>
+                                    <constraint firstItem="Plf-wc-Slv" firstAttribute="centerX" secondItem="sOA-CS-rid" secondAttribute="centerX" id="B8Y-AC-pGu"/>
+                                    <constraint firstAttribute="trailing" secondItem="iKB-kP-Ztn" secondAttribute="trailing" id="ENL-8n-oBW"/>
+                                    <constraint firstItem="iKB-kP-Ztn" firstAttribute="top" secondItem="sOA-CS-rid" secondAttribute="top" id="FdT-Yt-4jQ"/>
+                                    <constraint firstItem="Uqk-GB-5s4" firstAttribute="top" secondItem="sOA-CS-rid" secondAttribute="top" constant="178" id="KOC-I8-ypG"/>
+                                    <constraint firstItem="Zrq-qe-vC8" firstAttribute="top" secondItem="sOA-CS-rid" secondAttribute="top" id="Tlp-JM-aEY"/>
+                                    <constraint firstItem="Uqk-GB-5s4" firstAttribute="width" secondItem="sOA-CS-rid" secondAttribute="width" id="UDF-ZU-nnZ"/>
+                                    <constraint firstItem="Uqk-GB-5s4" firstAttribute="leading" secondItem="sOA-CS-rid" secondAttribute="leading" id="UZH-p1-9Sn"/>
+                                    <constraint firstItem="zsT-V3-zRI" firstAttribute="width" secondItem="sOA-CS-rid" secondAttribute="width" id="YvE-Hw-k6d"/>
+                                    <constraint firstItem="Plf-wc-Slv" firstAttribute="leading" secondItem="sOA-CS-rid" secondAttribute="leading" constant="59" id="eaV-eT-kdZ"/>
+                                    <constraint firstItem="Uqk-GB-5s4" firstAttribute="centerX" secondItem="sOA-CS-rid" secondAttribute="centerX" id="fdY-SQ-IJ0"/>
+                                    <constraint firstItem="zsT-V3-zRI" firstAttribute="top" secondItem="sOA-CS-rid" secondAttribute="top" constant="204" id="mNo-Is-bO9"/>
+                                    <constraint firstAttribute="bottom" secondItem="zsT-V3-zRI" secondAttribute="bottom" constant="50" id="oHE-E6-6mz"/>
+                                    <constraint firstItem="zsT-V3-zRI" firstAttribute="leading" secondItem="sOA-CS-rid" secondAttribute="leading" id="syX-Az-2nP"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gGL-Km-Oxt" firstAttribute="trailing" secondItem="sOA-CS-rid" secondAttribute="trailing" id="4ZE-qZ-Z3E"/>
+                            <constraint firstItem="sOA-CS-rid" firstAttribute="leading" secondItem="gGL-Km-Oxt" secondAttribute="leading" id="HcS-uI-3fP"/>
+                            <constraint firstItem="sOA-CS-rid" firstAttribute="centerX" secondItem="gGL-Km-Oxt" secondAttribute="centerX" id="ISj-P0-cTW"/>
+                            <constraint firstAttribute="bottom" secondItem="sOA-CS-rid" secondAttribute="bottom" id="RPG-XF-Nw1"/>
+                            <constraint firstItem="sOA-CS-rid" firstAttribute="top" secondItem="jcF-ps-WVX" secondAttribute="top" id="ilT-4g-IdH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gGL-Km-Oxt"/>
                     </view>
+                    <connections>
+                        <outlet property="starshipImageScrollView" destination="Plf-wc-Slv" id="bLS-IK-3Rh"/>
+                        <outlet property="starshipInformation" destination="zsT-V3-zRI" id="LrL-Eg-5ia"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE5-q1-MGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-581" y="800"/>
+            <point key="canvasLocation" x="-546.37681159420299" y="1106.9196428571429"/>
         </scene>
         <!--Vehicle Details View Controller-->
         <scene sceneID="lWb-Iu-gui">
@@ -1693,7 +1822,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjZ-7g-Ciw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-581" y="1505"/>
+            <point key="canvasLocation" x="-555" y="2069"/>
         </scene>
     </scenes>
     <resources>
@@ -1704,6 +1833,7 @@
         <image name="menu" width="30" height="30"/>
         <image name="planet" width="30" height="30"/>
         <image name="specie" width="30" height="30"/>
+        <image name="starship" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oqM-Pr-ldJ"/>
