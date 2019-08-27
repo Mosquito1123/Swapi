@@ -25,7 +25,7 @@ extension StarshipDetailsViewController: DetailScrollViewProtocol {
     }
 }
 
-extension StarshipDetailsViewController: UICollectionViewDelegate {
+extension StarshipDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == starshipImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
@@ -37,6 +37,55 @@ extension StarshipDetailsViewController: UICollectionViewDelegate {
     }
 }
 
+extension StarshipDetailsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == filmCollection {
+            return viewModel?.films.count ?? 0
+        } else if collectionView == pilotCollection {
+            return viewModel?.pilots.count ?? 0
+        }
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+
+            filmCell.name = viewModel?.films[indexPath.row]
+            return filmCell
+        } else if collectionView == pilotCollection, let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+
+            pilotCell.name = viewModel?.pilots[indexPath.row]
+            return pilotCell
+        }
+
+        return UICollectionViewCell()
+    }
+}
+
+extension StarshipDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel()
+        if collectionView == filmCollection {
+            label.text = viewModel?.films[indexPath.row]
+        } else if collectionView == pilotCollection {
+            label.text = viewModel?.pilots[indexPath.row]
+        }
+
+        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == filmCollection {
+            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+        } else if collectionView == pilotCollection {
+            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.pilots)
+        }
+    }
+}
+
+
 extension StarshipDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 12
@@ -44,7 +93,7 @@ extension StarshipDetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let starshipCell = tableView.dequeueReusableCell(withIdentifier: "starshipInformation", for: indexPath)
-        
+
         if indexPath.row == 0 {
             starshipCell.textLabel?.text = "Class"
             starshipCell.detailTextLabel?.text = starshipData?.starshipClass
@@ -90,6 +139,7 @@ extension StarshipDetailsViewController: UITableViewDataSource {
 }
 
 // MARK: Main class
+
 class StarshipDetailsViewModel: ViewModel {
     weak var starshipDetailsVC: StarshipDetailsViewController?
 
@@ -128,6 +178,8 @@ class StarshipDetailsViewModel: ViewModel {
     func reloadAllTableAndCollection() {
         guard let vc = starshipDetailsVC else { return }
         vc.starshipInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
+        vc.filmCollection.reloadSections(IndexSet(integer: 0))
+        vc.pilotCollection.reloadSections(IndexSet(integer: 0))
     }
     
     override func set(direction: ViewModel.PageDirection) {
@@ -139,24 +191,44 @@ class StarshipDetailsViewModel: ViewModel {
 
 class StarshipDetailsViewController: UIViewController {
 
+    // MARK: Views
+
+    @IBOutlet weak var starshipMainScrollView: UIView!
+
+    @IBOutlet weak var pilotCollection: UICollectionView!
+
+    @IBOutlet weak var filmCollection: UICollectionView!
+
     @IBOutlet weak var starshipImageScrollView: UIScrollView!
 
     @IBOutlet weak var starshipInformation: UITableView!
 
+    // MARK: Control logic
+
     var starshipData: Starship?
-    
+
     private var starshipIndex: Int?
 
     var viewModel: StarshipDetailsViewModel?
-    
+
     var starshipNames: [String]?
+
+    // MARK: Functionalities
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = StarshipDetailsViewModel(starshipDetailsVC: self)
         viewModel?.scrollViewSetup()
-        
+
         presentDetails()
+    }
+//
+    override func viewDidLayoutSubviews() {
+        if UIDevice.current.orientation.isLandscape {
+            starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600
+        } else if UIDevice.current.orientation.isPortrait {
+            starshipMainScrollView.constraintWithIdentifier("starshipMainScrollViewHeight")?.constant = 300
+        }
     }
 
     func presentDetails() {
