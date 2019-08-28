@@ -222,7 +222,7 @@ class StarshipDetailsViewController: UIViewController {
 
         presentDetails()
     }
-//
+
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600

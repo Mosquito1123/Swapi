@@ -212,6 +212,9 @@ enum Router {
             break
         case .VehicleDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "VehicleDetailsViewController")
+            let vehicleDetailsVC = toVC as! VehicleDetailsViewController
+            vehicleDetailsVC.pageIndex = page
+            vehicleDetailsVC.vehicleNames = entityName
             break
         }
         from.show(toVC, sender: nil)
