@@ -54,6 +54,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Characters" id="O5K-U3-g9K">
+                        <barButtonItem key="backBarButtonItem" title="Characters" id="hbh-XO-kjO"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" landscapeImage="menu" id="Wun-Mh-Hq0">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <userDefinedRuntimeAttributes>
@@ -249,6 +250,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Films" image="films" landscapeImage="films" id="OWu-mr-1JX"/>
                     <navigationItem key="navigationItem" title="Films" id="eBG-Ai-ubM">
+                        <barButtonItem key="backBarButtonItem" title="Films" id="VAG-S4-paU"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" id="B2S-cj-Yre">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <userDefinedRuntimeAttributes>
@@ -294,6 +296,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Planets" id="kUj-7y-1y9">
+                        <barButtonItem key="backBarButtonItem" title="Planets" id="oCt-VN-l3M"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" id="liD-1N-mBG">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -394,6 +397,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Species" id="Ck6-2U-HcG">
+                        <barButtonItem key="backBarButtonItem" title="Species" id="2ZT-kA-9CM"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" id="UY0-hn-2xC">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -483,11 +487,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5k-IY-mkm">
-                                <rect key="frame" x="0.0" y="49" width="414" height="1100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1100"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQt-Gq-c9M">
                                         <rect key="frame" x="59" y="0.0" width="296" height="170"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vw2-fN-mzo">
+                                                <rect key="frame" x="28" y="0.0" width="240" height="170"/>
+                                            </imageView>
+                                        </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="vw2-fN-mzo" firstAttribute="leading" secondItem="vQt-Gq-c9M" secondAttribute="leading" constant="28" id="FmD-J3-6R9"/>
+                                            <constraint firstAttribute="trailing" secondItem="vw2-fN-mzo" secondAttribute="trailing" constant="28" id="IhD-UE-46C"/>
+                                            <constraint firstAttribute="bottom" secondItem="vw2-fN-mzo" secondAttribute="bottom" id="SDK-xX-9L6"/>
+                                            <constraint firstItem="vw2-fN-mzo" firstAttribute="height" secondItem="vQt-Gq-c9M" secondAttribute="height" id="T3T-Kq-ZDd"/>
+                                            <constraint firstItem="vw2-fN-mzo" firstAttribute="centerX" secondItem="vQt-Gq-c9M" secondAttribute="centerX" id="nTu-4p-g7J"/>
+                                            <constraint firstItem="vw2-fN-mzo" firstAttribute="top" secondItem="vQt-Gq-c9M" secondAttribute="top" id="sXj-PD-OHy"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="characterDetailScrollView"/>
                                         </userDefinedRuntimeAttributes>
@@ -750,6 +767,7 @@
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
                         <outlet property="attributeCollection" destination="MYS-EI-dxX" id="hJs-dz-1Sk"/>
+                        <outlet property="characterUIImageView" destination="vw2-fN-mzo" id="44P-CG-uHm"/>
                         <outlet property="charactersImageScrollView" destination="vQt-Gq-c9M" id="TYg-HX-UTm"/>
                         <outlet property="filmsCollection" destination="7jQ-JR-rJH" id="iBb-cr-OU7"/>
                         <outlet property="specieCollection" destination="BJb-4z-9Yy" id="59E-LZ-Us1"/>
@@ -771,10 +789,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Dz-nQE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="1522"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="1429"/>
                                 <subviews>
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bck-v8-1Yw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2122"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2029"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQZ-s9-NZw">
                                                 <rect key="frame" x="354" y="0.0" width="60" height="170"/>
@@ -1561,6 +1579,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Starships" id="suR-eJ-D6P">
+                        <barButtonItem key="backBarButtonItem" title="Starships" id="E4M-4Y-Wtx"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" id="4wf-CD-CS4">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -1642,6 +1661,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Vehicles" id="9wv-77-qSj">
+                        <barButtonItem key="backBarButtonItem" title="Vehicles" id="CmR-BK-ph4"/>
                         <barButtonItem key="leftBarButtonItem" image="menu" id="hIG-ZB-QJb">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -2156,8 +2176,8 @@
         <image name="vehicle" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oqM-Pr-ldJ"/>
-        <segue reference="jJ6-hS-afP"/>
+        <segue reference="w2V-tt-kDi"/>
+        <segue reference="OcR-K0-4Rq"/>
         <segue reference="bFe-KV-bdZ"/>
     </inferredMetricsTieBreakers>
 </document>
