@@ -154,6 +154,7 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 characterScrollViewRightArrowAction()
             }
+            characterUIScrollViewImage.frame.origin.x = imageScrollView.contentOffset.x + imageScrollView.frame.midX/2.5
         }
     }
 }
@@ -258,6 +259,7 @@ class CharacterDetailsViewModel: ViewModel {
         super.scrollViewSetup()
         if let vc = characterDetailsVC {
             vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 87, height: 0)
+            vc.imageScrollView.addSubview(vc.characterUIScrollViewImage)
         }
     }
 
@@ -268,6 +270,7 @@ class CharacterDetailsViewModel: ViewModel {
         vc.vehicleCollection.reloadSections(IndexSet(integer: 0))
         vc.starshipCollection.reloadSections(IndexSet(integer: 0))
         vc.attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
+        vc.characterUIScrollViewImage.image = UIImage(named: "Characters/\(vc.title ?? "")")
     }
 }
 
@@ -292,6 +295,15 @@ class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var filmsCollection: UICollectionView!
 
     @IBOutlet weak var charactersImageScrollView: UIScrollView!
+    
+    lazy var characterUIScrollViewImage: UIImageView = {
+        let imageView = UIImageView(frame: CGRect(x: imageScrollView.contentOffset.x + imageScrollView.frame.midX/2.5,
+                                                  y: 0,
+                                                  width: 100, height: imageScrollView.frame.height))
+        imageView.image = UIImage(named: "Characters/\(title ?? "")")
+        
+        return imageView
+    }()
 
     // MARK: control logic
 
