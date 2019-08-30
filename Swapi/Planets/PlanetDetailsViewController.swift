@@ -197,6 +197,7 @@ class PlanetDetailsViewController: UIViewController {
 
     @IBOutlet weak var inhabitantCollection: UICollectionView!
 
+    @IBOutlet weak var planetUIImageView: UIImageView!
     // MARK: Control logic
 
     var planetData: Planet?
@@ -228,6 +229,7 @@ class PlanetDetailsViewController: UIViewController {
             planetData = Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values)[pageIndex]
         }
         title = planetData?.name
+        planetUIImageView.image = UIImage(named: "Planets/\(title ?? "")")
     }
 
     @IBAction func planetScrollViewLeftArrowAction() {
