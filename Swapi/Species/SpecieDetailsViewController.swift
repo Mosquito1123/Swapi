@@ -215,6 +215,8 @@ class SpecieDetailsViewController: UIViewController {
 
     @IBOutlet weak var specieInformation: UITableView!
 
+    @IBOutlet weak var specieUIImageView: UIImageView!
+
     @IBOutlet weak var specieImageScrollView: UIScrollView!
 
     @IBOutlet weak var ownByCharacterCollection: UICollectionView!
@@ -250,6 +252,7 @@ class SpecieDetailsViewController: UIViewController {
             specieData = Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values)[pageIndex]
         }
         title = specieData?.name
+        specieUIImageView.image = UIImage(named: "Species/\(title ?? "")")
     }
 
     @IBAction func specieScrollViewLeftArrowAction() {

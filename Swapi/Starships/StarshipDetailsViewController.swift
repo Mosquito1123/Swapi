@@ -193,6 +193,8 @@ class StarshipDetailsViewController: UIViewController {
 
     // MARK: Views
 
+    @IBOutlet weak var starshipUIImageView: UIImageView!
+
     @IBOutlet weak var starshipMainScrollView: UIView!
 
     @IBOutlet weak var pilotCollection: UICollectionView!
@@ -243,6 +245,7 @@ class StarshipDetailsViewController: UIViewController {
             starshipData = Array(LocalCache.starships?.values ?? Dictionary<Int, Starship>().values)[pageIndex]
         }
         title = starshipData?.name
+        starshipUIImageView.image = UIImage(named: "Starships/\(title ?? "")")
     }
 
     @IBAction func starshipScrollViewLeftArrowAction() {

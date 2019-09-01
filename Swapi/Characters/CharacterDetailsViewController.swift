@@ -270,7 +270,6 @@ class CharacterDetailsViewModel: ViewModel {
         vc.vehicleCollection.reloadSections(IndexSet(integer: 0))
         vc.starshipCollection.reloadSections(IndexSet(integer: 0))
         vc.attributeCollection.reloadSections(IndexSet(integer: 0), with: .automatic)
-        vc.characterUIImageView.image = UIImage(named: "Characters/\(vc.title ?? "")")
     }
 }
 

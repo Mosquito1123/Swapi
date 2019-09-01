@@ -182,6 +182,8 @@ class VehicleDetailsViewModel: ViewModel {
 
 class VehicleDetailsViewController: UIViewController {
 
+    @IBOutlet weak var vehicleUIImageView: UIImageView!
+
     @IBOutlet weak var vehicleMainScrollView: UIScrollView!
 
     @IBOutlet weak var pilotCollection: UICollectionView!
@@ -236,6 +238,14 @@ class VehicleDetailsViewController: UIViewController {
             vehicleData = Array(LocalCache.vehicles?.values ?? Dictionary<Int, Vehicle>().values)[pageIndex]
         }
         title = vehicleData?.name
+        if let title = title {
+            if title.contains("/") {
+                let newTitle = title.replacingOccurrences(of: "/", with: ":") // image file's name cannot contain forward slash "/". That is why we replace it with colon ":"
+                vehicleUIImageView.image = UIImage(named: "Vehicles/\(newTitle)")
+            } else {
+                vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")
+            }
+        }
     }
 
     @IBAction func vehicleScrollVIewLeftArrowAction() {
