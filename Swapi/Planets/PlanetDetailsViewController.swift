@@ -217,6 +217,13 @@ class PlanetDetailsViewController: UIViewController {
         viewModel?.scrollViewSetup()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = title
+        navigationItem.backBarButtonItem = backItem
+    }
+
     func presentDetails() {
         if let planetNames = planetNames {
             for planet in Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values) {

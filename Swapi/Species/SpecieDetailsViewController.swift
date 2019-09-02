@@ -240,6 +240,13 @@ class SpecieDetailsViewController: UIViewController {
         presentDetails()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = title
+        navigationItem.backBarButtonItem = backItem
+    }
+
     func presentDetails() {
         if let specieNames = specieNames {
             for specie in Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values) {

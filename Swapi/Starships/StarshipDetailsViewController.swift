@@ -225,6 +225,13 @@ class StarshipDetailsViewController: UIViewController {
         presentDetails()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = title
+        navigationItem.backBarButtonItem = backItem
+    }
+
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600
