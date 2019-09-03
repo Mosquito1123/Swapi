@@ -171,7 +171,7 @@ class StarshipDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = starshipDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 37, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 37
         }
     }
     
@@ -220,9 +220,6 @@ class StarshipDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = StarshipDetailsViewModel(starshipDetailsVC: self)
-        viewModel?.scrollViewSetup()
-
-        presentDetails()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -237,6 +234,11 @@ class StarshipDetailsViewController: UIViewController {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600
         } else if UIDevice.current.orientation.isPortrait {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 300
+        }
+
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
         }
     }
 
@@ -253,6 +255,7 @@ class StarshipDetailsViewController: UIViewController {
         }
         title = starshipData?.name
         starshipUIImageView.image = UIImage(named: "Starships/\(title ?? "")")
+        imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
     }
 
     @IBAction func starshipScrollViewLeftArrowAction() {

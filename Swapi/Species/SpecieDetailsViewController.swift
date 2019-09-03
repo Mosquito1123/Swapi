@@ -200,7 +200,7 @@ class SpecieDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = specieDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 37, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 37
         }
     }
 }
@@ -235,9 +235,6 @@ class SpecieDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = SpecieDetailsViewModel(specieDetailsVC: self)
-        viewModel?.scrollViewSetup()
-
-        presentDetails()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -245,6 +242,13 @@ class SpecieDetailsViewController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = title
         navigationItem.backBarButtonItem = backItem
+    }
+
+    override func viewDidLayoutSubviews() {
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     func presentDetails() {
@@ -260,6 +264,7 @@ class SpecieDetailsViewController: UIViewController {
         }
         title = specieData?.name
         specieUIImageView.image = UIImage(named: "Species/\(title ?? "")")
+        imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
     }
 
     @IBAction func specieScrollViewLeftArrowAction() {

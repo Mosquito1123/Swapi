@@ -214,7 +214,7 @@ class FilmDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = filmDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 7, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 7
         }
     }
 
@@ -273,12 +273,9 @@ class FilmDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presentDetails()
-
         openingCrawl.text = filmData?.openingCrawl
 
         viewModel = FilmDetailsViewModel(filmDetailsVC: self)
-        viewModel?.scrollViewSetup()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -293,6 +290,11 @@ class FilmDetailsViewController: UIViewController {
             filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 900
         } else if UIDevice.current.orientation.isPortrait {
             filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 600
+        }
+
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
         }
     }
 

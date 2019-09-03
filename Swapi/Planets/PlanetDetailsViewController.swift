@@ -167,7 +167,7 @@ class PlanetDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = planetDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 61, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 61
         }
     }
 
@@ -212,9 +212,14 @@ class PlanetDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentDetails()
         viewModel = PlanetDetailsViewModel(planetDetailsVC: self)
-        viewModel?.scrollViewSetup()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -237,6 +242,7 @@ class PlanetDetailsViewController: UIViewController {
         }
         title = planetData?.name
         planetUIImageView.image = UIImage(named: "Planets/\(title ?? "")")
+        imageScrollView.constraintWithIdentifier("planetUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
     }
 
     @IBAction func planetScrollViewLeftArrowAction() {

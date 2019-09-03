@@ -162,7 +162,7 @@ class VehicleDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = vehicleDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 37, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 37
         }
     }
 
@@ -206,9 +206,6 @@ class VehicleDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = VehicleDetailsViewModel(vehicleDetailsVC: self)
-        viewModel?.scrollViewSetup()
-        
-        presentDetails()
     }
     
     override func viewDidLayoutSubviews() {
@@ -216,6 +213,11 @@ class VehicleDetailsViewController: UIViewController {
             vehicleMainScrollView.constraintWithIdentifier("vehicleScrollViewBottom")?.constant = 250
         } else if UIDevice.current.orientation.isPortrait {
             vehicleMainScrollView.constraintWithIdentifier("vehicleScrollViewBottom")?.constant = -188
+        }
+        
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
         }
     }
     
@@ -246,6 +248,7 @@ class VehicleDetailsViewController: UIViewController {
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")
             }
         }
+        imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
     }
 
     @IBAction func vehicleScrollVIewLeftArrowAction() {

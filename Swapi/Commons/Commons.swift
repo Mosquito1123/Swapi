@@ -66,7 +66,7 @@ class ViewModel {
 
     func set(direction: PageDirection) {
         var newPage = 0
-        var scrollToVisibleRect = detailScrollViewProtocol.imageScrollView.frame.origin
+        var visibleRect = detailScrollViewProtocol.imageScrollView.frame
 
         switch direction {
         case .left:
@@ -77,10 +77,10 @@ class ViewModel {
             break
         default:
             newPage = detailScrollViewProtocol.pageIndex
-            scrollToVisibleRect.x = detailScrollViewProtocol.imageScrollView.frame.width * CGFloat(newPage)
-            scrollToVisibleRect.y = 0
-            detailScrollViewProtocol.imageScrollView.setContentOffset(scrollToVisibleRect, animated: true)
         }
+        visibleRect.origin.x = detailScrollViewProtocol.imageScrollView.frame.width * CGFloat(newPage)
+        detailScrollViewProtocol.imageScrollView.contentOffset = visibleRect.origin
+        detailScrollViewProtocol.imageScrollView.scrollRectToVisible(visibleRect, animated: true)
         previousImageViewContentOffset = detailScrollViewProtocol.imageScrollView.contentOffset
         detailScrollViewProtocol.pageIndex = newPage
     }

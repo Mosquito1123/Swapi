@@ -150,6 +150,7 @@ extension CharacterDetailsViewController: UITableViewDelegate {
 
 extension CharacterDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("ldjfldsk")
         if scrollView == charactersImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 characterScrollViewLeftArrowAction()
@@ -168,9 +169,9 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
  **/
 
 class CharacterDetailsViewModel: ViewModel {
-    
+
     weak var characterDetailsVC: CharacterDetailsViewController?
-    
+
     // MARK: data manipulation
 
     var height: String {
@@ -259,7 +260,7 @@ class CharacterDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = characterDetailsVC {
-            vc.imageScrollView.contentSize = CGSize(width: vc.imageScrollView.frame.width * 87, height: 0)
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 87
         }
     }
 
@@ -311,11 +312,7 @@ class CharacterDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        presentDetails()
-
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
-        viewModel?.scrollViewSetup()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -323,6 +320,13 @@ class CharacterDetailsViewController: UIViewController {
         let backItem = UIBarButtonItem()
         backItem.title = title
         navigationItem.backBarButtonItem = backItem
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     func presentDetails() {
@@ -338,6 +342,7 @@ class CharacterDetailsViewController: UIViewController {
         }
         title = characterData?.name
         characterUIImageView.image = UIImage(named: "Characters/\(title ?? "")")
+        imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
     }
 
     // MARK: Character scroll view logic
