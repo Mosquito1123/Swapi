@@ -150,7 +150,6 @@ extension CharacterDetailsViewController: UITableViewDelegate {
 
 extension CharacterDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("ldjfldsk")
         if scrollView == charactersImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 characterScrollViewLeftArrowAction()
