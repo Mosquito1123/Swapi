@@ -341,7 +341,11 @@ class CharacterDetailsViewController: UIViewController {
         }
         title = characterData?.name
         characterUIImageView.image = UIImage(named: "Characters/\(title ?? "")")
-        imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        if viewModel?.previousImageViewContentOffset.x != 0.0 {
+            imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        } else {
+            imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll from right to left. UIScrollView stop responding
+        }
     }
 
     // MARK: Character scroll view logic

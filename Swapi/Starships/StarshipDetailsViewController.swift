@@ -255,7 +255,12 @@ class StarshipDetailsViewController: UIViewController {
         }
         title = starshipData?.name
         starshipUIImageView.image = UIImage(named: "Starships/\(title ?? "")")
-        imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+
+        if viewModel?.previousImageViewContentOffset.x != 0.0 {
+            imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        } else {
+            imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = 1
+        }
     }
 
     @IBAction func starshipScrollViewLeftArrowAction() {

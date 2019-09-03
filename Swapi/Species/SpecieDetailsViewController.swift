@@ -264,7 +264,11 @@ class SpecieDetailsViewController: UIViewController {
         }
         title = specieData?.name
         specieUIImageView.image = UIImage(named: "Species/\(title ?? "")")
-        imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        if viewModel?.previousImageViewContentOffset.x != 0.0 {
+            imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        } else {
+            imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = 1
+        }
     }
 
     @IBAction func specieScrollViewLeftArrowAction() {

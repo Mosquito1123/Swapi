@@ -248,7 +248,12 @@ class VehicleDetailsViewController: UIViewController {
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")
             }
         }
-        imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        
+        if viewModel?.previousImageViewContentOffset.x != 0.0 {
+            imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        } else {
+            imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = 1
+        }
     }
 
     @IBAction func vehicleScrollVIewLeftArrowAction() {
