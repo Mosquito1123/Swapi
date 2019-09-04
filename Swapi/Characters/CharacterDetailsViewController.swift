@@ -149,11 +149,18 @@ extension CharacterDetailsViewController: UITableViewDelegate {
 }
 
 extension CharacterDetailsViewController: UIScrollViewDelegate {
+    var endOfScrollViewContentOffsetX: CGFloat {
+        let characterCount = characterNames?.count ?? (LocalCache.characters?.count ?? 1)
+
+        return CGFloat(296 * (characterCount - 1))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
         // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > 25456 {
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
             var visibleRect = scrollView.frame
-            visibleRect.origin.x = 25456
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
             scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
         if scrollView == charactersImageScrollView {

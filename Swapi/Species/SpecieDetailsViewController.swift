@@ -79,11 +79,17 @@ extension SpecieDetailsViewController: UITableViewDataSource {
 }
 
 extension SpecieDetailsViewController: UIScrollViewDelegate {
+    var endOfScrollViewContentOffsetX: CGFloat {
+        let specieCount = specieNames?.count ?? (LocalCache.species?.count ?? 1)
+        
+        return CGFloat(294 * (specieCount - 1))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > 10584.0 {
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
             var visibleRect = scrollView.frame
-            visibleRect.origin.x = 10584.0
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
             scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
         if scrollView == specieImageScrollView {

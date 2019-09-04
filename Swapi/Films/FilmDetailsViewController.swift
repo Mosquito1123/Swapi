@@ -81,11 +81,14 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
 }
 
 extension FilmDetailsViewController: UIScrollViewDelegate {
+    var endOfScrollViewContentOffsetX: CGFloat {
+        let filmCount = filmTitles?.count ?? (LocalCache.films?.count ?? 1)
+
+        return CGFloat(294 * (filmCount - 1))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // incase user scroll past the end of scroll view
-        let filmCount = filmTitles?.count ?? (LocalCache.films?.count ?? 1)
-        let endOfScrollViewContentOffsetX = CGFloat(294 * (filmCount - 1))
-
         if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
             var visibleRect = scrollView.frame
             visibleRect.origin.x = endOfScrollViewContentOffsetX

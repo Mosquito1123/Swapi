@@ -26,11 +26,17 @@ extension PlanetDetailsViewController: DetailScrollViewProtocol {
 }
 
 extension PlanetDetailsViewController: UIScrollViewDelegate {
+    var endOfScrollViewContentOffsetX: CGFloat {
+        let planetCount = planetNames?.count ?? (LocalCache.planets?.count ?? 1)
+        
+        return CGFloat(294 * (planetCount - 1))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > 17640.0 {
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
             var visibleRect = scrollView.frame
-            visibleRect.origin.x = 17640.0
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
             scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
         if scrollView == planetsImageScrollView {

@@ -26,6 +26,12 @@ extension StarshipDetailsViewController: DetailScrollViewProtocol {
 }
 
 extension StarshipDetailsViewController: UIScrollViewDelegate {
+    var endOfScrollViewContentOffsetX: CGFloat {
+        let starshipCount = starshipNames?.count ?? (LocalCache.starships?.count ?? 1)
+        
+        return CGFloat(296 * (starshipCount - 1))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // incase user scroll past the end of scroll view
         if scrollView.contentOffset.x > 10656.0 {
