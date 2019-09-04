@@ -27,6 +27,12 @@ extension VehicleDetailsViewController: DetailScrollViewProtocol {
 
 extension VehicleDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // incase user scroll past the end of scroll view
+        if scrollView.contentOffset.x > 11248.0 {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = 11248
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
+        }
         if scrollView == vehicleImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 vehicleScrollVIewLeftArrowAction()
@@ -162,7 +168,7 @@ class VehicleDetailsViewModel: ViewModel {
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = vehicleDetailsVC {
-            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 37
+            vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 39
         }
     }
 
@@ -248,7 +254,7 @@ class VehicleDetailsViewController: UIViewController {
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")
             }
         }
-        
+
         if viewModel?.previousImageViewContentOffset.x != 0.0 {
             imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
         } else {

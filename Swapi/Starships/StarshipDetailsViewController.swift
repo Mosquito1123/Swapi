@@ -27,6 +27,12 @@ extension StarshipDetailsViewController: DetailScrollViewProtocol {
 
 extension StarshipDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // incase user scroll past the end of scroll view
+        if scrollView.contentOffset.x > 10656.0 {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = 10656.0
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
+        }
         if scrollView == starshipImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 starshipScrollViewLeftArrowAction()

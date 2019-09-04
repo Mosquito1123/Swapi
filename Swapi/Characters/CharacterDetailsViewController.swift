@@ -150,6 +150,12 @@ extension CharacterDetailsViewController: UITableViewDelegate {
 
 extension CharacterDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // incase user scroll past the end of scroll view
+        if scrollView.contentOffset.x > 25456 {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = 25456
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
+        }
         if scrollView == charactersImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 characterScrollViewLeftArrowAction()

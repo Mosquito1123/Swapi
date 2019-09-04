@@ -80,6 +80,12 @@ extension SpecieDetailsViewController: UITableViewDataSource {
 
 extension SpecieDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // incase user scroll past the end of scroll view
+        if scrollView.contentOffset.x > 10584.0 {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = 10584.0
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
+        }
         if scrollView == specieImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 specieScrollViewLeftArrowAction()

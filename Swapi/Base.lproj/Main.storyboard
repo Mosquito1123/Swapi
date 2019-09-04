@@ -1993,8 +1993,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ze-Ln-gJe">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1581"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDH-BY-G28">
-                                                <rect key="frame" x="59" y="0.0" width="296" height="170"/>
+                                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDH-BY-G28">
+                                                <rect key="frame" x="58" y="0.0" width="296" height="170"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gk0-yz-qgU">
                                                         <rect key="frame" x="0.0" y="0.0" width="296" height="170"/>
@@ -2008,6 +2008,7 @@
                                                     <constraint firstItem="gk0-yz-qgU" firstAttribute="top" secondItem="vDH-BY-G28" secondAttribute="top" id="Qdk-MM-JiF"/>
                                                     <constraint firstItem="gk0-yz-qgU" firstAttribute="leading" secondItem="vDH-BY-G28" secondAttribute="leading" id="TGW-Qr-QRL"/>
                                                     <constraint firstAttribute="bottom" secondItem="gk0-yz-qgU" secondAttribute="bottom" id="q6b-dk-TrO"/>
+                                                    <constraint firstAttribute="height" constant="170" id="zsk-M1-3Fj"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="delegate" destination="2Zu-5u-MgJ" id="LJI-Bl-L8e"/>
@@ -2151,13 +2152,12 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ha2-MJ-SAL" secondAttribute="trailing" id="2QJ-jh-EX3"/>
-                                            <constraint firstAttribute="trailing" secondItem="vDH-BY-G28" secondAttribute="trailing" constant="59" id="5WF-sL-gKi"/>
+                                            <constraint firstAttribute="trailing" secondItem="vDH-BY-G28" secondAttribute="trailing" constant="60" id="5WF-sL-gKi"/>
                                             <constraint firstItem="Eno-yS-4u2" firstAttribute="height" secondItem="Mqs-gf-loP" secondAttribute="height" constant="33" id="5kD-Ef-t8V"/>
                                             <constraint firstItem="Mqs-gf-loP" firstAttribute="width" secondItem="2ze-Ln-gJe" secondAttribute="width" id="8rS-6I-aCo"/>
                                             <constraint firstItem="Geg-Rz-K0m" firstAttribute="top" secondItem="2ze-Ln-gJe" secondAttribute="top" id="9ou-Zr-J8U"/>
                                             <constraint firstItem="0ba-ad-gMx" firstAttribute="bottom" secondItem="e2f-0q-5aK" secondAttribute="bottom" constant="58" id="CbH-K1-H67"/>
-                                            <constraint firstItem="pfq-FC-pKq" firstAttribute="top" secondItem="vDH-BY-G28" secondAttribute="bottom" constant="8" symbolic="YES" id="IvJ-xy-HfJ"/>
-                                            <constraint firstItem="vDH-BY-G28" firstAttribute="leading" secondItem="2ze-Ln-gJe" secondAttribute="leading" constant="59" id="JTe-gN-aeD"/>
+                                            <constraint firstItem="vDH-BY-G28" firstAttribute="leading" secondItem="2ze-Ln-gJe" secondAttribute="leading" constant="58" id="JTe-gN-aeD"/>
                                             <constraint firstItem="JXG-pA-ox8" firstAttribute="centerX" secondItem="2ze-Ln-gJe" secondAttribute="centerX" id="LUq-8u-Z2W"/>
                                             <constraint firstItem="Mqs-gf-loP" firstAttribute="centerX" secondItem="2ze-Ln-gJe" secondAttribute="centerX" id="M2H-er-2JH"/>
                                             <constraint firstItem="vDH-BY-G28" firstAttribute="top" secondItem="2ze-Ln-gJe" secondAttribute="top" id="P4h-gE-g7V"/>
