@@ -82,6 +82,15 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
 
 extension FilmDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // incase user scroll past the end of scroll view
+        let filmCount = filmTitles?.count ?? (LocalCache.films?.count ?? 1)
+        let endOfScrollViewContentOffsetX = CGFloat(294 * (filmCount - 1))
+
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
+        }
         if scrollView == filmsImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
@@ -258,6 +267,8 @@ class FilmDetailsViewController: UIViewController {
 
     @IBOutlet weak var filmInformationCollection: UITableView!
 
+    @IBOutlet weak var filmUIImageView: UIImageView!
+
     // MARK: Control logic
 
     var filmData: Film?
@@ -311,6 +322,12 @@ class FilmDetailsViewController: UIViewController {
             filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[pageIndex]
         }
         title = filmData?.title
+        filmUIImageView.image = UIImage(named: "Films/\(title ?? "")")
+        if viewModel?.previousImageViewContentOffset.x != 0.0 {
+            imageScrollView.constraintWithIdentifier("filmUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
+        } else {
+            imageScrollView.constraintWithIdentifier("filmUIImageViewCenterX")?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll from right to left. UIScrollView stop responding
+        }
     }
 
     @IBAction func filmScrollViewLeftArrowAction() {
