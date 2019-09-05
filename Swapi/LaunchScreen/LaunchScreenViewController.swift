@@ -34,10 +34,10 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
         let button = UIButton()
         button.accessibilityIdentifier = "tryServiceRequestAgain"
         button.setTitle("Try Again", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .lightText
-        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.backgroundColor = .black
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 0.5
         button.addTarget(self, action: #selector(preFetchAllStarwarsEntities), for: .touchUpInside)
         

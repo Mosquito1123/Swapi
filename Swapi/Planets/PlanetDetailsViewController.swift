@@ -266,14 +266,14 @@ class PlanetDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func planetScrollViewLeftArrowAction() {
+    func planetScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
     }
 
-    @IBAction func planetScrollViewRightArrowAction() {
+    func planetScrollViewRightArrowAction() {
         let totalPage = planetNames == nil ? LocalCache.planets?.count ?? 0 : planetNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)

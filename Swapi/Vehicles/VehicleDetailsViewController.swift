@@ -272,14 +272,14 @@ class VehicleDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func vehicleScrollVIewLeftArrowAction() {
+    func vehicleScrollVIewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
     }
 
-    @IBAction func vehicleScrollViewRightArrowAction() {
+    func vehicleScrollViewRightArrowAction() {
         let totalPage = vehicleNames == nil ? LocalCache.vehicles?.count ?? 0 : vehicleNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)

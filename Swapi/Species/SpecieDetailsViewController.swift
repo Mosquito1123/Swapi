@@ -287,14 +287,14 @@ class SpecieDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func specieScrollViewLeftArrowAction() {
+    func specieScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
     }
 
-    @IBAction func specieScrollViewRightArrowAction() {
+    func specieScrollViewRightArrowAction() {
         let totalPage = specieNames == nil ? LocalCache.species?.count ?? 0 : specieNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)

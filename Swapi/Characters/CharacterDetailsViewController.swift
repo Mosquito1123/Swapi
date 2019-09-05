@@ -370,7 +370,7 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: Character scroll view logic
 
-    @IBAction func characterScrollViewRightArrowAction() {
+    func characterScrollViewRightArrowAction() {
         let totalPage = characterNames == nil ? LocalCache.characters?.count ?? 0 : characterNames?.count ?? 0
         if pageIndex < totalPage - 1  {
             viewModel?.set(direction: .right)
@@ -378,7 +378,7 @@ class CharacterDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func characterScrollViewLeftArrowAction() {
+    func characterScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()

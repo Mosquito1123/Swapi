@@ -279,14 +279,14 @@ class StarshipDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func starshipScrollViewLeftArrowAction() {
+    func starshipScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
     }
 
-    @IBAction func starshipScrollViewRightArrowAction() {
+    func starshipScrollViewRightArrowAction() {
         let totalPage = starshipNames == nil ? LocalCache.species?.count ?? 0 : starshipNames?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)

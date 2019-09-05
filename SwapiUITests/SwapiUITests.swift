@@ -103,13 +103,6 @@ class SwapiUITests: XCTestCase {
         expectation(for: exists, evaluatedWith: table, handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
 
-        table.cells.element(boundBy: 0).tap()
-        app.buttons.element(matching: .button, identifier: "charactersRightScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
-
-        app.buttons.element(matching: .button, identifier: "charactersLeftScrollViewButton").tap(withNumberOfTaps: 10, numberOfTouches: 5)
-
-        app.navigationBars.buttons.element(boundBy: 0).tap()
-
         table.cells.element(boundBy: 1).tap()
         app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeLeft()
         app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeRight()

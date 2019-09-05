@@ -335,14 +335,14 @@ class FilmDetailsViewController: UIViewController {
         }
     }
 
-    @IBAction func filmScrollViewLeftArrowAction() {
+    func filmScrollViewLeftArrowAction() {
         if pageIndex > 0 {
             viewModel?.set(direction: .left)
             viewModel?.reloadAllTableAndCollection()
         }
     }
 
-    @IBAction func filmScrollViewRightArrowAction() {
+    func filmScrollViewRightArrowAction() {
         let totalPage = filmTitles == nil ? LocalCache.films?.count ?? 0 : filmTitles?.count ?? 0
         if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)
