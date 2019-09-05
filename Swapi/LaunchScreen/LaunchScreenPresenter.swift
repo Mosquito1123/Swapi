@@ -206,7 +206,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                         length: vehicle.1["length"].string ?? "",
                                         maxAtmospheringSpeed: vehicle.1["max_atmosphering_speed"].string ?? "",
                                         crew: vehicle.1["crew"].string ?? "",
-                                        passenger: vehicle.1["passenger"].string ?? "",
+                                        passenger: vehicle.1["passengers"].string ?? "",
                                         cargoCapacity: vehicle.1["cargo_capacity"].string ?? "",
                                         consumables: vehicle.1["consumables"].string ?? "",
                                         vehicleClass: vehicle.1["vehicle_class"].string ?? "",
