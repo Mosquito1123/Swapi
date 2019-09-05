@@ -39,6 +39,8 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
             Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
         } else if collectionView == starshipCollection {
             Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: viewModel?.starships)
+        } else if collectionView == vehicleCollection {
+            Router.routeTo(from: self, to: .VehicleDetails, page: indexPath.row, entityName: viewModel?.vehicles)
         }
     }
 }

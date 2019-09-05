@@ -11,24 +11,10 @@
 
 import Foundation
 
-// MARK: Common functionns
-
-func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
-    guard image != nil else {
-        return nil
-    }
-    let hasAlpha = true
-    let scale: CGFloat = 0.0 // Use scale factor of main screen
-    
-    UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
-    image?.draw(in: CGRect(origin: .zero, size: sizeChange))
-    
-    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-    return scaledImage
-}
-
 /**
- Common Image scroll view for detail view controller. CharacterDetailViewController
+ Common Image scroll view for detail view controller. CharacterDetailViewController,
+ FilmDetailsViewController, SpeciesDetailsViewController, StarshipDetailsViewController,
+ PlanetDetailsViewController, and VehicleDetailsViewController
  **/
 protocol DetailScrollViewProtocol {
     var imageScrollView: UIScrollView { get }
@@ -128,6 +114,20 @@ class Cell: UICollectionViewCell {
     private func setupViewMoreIndicator() {
         contentView.addSubview(viewMoreIndicator)
         viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    }
+    
+    private func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
+        guard image != nil else {
+            return nil
+        }
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        image?.draw(in: CGRect(origin: .zero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
     }
     
     override init(frame: CGRect) {

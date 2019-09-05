@@ -40,6 +40,14 @@ class FilmsViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Films"
+        backItem.tintColor = .yellow
+        navigationItem.backBarButtonItem = backItem
+    }
+
     // MARK: Table view setup
 
     var films: Dictionary<Int, Film>? = LocalCache.films
