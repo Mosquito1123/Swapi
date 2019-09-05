@@ -29,22 +29,25 @@ extension VehicleDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let vehicleCount = vehicleNames?.count ?? (LocalCache.vehicles?.count ?? 1)
 
-        return CGFloat(296 * (vehicleCount - 1))
+        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(vehicleCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
-            var visibleRect = scrollView.frame
-            visibleRect.origin.x = endOfScrollViewContentOffsetX
-            scrollView.scrollRectToVisible(visibleRect, animated: true)
-        }
         if scrollView == vehicleImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 vehicleScrollVIewLeftArrowAction()
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 vehicleScrollViewRightArrowAction()
             }
+        }
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        // prevent user scroll past the end of scroll view
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
     }
 }

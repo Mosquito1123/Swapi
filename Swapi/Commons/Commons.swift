@@ -42,6 +42,10 @@ protocol DetailScrollViewProtocol {
 
 class ViewModel {
 
+    var scrollImageContentOffsetX: CGFloat {
+        return detailScrollViewProtocol.imageScrollView.frame.width
+    }
+
     var detailScrollViewProtocol: DetailScrollViewProtocol
     
     var previousImageViewContentOffset: CGPoint = .zero

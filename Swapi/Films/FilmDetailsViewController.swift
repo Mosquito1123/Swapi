@@ -84,22 +84,25 @@ extension FilmDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let filmCount = filmTitles?.count ?? (LocalCache.films?.count ?? 1)
 
-        return CGFloat(294 * (filmCount - 1))
+        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(filmCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
-            var visibleRect = scrollView.frame
-            visibleRect.origin.x = endOfScrollViewContentOffsetX
-            scrollView.scrollRectToVisible(visibleRect, animated: true)
-        }
         if scrollView == filmsImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 filmScrollViewRightArrowAction()
             }
+        }
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        // prevent user scroll past the end of scroll view
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
     }
 }
@@ -217,7 +220,6 @@ class FilmDetailsViewModel: ViewModel {
 
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
-
         if let vc = filmDetailsVC {
             vc.presentDetails()
         }
@@ -287,8 +289,6 @@ class FilmDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        openingCrawl.text = filmData?.openingCrawl
-
         viewModel = FilmDetailsViewModel(filmDetailsVC: self)
     }
 
@@ -326,6 +326,7 @@ class FilmDetailsViewController: UIViewController {
         }
         title = filmData?.title
         filmUIImageView.image = UIImage(named: "Films/\(title ?? "")")
+        openingCrawl.text = filmData?.openingCrawl
         if viewModel?.previousImageViewContentOffset.x != 0.0 {
             imageScrollView.constraintWithIdentifier("filmUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
         } else {

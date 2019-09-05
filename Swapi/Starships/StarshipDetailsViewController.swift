@@ -29,22 +29,25 @@ extension StarshipDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let starshipCount = starshipNames?.count ?? (LocalCache.starships?.count ?? 1)
         
-        return CGFloat(296 * (starshipCount - 1))
+        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(starshipCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > 10656.0 {
-            var visibleRect = scrollView.frame
-            visibleRect.origin.x = 10656.0
-            scrollView.scrollRectToVisible(visibleRect, animated: true)
-        }
         if scrollView == starshipImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 starshipScrollViewLeftArrowAction()
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 starshipScrollViewRightArrowAction()
             }
+        }
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        // prevent user scroll past the end of scroll view
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
     }
 }

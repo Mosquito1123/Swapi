@@ -152,23 +152,25 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let characterCount = characterNames?.count ?? (LocalCache.characters?.count ?? 1)
 
-        return CGFloat(296 * (characterCount - 1))
+        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(characterCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
-        // incase user scroll past the end of scroll view
-        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
-            var visibleRect = scrollView.frame
-            visibleRect.origin.x = endOfScrollViewContentOffsetX
-            scrollView.scrollRectToVisible(visibleRect, animated: true)
-        }
         if scrollView == charactersImageScrollView {
             if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 characterScrollViewLeftArrowAction()
             } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 characterScrollViewRightArrowAction()
             }
+        }
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        // prevent user scroll past the end of scroll view
+        if scrollView.contentOffset.x > endOfScrollViewContentOffsetX {
+            var visibleRect = scrollView.frame
+            visibleRect.origin.x = endOfScrollViewContentOffsetX
+            scrollView.scrollRectToVisible(visibleRect, animated: true)
         }
     }
 }
@@ -296,6 +298,8 @@ class CharacterDetailsViewController: UIViewController {
 
     // MARK: view properties
 
+    @IBOutlet weak var characterMainScrollView: UIScrollView!
+
     @IBOutlet weak var vehicleCollection: UICollectionView!
 
     @IBOutlet weak var attributeCollection: UITableView!
@@ -333,8 +337,10 @@ class CharacterDetailsViewController: UIViewController {
         backItem.title = title
         navigationItem.backBarButtonItem = backItem
     }
-    
+
     override func viewDidLayoutSubviews() {
+        characterMainScrollView.contentSize.height = 1000
+
         if let viewModel = self.viewModel {
             viewModel.scrollViewSetup()
             presentDetails()
