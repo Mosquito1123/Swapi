@@ -2,9 +2,7 @@
 
 # Swapi
 
-An IOS app that displays a set of all the People, Films, Species, Starships, Vehicles and Planets from **Star Wars** movies.
-
-This is the early development stage of Swapi. So, it is far from finished. :blush:
+An IOS app that displays a set of all the People, Films, Species, Starships, Vehicles and Planets from **Star Wars** movies. And how they are related to each other.
 
 API and back end service are already written and credit to https://github.com/phalt/swapi, which was developed by
 
@@ -19,4 +17,4 @@ This app currently uses Clean IOS and ViewModel architecture. It also contains S
 
 # Contribution
 
-Since this is the early stage. All contributions are more than welcomed.
+All contributions are more than welcomed. Especially with the color and theme of the app so that it should be more visually appealing to the eyes
