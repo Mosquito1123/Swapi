@@ -59,6 +59,7 @@ class FilmsViewController: UITableViewController {
         let keysArray = Array(films?.keys ?? Dictionary<Int, Film>().keys)
         let film = films?[keysArray[indexPath.row]]
         cell.textLabel?.text = film?.title
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = film?.title ?? ""

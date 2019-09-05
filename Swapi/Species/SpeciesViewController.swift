@@ -39,6 +39,14 @@ class SpeciesViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Species"
+        backItem.tintColor = .yellow
+        navigationItem.backBarButtonItem = backItem
+    }
+
     // MARK: Tableview setup
 
     var species: Dictionary<Int, Specie>? = LocalCache.species
@@ -58,6 +66,7 @@ class SpeciesViewController: UITableViewController {
         let keysArray = Array(species?.keys ?? Dictionary<Int, Specie>().keys)
         let specie = species?[keysArray[indexPath.row]]
         cell.textLabel?.text = specie?.name
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = specie?.name ?? ""

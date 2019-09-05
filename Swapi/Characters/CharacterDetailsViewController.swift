@@ -335,6 +335,7 @@ class CharacterDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         let backItem = UIBarButtonItem()
         backItem.title = title
+        backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
     }
 

@@ -36,6 +36,14 @@ class StarshipsViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Starships"
+        backItem.tintColor = .yellow
+        navigationItem.backBarButtonItem = backItem
+    }
+
     // MARK: Tableview setup
 
     var starships: Dictionary<Int, Starship>? = LocalCache.starships
@@ -55,6 +63,7 @@ class StarshipsViewController: UITableViewController {
         let keysArray = Array(starships?.keys ?? Dictionary<Int, Starship>().keys)
         let starship = starships?[keysArray[indexPath.row]]
         cell.textLabel?.text = starship?.name
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = starship?.name ?? ""

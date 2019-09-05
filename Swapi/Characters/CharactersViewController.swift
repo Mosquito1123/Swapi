@@ -44,6 +44,15 @@ class CharactersViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Characters"
+        backItem.tintColor = .yellow
+        navigationItem.backBarButtonItem = backItem
+    }
+
+
     // MARK: Table view setup
 
     var characters: Dictionary<Int, Character>? = LocalCache.characters
@@ -65,6 +74,7 @@ class CharactersViewController: UITableViewController {
         let character = characters?[keysArray[indexPath.row]]
 
         cell.textLabel?.text = character?.name
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = character?.name ?? ""

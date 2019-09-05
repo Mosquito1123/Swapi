@@ -40,6 +40,14 @@ class PlanetsViewController: UITableViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Planets"
+        backItem.tintColor = .yellow
+        navigationItem.backBarButtonItem = backItem
+    }
+
     // MARK: Tableview setup
 
     var planets: Dictionary<Int, Planet>? = LocalCache.planets
@@ -59,6 +67,7 @@ class PlanetsViewController: UITableViewController {
         let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
         let planet = planets?[keysArray[indexPath.row]]
         cell.textLabel?.text = planet?.name
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = planet?.name ?? ""

@@ -296,6 +296,7 @@ class FilmDetailsViewController: UIViewController {
         super.viewWillDisappear(animated)
         let backItem = UIBarButtonItem()
         backItem.title = title
+        backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
     }
 

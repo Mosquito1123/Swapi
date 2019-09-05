@@ -39,6 +39,7 @@ class VehiclesViewController: UITableViewController {
         super.viewWillAppear(animated)
         let backItem = UIBarButtonItem()
         backItem.title = "Vehicles"
+        backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
     }
 
@@ -62,6 +63,7 @@ class VehiclesViewController: UITableViewController {
         let keysArray = Array(vehicles?.keys ?? Dictionary<Int, Vehicle>().keys)
         let vehicle = vehicles?[keysArray[indexPath.row]]
         cell.textLabel?.text = vehicle?.name
+        cell.textLabel?.textColor = .white
 
         // test identifiers
         cell.accessibilityIdentifier = vehicle?.name ?? ""
