@@ -111,8 +111,9 @@ extension VehicleDetailsViewController: UICollectionViewDataSource {
 
             filmCell.name = viewModel?.films[indexPath.row]
             return filmCell
-        } else if collectionView == pilotCollection, let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
-            
+        } else if collectionView == pilotCollection,
+            let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+
             pilotCell.name = viewModel?.pilots[indexPath.row]
             return pilotCell
         }
@@ -136,9 +137,9 @@ extension VehicleDetailsViewController: UICollectionViewDelegate, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmCollection {
-            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+            Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: viewModel?.films)
         } else if collectionView == pilotCollection {
-            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.pilots)
+            Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: viewModel?.pilots)
         }
     }
 }
@@ -258,19 +259,18 @@ class VehicleDetailsViewController: UIViewController {
 
     func presentDetails() {
         if let vehicleNames = vehicleNames {
-            for vehicle in Array(LocalCache.vehicles?.values ?? Dictionary<Int, Vehicle>().values) {
-                if vehicle.name == vehicleNames[pageIndex] {
-                    vehicleData = vehicle
-                    break
-                }
+            for vehicle in Array(LocalCache.vehicles?.values ?? [Int: Vehicle]().values) where vehicle.name == vehicleNames[pageIndex] {
+                vehicleData = vehicle
+                break
             }
         } else {
-            vehicleData = Array(LocalCache.vehicles?.values ?? Dictionary<Int, Vehicle>().values)[pageIndex]
+            vehicleData = Array(LocalCache.vehicles?.values ?? [Int: Vehicle]().values)[pageIndex]
         }
         title = vehicleData?.name
         if let title = title {
             if title.contains("/") {
-                let newTitle = title.replacingOccurrences(of: "/", with: ":") // image file's name cannot contain forward slash "/". That is why we replace it with colon ":"
+                // image file's name cannot contain forward slash "/". That is why we replace it with colon ":"
+                let newTitle = title.replacingOccurrences(of: "/", with: ":")
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(newTitle)")
             } else {
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")

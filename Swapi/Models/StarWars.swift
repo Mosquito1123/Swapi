@@ -10,12 +10,12 @@ import Foundation
 import SwiftyJSON
 
 struct LocalCache {
-    public static var characters: Dictionary<Int, Character>?
-    public static var films: Dictionary<Int, Film>?
-    public static var planets: Dictionary<Int, Planet>?
-    public static var species: Dictionary<Int, Specie>?
-    public static var starships: Dictionary<Int, Starship>?
-    public static var vehicles: Dictionary<Int, Vehicle>?
+    public static var characters: [Int: Character]?
+    public static var films: [Int: Film]?
+    public static var planets: [Int: Planet]?
+    public static var species: [Int: Specie]?
+    public static var starships: [Int: Starship]?
+    public static var vehicles: [Int: Vehicle]?
 }
 
 struct Character: Equatable {
@@ -51,31 +51,31 @@ struct Film: Equatable {
     static func == (lhs: Film, rhs: Film) -> Bool {
         return true
     }
-    
+
     var title: String
-    
+
     var episode: Int
-    
+
     var openingCrawl: String
-    
+
     var director: String
-    
+
     var producer: String
-    
+
     var releaseDate: String
-    
+
     var characters: [JSON]
-    
+
     var planets: [JSON]
-    
+
     var starships: [JSON]
 
     var vehicles: [JSON]
 
     var species: [JSON]
-    
+
     var created: String
-    
+
     var edited: String
 }
 
@@ -206,5 +206,3 @@ struct Starship: Vehicle {
 
     var starshipClass: String?
 }
-
-

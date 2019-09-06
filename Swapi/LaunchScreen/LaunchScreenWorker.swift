@@ -12,8 +12,7 @@
 
 import UIKit
 
-class LaunchScreenWorker
-{
+class LaunchScreenWorker {
     var category: CategoryProtocol
 
     init(category: CategoryProtocol) {

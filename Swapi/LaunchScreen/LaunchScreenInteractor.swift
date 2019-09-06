@@ -12,8 +12,7 @@
 
 import UIKit
 
-protocol LaunchScreenBusinessLogic
-{
+protocol LaunchScreenBusinessLogic {
     func preFetchCharacters(request: LaunchScreen.Fetch.Request)
     func preFetchFilms()
     func preFetchPlanets(request: LaunchScreen.Fetch.Request)
@@ -22,13 +21,11 @@ protocol LaunchScreenBusinessLogic
     func preFetchVehicles(request: LaunchScreen.Fetch.Request)
 }
 
-protocol LaunchScreenDataStore
-{
+protocol LaunchScreenDataStore {
 
 }
 
-class LaunchScreenInteractor: LaunchScreenBusinessLogic, LaunchScreenDataStore
-{
+class LaunchScreenInteractor: LaunchScreenBusinessLogic, LaunchScreenDataStore {
     var presenter: LaunchScreenPresentationLogic?
     var worker: LaunchScreenWorker? = LaunchScreenWorker(category: CategoryProtocolImplementation())
 
@@ -69,5 +66,4 @@ class LaunchScreenInteractor: LaunchScreenBusinessLogic, LaunchScreenDataStore
             self.presenter?.cachVehicles(response: LaunchScreen.Fetch.Response.Vehicles(vehicles: datas))
         }
     }
-  
 }

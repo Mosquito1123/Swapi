@@ -45,8 +45,8 @@ class VehiclesViewController: UITableViewController {
 
     // MARK: Tableview setup
 
-    var vehicles: Dictionary<Int, Vehicle>? = LocalCache.vehicles
-    
+    var vehicles: [Int: Vehicle]? = LocalCache.vehicles
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -60,7 +60,7 @@ class VehiclesViewController: UITableViewController {
             return UITableViewCell(style: .default, reuseIdentifier: "VehiclesTableViewCell")
         }
 
-        let keysArray = Array(vehicles?.keys ?? Dictionary<Int, Vehicle>().keys)
+        let keysArray = Array(vehicles?.keys ?? [Int: Vehicle]().keys)
         let vehicle = vehicles?[keysArray[indexPath.row]]
         cell.textLabel?.text = vehicle?.name
         cell.textLabel?.textColor = .white
@@ -73,6 +73,6 @@ class VehiclesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .VehicleDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .vehicleDetails, page: indexPath.row, entityName: nil)
     }
 }

@@ -12,18 +12,15 @@
 
 import UIKit
 
-@objc protocol LaunchScreenRoutingLogic
-{
+@objc protocol LaunchScreenRoutingLogic {
   //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol LaunchScreenDataPassing
-{
+protocol LaunchScreenDataPassing {
   var dataStore: LaunchScreenDataStore? { get }
 }
 
-class LaunchScreenRouter: NSObject, LaunchScreenRoutingLogic, LaunchScreenDataPassing
-{
+class LaunchScreenRouter: NSObject, LaunchScreenRoutingLogic, LaunchScreenDataPassing {
   weak var viewController: LaunchScreenViewController?
   var dataStore: LaunchScreenDataStore?
 }

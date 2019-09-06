@@ -28,7 +28,7 @@ extension PlanetDetailsViewController: DetailScrollViewProtocol {
 extension PlanetDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let planetCount = planetNames?.count ?? (LocalCache.planets?.count ?? 1)
-        
+
         return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(planetCount - 1)
     }
 
@@ -56,7 +56,7 @@ extension PlanetDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let planetCell = tableView.dequeueReusableCell(withIdentifier: "planetInformation", for: indexPath)
         if indexPath.row == 0 {
@@ -98,16 +98,18 @@ extension PlanetDetailsViewController: UICollectionViewDataSource {
         }
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+        if collectionView == filmCollection,
+            let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
             filmCell.name = viewModel?.films[indexPath.row]
             return filmCell
-        } else if collectionView == inhabitantCollection, let inhabitantCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+        } else if collectionView == inhabitantCollection,
+            let inhabitantCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             inhabitantCell.name = viewModel?.inhabitants[indexPath.row]
             return inhabitantCell
         }
-        
+
         return UICollectionViewCell()
     }
 }
@@ -128,9 +130,9 @@ extension PlanetDetailsViewController: UICollectionViewDelegate, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmCollection {
-            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+            Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: viewModel?.films)
         } else if collectionView == inhabitantCollection {
-            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.inhabitants)
+            Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: viewModel?.inhabitants)
         }
     }
 }
@@ -170,7 +172,7 @@ class PlanetDetailsViewModel: ViewModel {
         super.init(detailScrollViewProtocol: planetDetailsVC)
         self.planetDetailsVC = planetDetailsVC
     }
-    
+
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
 
@@ -257,14 +259,12 @@ class PlanetDetailsViewController: UIViewController {
 
     func presentDetails() {
         if let planetNames = planetNames {
-            for planet in Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values) {
-                if planet.name == planetNames[pageIndex] {
-                    planetData = planet
-                    break
-                }
+            for planet in Array(LocalCache.planets?.values ?? [Int: Planet]().values) where planet.name == planetNames[pageIndex] {
+                planetData = planet
+                break
             }
         } else {
-            planetData = Array(LocalCache.planets?.values ?? Dictionary<Int, Planet>().values)[pageIndex]
+            planetData = Array(LocalCache.planets?.values ?? [Int: Planet]().values)[pageIndex]
         }
         title = planetData?.name
         planetUIImageView.image = UIImage(named: "Planets/\(title ?? "")")

@@ -33,7 +33,7 @@ class ViewModel {
     }()
 
     var detailScrollViewProtocol: DetailScrollViewProtocol
-    
+
     private(set) var previousImageScrollViewContentOffset: CGPoint = .zero
 
     enum PageDirection {
@@ -61,10 +61,8 @@ class ViewModel {
         switch direction {
         case .left:
             newPage = detailScrollViewProtocol.pageIndex - 1
-            break
         case .right:
             newPage = detailScrollViewProtocol.pageIndex + 1
-            break
         default:
             newPage = detailScrollViewProtocol.pageIndex
         }
@@ -74,7 +72,7 @@ class ViewModel {
         previousImageScrollViewContentOffset = detailScrollViewProtocol.imageScrollView.contentOffset
         detailScrollViewProtocol.pageIndex = newPage
     }
-    
+
     func setUIImageViewCenterXContraint(identifier: String, constant: CGFloat?) {
         if let constant = constant {
             detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = constant
@@ -82,11 +80,16 @@ class ViewModel {
             if previousImageScrollViewContentOffset.x != 0.0 {
                 detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = previousImageScrollViewContentOffset.x
             } else {
-                detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll to the first page of the scroll view, it stop responding. Nevertheless, the constant should be 0, since we are at the first page. But it won't work with 0, so 1 is a quick fix for now.
+                /**
+                    FIXMEs: just a temporary fix. Otherwise, when scroll to the first page of the scroll view,
+                    it stop responding. Nevertheless, the constant should be 0, since we are at the first page.
+                    But it won't work with 0, so 1 is a quick fix for now.
+                **/
+                detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = 1
             }
         }
     }
-    
+
     func setPreviousImageViewContentOffset(with point: CGPoint) {
         previousImageScrollViewContentOffset = point
     }
@@ -103,13 +106,13 @@ class Cell: UICollectionViewCell {
             label.text = name
         }
     }
-    
+
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var viewMoreIndicator: UIButton = {
         let button = UIButton()
         let arrowRight = imageResize(image: UIImage(named: "arrowRight"), sizeChange: CGSize(width: 12, height: 12))
@@ -117,7 +120,7 @@ class Cell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     private func setupLabel() {
         contentView.addSubview(label)
         label.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
@@ -126,31 +129,31 @@ class Cell: UICollectionViewCell {
         label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         label.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     }
-    
+
     private func setupViewMoreIndicator() {
         contentView.addSubview(viewMoreIndicator)
         viewMoreIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     }
-    
+
     private func imageResize(image: UIImage?, sizeChange: CGSize) -> UIImage? {
         guard image != nil else {
             return nil
         }
         let hasAlpha = true
         let scale: CGFloat = 0.0 // Use scale factor of main screen
-        
+
         UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
         image?.draw(in: CGRect(origin: .zero, size: sizeChange))
-        
+
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         return scaledImage
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLabel()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupLabel()
@@ -190,52 +193,52 @@ enum Router {
     // MARK: Routing
 
     enum Route: String {
-        case CharacterDetails
-        case FilmDetails
-        case PlanetDetails
-        case SpecieDetails
-        case StarshipDetails
-        case VehicleDetails
+        case characterDetails
+        case filmDetails
+        case planetDetails
+        case specieDetails
+        case starshipDetails
+        case vehicleDetails
     }
     static func routeTo(from: UIViewController, to route: Router.Route, page: Int, entityName: [String]?) {
         var toVC: UIViewController = UIViewController()
         switch route {
-        case .CharacterDetails:
+        case .characterDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "CharacterDetailsViewController")
-            let characterDetailsVC = toVC as! CharacterDetailsViewController
-            characterDetailsVC.pageIndex = page
-            characterDetailsVC.characterNames = entityName
-            break
-        case .FilmDetails:
+            if let characterDetailsVC = toVC as? CharacterDetailsViewController {
+                characterDetailsVC.pageIndex = page
+                characterDetailsVC.characterNames = entityName
+            }
+        case .filmDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "FilmDetailsViewController")
-            let filmDetailsVC = toVC as! FilmDetailsViewController
-            filmDetailsVC.pageIndex = page
-            filmDetailsVC.filmTitles = entityName
-            break
-        case .PlanetDetails:
+            if let filmDetailsVC = toVC as? FilmDetailsViewController {
+                filmDetailsVC.pageIndex = page
+                filmDetailsVC.filmTitles = entityName
+            }
+        case .planetDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "PlanetDetailsViewController")
-            let planetDetailsVC = toVC as! PlanetDetailsViewController
-            planetDetailsVC.pageIndex = page
-            planetDetailsVC.planetNames = entityName
-            break
-        case .SpecieDetails:
+            if let planetDetailsVC = toVC as? PlanetDetailsViewController {
+                planetDetailsVC.pageIndex = page
+                planetDetailsVC.planetNames = entityName
+            }
+        case .specieDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "SpecieDetailsViewController")
-            let specieDetailsVC = toVC as! SpecieDetailsViewController
-            specieDetailsVC.pageIndex = page
-            specieDetailsVC.specieNames = entityName
-            break
-        case .StarshipDetails:
+            if let specieDetailsVC = toVC as? SpecieDetailsViewController {
+                specieDetailsVC.pageIndex = page
+                specieDetailsVC.specieNames = entityName
+            }
+        case .starshipDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "StarshipDetailsViewController")
-            let starshipDetailsVC = toVC as! StarshipDetailsViewController
-            starshipDetailsVC.pageIndex = page
-            starshipDetailsVC.starshipNames = entityName
-            break
-        case .VehicleDetails:
+            if let starshipDetailsVC = toVC as? StarshipDetailsViewController {
+                starshipDetailsVC.pageIndex = page
+                starshipDetailsVC.starshipNames = entityName
+            }
+        case .vehicleDetails:
             toVC = from.storyboard!.instantiateViewController(withIdentifier: "VehicleDetailsViewController")
-            let vehicleDetailsVC = toVC as! VehicleDetailsViewController
-            vehicleDetailsVC.pageIndex = page
-            vehicleDetailsVC.vehicleNames = entityName
-            break
+            if let vehicleDetailsVC = toVC as? VehicleDetailsViewController {
+                vehicleDetailsVC.pageIndex = page
+                vehicleDetailsVC.vehicleNames = entityName
+            }
         }
         from.show(toVC, sender: nil)
     }
@@ -247,4 +250,3 @@ extension UIView {
         return self.constraints.first { $0.identifier == identifier }
     }
 }
-

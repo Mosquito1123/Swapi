@@ -38,7 +38,6 @@ final class Service {
     }
 }
 
-
 class CategoryProtocolImplementation: CategoryProtocol {
     func getCharacters(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void) {
         var datas: [Data?] = []
@@ -111,7 +110,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
 
     func getSpecies(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void) {
         var datas: [Data?] = []
-        
+
         for page in sequence {
             Service.dispatchGroup.enter()
             Service.request(url: "https://swapi.co/api/species/?page=\(page)") { (species: () throws -> Data?) in
@@ -134,7 +133,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
 
     func getStarships(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void) {
         var datas: [Data?] = []
-        
+
         for page in sequence {
             Service.dispatchGroup.enter()
             Service.request(url: "https://swapi.co/api/starships/?page=\(page)") { (starShips: () throws -> Data?) in
@@ -157,7 +156,7 @@ class CategoryProtocolImplementation: CategoryProtocol {
 
     func getVehicles(_ sequence: Range<Int>, completion: @escaping ([Data?]) -> Void) {
         var datas: [Data?] = []
-        
+
         for page in sequence {
             Service.dispatchGroup.enter()
             Service.request(url: "https://swapi.co/api/vehicles/?page=\(page)") { (vehicles: () throws -> Data?) in
@@ -178,4 +177,3 @@ class CategoryProtocolImplementation: CategoryProtocol {
         }
     }
 }
-

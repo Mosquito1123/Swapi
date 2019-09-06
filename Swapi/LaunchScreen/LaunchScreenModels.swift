@@ -12,11 +12,11 @@
 
 import UIKit
 
-enum LaunchScreen
-{
+enum LaunchScreen {
     // MARK: Use cases
 
     enum Fetch {
+        // swiftlint:disable nesting
         struct Request {
             var sequence: Range<Int>
         }
@@ -29,12 +29,13 @@ enum LaunchScreen
             struct Vehicles { var vehicles: [Data?] }
         }
         struct ViewModel {
-            struct Characters { var characters: Dictionary<Int, Character> }
-            struct Films { var films: Dictionary<Int, Film> }
-            struct Planets { var planets: Dictionary<Int, Planet> }
-            struct Species { var species: Dictionary<Int, Specie> }
-            struct Starships { var starships: Dictionary<Int, Starship> }
-            struct Vehicles { var vehicles: Dictionary<Int, Vehicle> }
+            // swiftlint:disable nesting
+            struct Characters { var characters: [Int: Character] }
+            struct Films { var films: [Int: Film] }
+            struct Planets { var planets: [Int: Planet] }
+            struct Species { var species: [Int: Specie] }
+            struct Starships { var starships: [Int: Starship] }
+            struct Vehicles { var vehicles: [Int: Vehicle] }
         }
     }
 }

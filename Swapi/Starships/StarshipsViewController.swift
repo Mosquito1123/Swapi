@@ -46,7 +46,7 @@ class StarshipsViewController: UITableViewController {
 
     // MARK: Tableview setup
 
-    var starships: Dictionary<Int, Starship>? = LocalCache.starships
+    var starships: [Int: Starship]? = LocalCache.starships
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -60,7 +60,7 @@ class StarshipsViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "StarshipsTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "StarshipsTableViewCelll")
         }
-        let keysArray = Array(starships?.keys ?? Dictionary<Int, Starship>().keys)
+        let keysArray = Array(starships?.keys ?? [Int: Starship]().keys)
         let starship = starships?[keysArray[indexPath.row]]
         cell.textLabel?.text = starship?.name
         cell.textLabel?.textColor = .white
@@ -73,6 +73,6 @@ class StarshipsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .starshipDetails, page: indexPath.row, entityName: nil)
     }
 }

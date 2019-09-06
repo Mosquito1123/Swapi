@@ -29,7 +29,7 @@ extension SpecieDetailsViewController: DetailScrollViewProtocol {
 extension SpecieDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 8 {
-            Router.routeTo(from: self, to: .PlanetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
+            Router.routeTo(from: self, to: .planetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
         }
     }
 }
@@ -38,7 +38,7 @@ extension SpecieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 9
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let specieCell = tableView.dequeueReusableCell(withIdentifier: "specieInformation", for: indexPath)
         specieCell.accessoryType = .none
@@ -81,7 +81,7 @@ extension SpecieDetailsViewController: UITableViewDataSource {
 extension SpecieDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let specieCount = specieNames?.count ?? (LocalCache.species?.count ?? 1)
-        
+
         return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(specieCount - 1)
     }
 
@@ -114,14 +114,16 @@ extension SpecieDetailsViewController: UICollectionViewDataSource {
         }
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == ownByCharacterCollection, let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+        if collectionView == ownByCharacterCollection,
+            let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
 
             characterCell.name = viewModel?.characters[indexPath.row]
             return characterCell
 
-        } else if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+        } else if collectionView == filmCollection,
+            let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
             return filmCell
@@ -132,7 +134,7 @@ extension SpecieDetailsViewController: UICollectionViewDataSource {
     }
 }
 
-extension SpecieDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension SpecieDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -142,15 +144,15 @@ extension SpecieDetailsViewController: UICollectionViewDelegate, UICollectionVie
         } else if collectionView == filmCollection {
             label.text = viewModel?.films[indexPath.row]
         }
-        
+
         return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == ownByCharacterCollection {
-            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.characters)
+            Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: viewModel?.characters)
         } else if collectionView == filmCollection {
-            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+            Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: viewModel?.films)
         }
     }
 }
@@ -181,7 +183,7 @@ class SpecieDetailsViewModel: ViewModel {
             let id = Int(character.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.characters?[id]?.name ?? "")
         }
-    
+
         return result
     }
 
@@ -194,12 +196,12 @@ class SpecieDetailsViewModel: ViewModel {
         }
         return result
     }
-    
+
     init(specieDetailsVC: SpecieDetailsViewController) {
         super.init(detailScrollViewProtocol: specieDetailsVC)
         self.specieDetailsVC = specieDetailsVC
     }
-    
+
     func reloadAllTableAndCollection() {
         guard let vc = specieDetailsVC else { return }
         vc.specieInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
@@ -239,7 +241,7 @@ class SpecieDetailsViewController: UIViewController {
     @IBOutlet weak var filmCollection: UICollectionView!
 
     var specieData: Specie?
-    
+
     var specieNames: [String]?
 
     var specieIndex: Int?
@@ -279,14 +281,12 @@ class SpecieDetailsViewController: UIViewController {
 
     func presentDetails() {
         if let specieNames = specieNames {
-            for specie in Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values) {
-                if specie.name == specieNames[pageIndex] {
-                    specieData = specie
-                    break
-                }
+            for specie in Array(LocalCache.species?.values ?? [Int: Specie]().values) where specie.name == specieNames[pageIndex] {
+                specieData = specie
+                break
             }
         } else {
-            specieData = Array(LocalCache.species?.values ?? Dictionary<Int, Specie>().values)[pageIndex]
+            specieData = Array(LocalCache.species?.values ?? [Int: Specie]().values)[pageIndex]
         }
         title = specieData?.name
         specieUIImageView.image = UIImage(named: "Species/\(title ?? "")")

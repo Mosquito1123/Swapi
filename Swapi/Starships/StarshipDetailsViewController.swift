@@ -28,7 +28,7 @@ extension StarshipDetailsViewController: DetailScrollViewProtocol {
 extension StarshipDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let starshipCount = starshipNames?.count ?? (LocalCache.starships?.count ?? 1)
-        
+
         return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(starshipCount - 1)
     }
 
@@ -63,11 +63,13 @@ extension StarshipDetailsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
+        if collectionView == filmCollection,
+            let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
             return filmCell
-        } else if collectionView == pilotCollection, let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+        } else if collectionView == pilotCollection,
+            let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
 
             pilotCell.name = viewModel?.pilots[indexPath.row]
             return pilotCell
@@ -87,19 +89,18 @@ extension StarshipDetailsViewController: UICollectionViewDelegate, UICollectionV
         } else if collectionView == pilotCollection {
             label.text = viewModel?.pilots[indexPath.row]
         }
-
-        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height) // add 24 to make space for right arrow indicator
+        // add 24 to make space for right arrow indicator
+        return CGSize(width: label.intrinsicContentSize.width + 24, height: label.intrinsicContentSize.height)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmCollection {
-            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+            Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: viewModel?.films)
         } else if collectionView == pilotCollection {
-            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.pilots)
+            Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: viewModel?.pilots)
         }
     }
 }
-
 
 extension StarshipDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,8 +150,6 @@ extension StarshipDetailsViewController: UITableViewDataSource {
 
         return starshipCell
     }
-    
-
 }
 
 // MARK: Main class
@@ -177,26 +176,26 @@ class StarshipDetailsViewModel: ViewModel {
         }
         return result
     }
-    
+
     init(starshipDetailsVC: StarshipDetailsViewController) {
         super.init(detailScrollViewProtocol: starshipDetailsVC)
         self.starshipDetailsVC = starshipDetailsVC
     }
-    
+
     override func scrollViewSetup() {
         super.scrollViewSetup()
         if let vc = starshipDetailsVC {
             vc.imageScrollView.contentSize.width = vc.imageScrollView.frame.width * 37
         }
     }
-    
+
     func reloadAllTableAndCollection() {
         guard let vc = starshipDetailsVC else { return }
         vc.starshipInformation.reloadSections(IndexSet(integer: 0), with: .automatic)
         vc.filmCollection.reloadSections(IndexSet(integer: 0))
         vc.pilotCollection.reloadSections(IndexSet(integer: 0))
     }
-    
+
     override func set(direction: ViewModel.PageDirection) {
         super.set(direction: direction)
         guard let vc = starshipDetailsVC else { return }
@@ -272,14 +271,13 @@ class StarshipDetailsViewController: UIViewController {
 
     func presentDetails() {
         if let starshipNames = starshipNames {
-            for starship in Array(LocalCache.starships?.values ?? Dictionary<Int, Starship>().values) {
-                if starship.name == starshipNames[pageIndex] {
-                    starshipData = starship
-                    break
-                }
+            for starship in Array(LocalCache.starships?.values ?? [Int: Starship]().values)
+                where starship.name == starshipNames[pageIndex] {
+                starshipData = starship
+                break
             }
         } else {
-            starshipData = Array(LocalCache.starships?.values ?? Dictionary<Int, Starship>().values)[pageIndex]
+            starshipData = Array(LocalCache.starships?.values ?? [Int: Starship]().values)[pageIndex]
         }
         title = starshipData?.name
         starshipUIImageView.image = UIImage(named: "Starships/\(title ?? "")")

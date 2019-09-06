@@ -25,7 +25,7 @@ class FilmsViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-  
+
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class FilmsViewController: UITableViewController {
 
     // MARK: Table view setup
 
-    var films: Dictionary<Int, Film>? = LocalCache.films
+    var films: [Int: Film]? = LocalCache.films
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -64,7 +64,7 @@ class FilmsViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilmsTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "FilmsTableViewCelll")
         }
-        let keysArray = Array(films?.keys ?? Dictionary<Int, Film>().keys)
+        let keysArray = Array(films?.keys ?? [Int: Film]().keys)
         let film = films?[keysArray[indexPath.row]]
         cell.textLabel?.text = film?.title
         cell.textLabel?.textColor = .white
@@ -77,6 +77,6 @@ class FilmsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: nil)
     }
 }

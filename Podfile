@@ -12,6 +12,8 @@ target 'Swapi' do
   target 'SwapiTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Alamofire', '~> 4.8.2'
+    pod 'SwiftyJSON', '~> 4.2'
   end
 
   target 'SwapiUITests' do

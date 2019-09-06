@@ -13,8 +13,7 @@
 import UIKit
 import SwiftyJSON
 
-protocol LaunchScreenPresentationLogic
-{
+protocol LaunchScreenPresentationLogic {
     func cachCharacters(response: LaunchScreen.Fetch.Response.Characters)
     func cachFilms(response: LaunchScreen.Fetch.Response.Films)
     func cachPlanets(response: LaunchScreen.Fetch.Response.Planets)
@@ -23,8 +22,7 @@ protocol LaunchScreenPresentationLogic
     func cachVehicles(response: LaunchScreen.Fetch.Response.Vehicles)
 }
 
-class LaunchScreenPresenter: LaunchScreenPresentationLogic
-{
+class LaunchScreenPresenter: LaunchScreenPresentationLogic {
 
     weak var viewController: LaunchScreenDisplayLogic?
 
@@ -32,15 +30,15 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
 
     func cachCharacters(response: LaunchScreen.Fetch.Response.Characters) {
         let characterDatas = response.character
-        var dict: Dictionary<Int, Character> = [Int: Character]()
+        var dict = [Int: Character]()
         do {
             for characterData in characterDatas {
                 if characterData == nil { continue }
                 let json = try JSON(data: characterData!)
-                
+
                 for character in json["results"] {
-                    let id = Int(character.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = Character(name: character.1["name"].string ?? "",
+                    let characterId = Int(character.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[characterId] = Character(name: character.1["name"].string ?? "",
                                       height: character.1["height"].string ?? "",
                                       mass: character.1["mass"].string ?? "",
                                       hairColor: character.1["hair_color"].string ?? "",
@@ -66,13 +64,13 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
             print("film datas is null")
             return
         }
-        var dict: Dictionary<Int, Film> = [Int: Film]()
+        var dict = [Int: Film]()
         do {
             let json = try JSON(data: filmDatas)
-                
+
             for film in json["results"] {
-                let id = Int(film.1["url"].string!.components(separatedBy: "/")[5])!
-                dict[id] = Film(title: film.1["title"].string ?? "",
+                let filmId = Int(film.1["url"].string!.components(separatedBy: "/")[5])!
+                dict[filmId] = Film(title: film.1["title"].string ?? "",
                                 episode: film.1["episode_id"].int ?? 0,
                                 openingCrawl: film.1["opening_crawl"].string ?? "",
                                 director: film.1["director"].string ?? "",
@@ -86,7 +84,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                 created: film.1["created"].string ?? "",
                                 edited: film.1["edited"].string ?? "")
             }
-            
+
             viewController?.cachFilms(viewModel: LaunchScreen.Fetch.ViewModel.Films(films: dict))
         } catch let error {
             print("Error parsing films: ", error)
@@ -94,15 +92,15 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
     }
 
     func cachPlanets(response: LaunchScreen.Fetch.Response.Planets) {
-        var dict: Dictionary<Int, Planet> = [Int: Planet]()
+        var dict = [Int: Planet]()
         do {
             for planetData in response.planets {
                 if planetData == nil { continue }
-                
+
                 let json = try JSON(data: planetData!)
                 for planet in json["results"] {
-                    let id = Int(planet.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = Planet(name: planet.1["name"].string ?? "",
+                    let planetId = Int(planet.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[planetId] = Planet(name: planet.1["name"].string ?? "",
                                       rotationPeriod: planet.1["rotation_period"].string ?? "",
                                       orbitalPeriod: planet.1["orbital_period"].string ?? "",
                                       diameter: planet.1["diameter"].string ?? "",
@@ -117,7 +115,7 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
                                       edited: planet.1["edited"].string!)
                 }
             }
-            
+
             viewController?.cachPlanets(viewModel: LaunchScreen.Fetch.ViewModel.Planets(planets: dict))
         } catch let error {
             print("Error parsing planets: ", error)
@@ -125,15 +123,15 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
     }
 
     func cachSpecies(respones: LaunchScreen.Fetch.Response.Species) {
-        var dict: Dictionary<Int, Specie> = [Int: Specie]()
+        var dict = [Int: Specie]()
         do {
             for specieData in respones.species {
                 if specieData == nil { continue }
-                
+
                 let json = try JSON(data: specieData!)
                 for specie in json["results"] {
-                    let id = Int(specie.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = Specie(name: specie.1["name"].string ?? "",
+                    let specieId = Int(specie.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[specieId] = Specie(name: specie.1["name"].string ?? "",
                                       classification: specie.1["classification"].string ?? "",
                                       designation: specie.1["designation"].string ?? "",
                                       averageHeight: specie.1["average_height"].string ?? "",
@@ -156,15 +154,15 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
     }
 
     func cachStarships(response: LaunchScreen.Fetch.Response.Starships) {
-        var dict: Dictionary<Int, Starship> = [Int: Starship]()
+        var dict = [Int: Starship]()
         do {
             for starshipData in response.starships {
                 if starshipData == nil { continue }
-                
+
                 let json = try JSON(data: starshipData!)
                 for starship in json["results"] {
-                    let id = Int(starship.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = Starship(name: starship.1["name"].string ?? "",
+                    let starshipId = Int(starship.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[starshipId] = Starship(name: starship.1["name"].string ?? "",
                                         model: starship.1["model"].string ?? "",
                                         manufacturer: starship.1["manufacturer"].string ?? "",
                                         costInCredits: starship.1["cost_in_credits"].string ?? "",
@@ -191,15 +189,17 @@ class LaunchScreenPresenter: LaunchScreenPresentationLogic
     }
 
     func cachVehicles(response: LaunchScreen.Fetch.Response.Vehicles) {
-        var dict: Dictionary<Int, Vehicle> = [Int: Vehicle]()
+        var dict = [Int: Vehicle]()
         do {
             for vehicleData in response.vehicles {
-                if vehicleData == nil  { continue }
-                
+                if vehicleData == nil {
+                    continue
+                }
+
                 let json = try JSON(data: vehicleData!)
                 for vehicle in json["results"] {
-                    let id = Int(vehicle.1["url"].string!.components(separatedBy: "/")[5])!
-                    dict[id] = Starship(name: vehicle.1["name"].string ?? "",
+                    let vehicleId = Int(vehicle.1["url"].string!.components(separatedBy: "/")[5])!
+                    dict[vehicleId] = Starship(name: vehicle.1["name"].string ?? "",
                                         model: vehicle.1["model"].string ?? "",
                                         manufacturer: vehicle.1["manufacturer"].string ?? "",
                                         costInCredits: vehicle.1["cost_in_credits"].string ?? "",

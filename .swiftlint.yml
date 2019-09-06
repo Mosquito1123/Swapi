@@ -1,0 +1,22 @@
+excluded:
+- Carthage
+- Pods
+- SwiftLint/Common/3rdPartyLib
+
+line_length:
+ warning: 120
+ ignores_function_declarations: true
+ ignores_comments: true
+ ignores_interpolated_strings: true
+ ignores_urls: true
+
+variable_name:
+ min_length: 2 # only min_length
+
+line_length:
+ warning: 160
+ ignores_comments: true
+
+cyclomatic_complexity:
+ warning: 12
+

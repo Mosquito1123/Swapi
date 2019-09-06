@@ -49,7 +49,7 @@ class SpeciesViewController: UITableViewController {
 
     // MARK: Tableview setup
 
-    var species: Dictionary<Int, Specie>? = LocalCache.species
+    var species: [Int: Specie]? = LocalCache.species
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -63,7 +63,7 @@ class SpeciesViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciesTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "SpeciesTableViewCelll")
         }
-        let keysArray = Array(species?.keys ?? Dictionary<Int, Specie>().keys)
+        let keysArray = Array(species?.keys ?? [Int: Specie]().keys)
         let specie = species?[keysArray[indexPath.row]]
         cell.textLabel?.text = specie?.name
         cell.textLabel?.textColor = .white
@@ -76,7 +76,6 @@ class SpeciesViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .specieDetails, page: indexPath.row, entityName: nil)
     }
-    
 }

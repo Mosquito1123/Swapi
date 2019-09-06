@@ -343,6 +343,7 @@
 				040A187622EEC12800EA9D83 /* Frameworks */,
 				040A187722EEC12800EA9D83 /* Resources */,
 				820DC3AE7BDE28A3D493C333 /* [CP] Embed Pods Frameworks */,
+				0462F5C82321F9200079B163 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -361,6 +362,7 @@
 				040A188922EEC12900EA9D83 /* Sources */,
 				040A188A22EEC12900EA9D83 /* Frameworks */,
 				040A188B22EEC12900EA9D83 /* Resources */,
+				46176C8E5627C61A01BBE28A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -466,6 +468,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0462F5C82321F9200079B163 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		46176C8E5627C61A01BBE28A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwapiTests/Pods-SwapiTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwapiTests/Pods-SwapiTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwapiTests/Pods-SwapiTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		69CC653A91973A721E15B916 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -17,14 +17,13 @@ class SwapiUITests: XCTestCase {
 
         // Put setup code here. This method is called before the invocation of each test method in the class.
         app.launch()
-        
-        
+
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        
+
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-        
+
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 
     }
@@ -93,12 +92,11 @@ class SwapiUITests: XCTestCase {
         testTableView(identifier: "VehiclesTableView")
 
     }
-    
+
     func testDetailsView() {
-        
 
         let table = app.tables.matching(identifier: "CharactersTableView").element(boundBy: 0)
-        
+
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: table, handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
@@ -108,10 +106,8 @@ class SwapiUITests: XCTestCase {
         app.scrollViews.element(matching: .scrollView, identifier: "characterDetailScrollView").swipeRight()
 
         app.navigationBars.buttons.element(boundBy: 0).tap()
-        
     }
 }
-
 
 extension XCUIElement {
     func scrollToElement(element: XCUIElement) {

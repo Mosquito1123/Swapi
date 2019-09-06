@@ -32,15 +32,15 @@ extension FilmDetailsViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == characterCollection {
-            Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: viewModel?.characters)
+            Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: viewModel?.characters)
         } else if collectionView == planetCollection {
-            Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: viewModel?.planets)
+            Router.routeTo(from: self, to: .planetDetails, page: indexPath.row, entityName: viewModel?.planets)
         } else if collectionView == specieCollection {
-            Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
+            Router.routeTo(from: self, to: .specieDetails, page: indexPath.row, entityName: viewModel?.species)
         } else if collectionView == starshipCollection {
-            Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: viewModel?.starships)
+            Router.routeTo(from: self, to: .starshipDetails, page: indexPath.row, entityName: viewModel?.starships)
         } else if collectionView == vehicleCollection {
-            Router.routeTo(from: self, to: .VehicleDetails, page: indexPath.row, entityName: viewModel?.vehicles)
+            Router.routeTo(from: self, to: .vehicleDetails, page: indexPath.row, entityName: viewModel?.vehicles)
         }
     }
 }
@@ -62,19 +62,24 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == characterCollection, let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
+        if collectionView == characterCollection,
+            let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             characterCell.name = viewModel?.characters[indexPath.row]
             return characterCell
-        } else if collectionView == planetCollection, let planetCell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as? PlanetCell {
+        } else if collectionView == planetCollection,
+            let planetCell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as? PlanetCell {
             planetCell.name = viewModel?.planets[indexPath.row]
             return planetCell
-        } else if collectionView == starshipCollection, let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
+        } else if collectionView == starshipCollection,
+            let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
             starshipCell.name = viewModel?.starships[indexPath.row]
             return starshipCell
-        } else if collectionView == vehicleCollection, let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
+        } else if collectionView == vehicleCollection,
+            let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
             vehicleCell.name = viewModel?.vehicles[indexPath.row]
             return vehicleCell
-        } else if collectionView == specieCollection, let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
+        } else if collectionView == specieCollection,
+            let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
             specieCell.name = viewModel?.species[indexPath.row]
             return specieCell
         }
@@ -195,7 +200,7 @@ class FilmDetailsViewModel: ViewModel {
     var vehicles: [String] {
         let filmDatas = filmDetailsVC?.filmData
         var result: [String] = []
-        
+
         for vehicle in filmDatas?.vehicles ?? [] {
             let id = Int(vehicle.string!.components(separatedBy: "/")[5])!
             result.append(LocalCache.vehicles?[id]?.name ?? "")
@@ -332,14 +337,12 @@ class FilmDetailsViewController: UIViewController {
     /// This function is call for initial setup and is called before reloading all tableview and collection
     func presentDetails() {
         if let filmTitles = filmTitles {
-            for film in Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values) {
-                if film.title == filmTitles[pageIndex] {
-                    filmData = film
-                    break
-                }
+            for film in Array(LocalCache.films?.values ?? [Int: Film]().values) where film.title == filmTitles[pageIndex] {
+                filmData = film
+                break
             }
         } else {
-            filmData = Array(LocalCache.films?.values ?? Dictionary<Int, Film>().values)[pageIndex]
+            filmData = Array(LocalCache.films?.values ?? [Int: Film]().values)[pageIndex]
         }
         title = filmData?.title
         filmUIImageView.image = UIImage(named: "Films/\(title ?? "")")

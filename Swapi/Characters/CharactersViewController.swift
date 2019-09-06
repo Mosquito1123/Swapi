@@ -52,10 +52,9 @@ class CharactersViewController: UITableViewController {
         navigationItem.backBarButtonItem = backItem
     }
 
-
     // MARK: Table view setup
 
-    var characters: Dictionary<Int, Character>? = LocalCache.characters
+    var characters: [Int: Character]? = LocalCache.characters
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -70,7 +69,7 @@ class CharactersViewController: UITableViewController {
             return UITableViewCell(style: .default, reuseIdentifier: "CharactersTableViewCell")
         }
 
-        let keysArray = Array(characters?.keys ?? Dictionary<Int, Character>().keys)
+        let keysArray = Array(characters?.keys ?? [Int: Character]().keys)
         let character = characters?[keysArray[indexPath.row]]
 
         cell.textLabel?.text = character?.name
@@ -84,6 +83,6 @@ class CharactersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .CharacterDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .characterDetails, page: indexPath.row, entityName: nil)
     }
 }

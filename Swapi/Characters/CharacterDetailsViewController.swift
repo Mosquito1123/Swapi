@@ -38,22 +38,23 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == filmsCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell  {
+        if collectionView == filmsCollection,
+            let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
-
             return filmCell
-        } else if collectionView == specieCollection, let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
+        } else if collectionView == specieCollection,
+            let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
 
             specieCell.name = viewModel?.species[indexPath.row]
-
             return specieCell
-        } else if collectionView == vehicleCollection, let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
+        } else if collectionView == vehicleCollection,
+            let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
 
             vehicleCell.name = viewModel?.vehicles[indexPath.row]
-
             return vehicleCell
-        } else if collectionView == starshipCollection, let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
+        } else if collectionView == starshipCollection,
+            let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
 
             starshipCell.name = viewModel?.starships[indexPath.row]
 
@@ -75,8 +76,7 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
             label.text = viewModel?.vehicles[indexPath.row]
         } else if collectionView == starshipCollection {
             label.text = viewModel?.starships[indexPath.row]
-        }
-        else {
+        } else {
             label.text = viewModel?.species[indexPath.row]
         }
 
@@ -85,13 +85,13 @@ extension CharacterDetailsViewController: UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filmsCollection {
-            Router.routeTo(from: self, to: .FilmDetails, page: indexPath.row, entityName: viewModel?.films)
+            Router.routeTo(from: self, to: .filmDetails, page: indexPath.row, entityName: viewModel?.films)
         } else if collectionView == specieCollection {
-            Router.routeTo(from: self, to: .SpecieDetails, page: indexPath.row, entityName: viewModel?.species)
+            Router.routeTo(from: self, to: .specieDetails, page: indexPath.row, entityName: viewModel?.species)
         } else if collectionView == starshipCollection {
-            Router.routeTo(from: self, to: .StarshipDetails, page: indexPath.row, entityName: viewModel?.starships)
+            Router.routeTo(from: self, to: .starshipDetails, page: indexPath.row, entityName: viewModel?.starships)
         } else if collectionView == vehicleCollection {
-            Router.routeTo(from: self, to: .VehicleDetails, page: indexPath.row, entityName: viewModel?.vehicles)
+            Router.routeTo(from: self, to: .vehicleDetails, page: indexPath.row, entityName: viewModel?.vehicles)
         }
     }
 }
@@ -142,8 +142,8 @@ extension CharacterDetailsViewController: UITableViewDataSource {
 
 extension CharacterDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == attributeCollection && indexPath.row == 7  {
-            Router.routeTo(from: self, to: .PlanetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
+        if tableView == attributeCollection && indexPath.row == 7 {
+            Router.routeTo(from: self, to: .planetDetails, page: 0, entityName: [viewModel?.homeworld ?? ""])
         }
     }
 }
@@ -255,7 +255,7 @@ class CharacterDetailsViewModel: ViewModel {
     }
 
     // MARK: initialization
-    
+
     init(characterDetailsVC: CharacterDetailsViewController) {
         super.init(detailScrollViewProtocol: characterDetailsVC)
         self.characterDetailsVC = characterDetailsVC
@@ -311,7 +311,7 @@ class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var filmsCollection: UICollectionView!
 
     @IBOutlet weak var charactersImageScrollView: UIScrollView!
-    
+
     @IBOutlet weak var characterUIImageView: UIImageView!
 
     // MARK: control logic
@@ -319,7 +319,7 @@ class CharacterDetailsViewController: UIViewController {
     var characterData: Character?
 
     var viewModel: CharacterDetailsViewModel?
-    
+
     var characterNames: [String]?
 
     private var characterIndex: Int?
@@ -350,7 +350,7 @@ class CharacterDetailsViewController: UIViewController {
         navigationItem.backBarButtonItem = backItem
         imageScrollView.setContentOffset(.zero, animated: true)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
@@ -362,14 +362,12 @@ class CharacterDetailsViewController: UIViewController {
 
     func presentDetails() {
         if let characterNames = characterNames {
-            for character in Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values) {
-                if character.name == characterNames[pageIndex] {
-                    characterData = character
-                    break
-                }
+            for character in Array(LocalCache.characters?.values ?? [Int: Character]().values) where character.name == characterNames[pageIndex] {
+                characterData = character
+                break
             }
         } else {
-            characterData = Array(LocalCache.characters?.values ?? Dictionary<Int, Character>().values)[pageIndex]
+            characterData = Array(LocalCache.characters?.values ?? [Int: Character]().values)[pageIndex]
         }
         title = characterData?.name
         characterUIImageView.image = UIImage(named: "Characters/\(title ?? "")")
@@ -380,7 +378,7 @@ class CharacterDetailsViewController: UIViewController {
 
     func characterScrollViewRightArrowAction() {
         let totalPage = characterNames == nil ? LocalCache.characters?.count ?? 0 : characterNames?.count ?? 0
-        if pageIndex < totalPage - 1  {
+        if pageIndex < totalPage - 1 {
             viewModel?.set(direction: .right)
             viewModel?.reloadAllTableAndCollection()
         }

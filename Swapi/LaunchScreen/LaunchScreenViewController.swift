@@ -12,8 +12,7 @@
 
 import UIKit
 
-protocol LaunchScreenDisplayLogic: class
-{
+protocol LaunchScreenDisplayLogic: class {
     func cachPeople(viewModel: LaunchScreen.Fetch.ViewModel.Characters)
     func cachFilms(viewModel: LaunchScreen.Fetch.ViewModel.Films)
     func cachPlanets(viewModel: LaunchScreen.Fetch.ViewModel.Planets)
@@ -22,10 +21,10 @@ protocol LaunchScreenDisplayLogic: class
     func cachVehicles(viewModel: LaunchScreen.Fetch.ViewModel.Vehicles)
 }
 
-class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
-{
+class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic {
 
     var interactor: LaunchScreenBusinessLogic?
+
     var router: (NSObjectProtocol & LaunchScreenRoutingLogic & LaunchScreenDataPassing)?
 
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -40,7 +39,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 0.5
         button.addTarget(self, action: #selector(preFetchAllStarwarsEntities), for: .touchUpInside)
-        
+
         return button
     }()
 
@@ -57,7 +56,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
     }
 
     // MARK: Setup
-  
+
     private func setup() {
         let viewController = self
         let interactor = LaunchScreenInteractor()
@@ -102,9 +101,9 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
         interactor?.preFetchVehicles(request: LaunchScreen.Fetch.Request(sequence: 1..<5))
 
         Service.dispatchGroup.notify(queue: .main) {
-            if let _ = LocalCache.characters, let _ = LocalCache.films, let _ = LocalCache.planets,
-                let _ = LocalCache.species, let _ = LocalCache.starships, let _ = LocalCache.vehicles {
-               
+            if LocalCache.characters != nil, LocalCache.films != nil, LocalCache.planets != nil,
+               LocalCache.species != nil, LocalCache.starships != nil, LocalCache.vehicles != nil {
+
                 print("finish pre-fetching all starwars entities")
                 self.performSegue(withIdentifier: "first_screen", sender: nil)
 

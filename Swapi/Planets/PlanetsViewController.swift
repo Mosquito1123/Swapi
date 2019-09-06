@@ -12,7 +12,6 @@
 
 import UIKit
 
-
 class PlanetsViewController: UITableViewController {
     @IBOutlet weak var revealMenuBar: UIBarButtonItem!
 
@@ -50,7 +49,7 @@ class PlanetsViewController: UITableViewController {
 
     // MARK: Tableview setup
 
-    var planets: Dictionary<Int, Planet>? = LocalCache.planets
+    var planets: [Int: Planet]? = LocalCache.planets
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -64,7 +63,7 @@ class PlanetsViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlanetsTableViewCell") else {
             return UITableViewCell(style: .default, reuseIdentifier: "PlanetsTableViewCelll")
         }
-        let keysArray = Array(planets?.keys ?? Dictionary<Int, Planet>().keys)
+        let keysArray = Array(planets?.keys ?? [Int: Planet]().keys)
         let planet = planets?[keysArray[indexPath.row]]
         cell.textLabel?.text = planet?.name
         cell.textLabel?.textColor = .white
@@ -77,6 +76,6 @@ class PlanetsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.routeTo(from: self, to: .PlanetDetails, page: indexPath.row, entityName: nil)
+        Router.routeTo(from: self, to: .planetDetails, page: indexPath.row, entityName: nil)
     }
 }
