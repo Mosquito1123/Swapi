@@ -86,14 +86,15 @@ extension FilmDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let filmCount = filmTitles?.count ?? (LocalCache.films?.count ?? 1)
 
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(filmCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(filmCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
         if scrollView == filmsImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 filmScrollViewRightArrowAction()
             }
         }
@@ -292,6 +293,11 @@ class FilmDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = FilmDetailsViewModel(filmDetailsVC: self)
+
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -300,6 +306,19 @@ class FilmDetailsViewController: UIViewController {
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "filmUIImageViewCenterX", constant: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
     }
 
     override func viewDidLayoutSubviews() {
@@ -307,11 +326,6 @@ class FilmDetailsViewController: UIViewController {
             filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 900
         } else if UIDevice.current.orientation.isPortrait {
             filmMainScrollView.constraintWithIdentifier("filmMainScrollViewHeight")?.constant = 600
-        }
-
-        if let viewModel = self.viewModel {
-            viewModel.scrollViewSetup()
-            presentDetails()
         }
     }
 
@@ -330,11 +344,7 @@ class FilmDetailsViewController: UIViewController {
         title = filmData?.title
         filmUIImageView.image = UIImage(named: "Films/\(title ?? "")")
         openingCrawl.text = filmData?.openingCrawl
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("filmUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("filmUIImageViewCenterX")?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll from right to left. UIScrollView stop responding
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "filmUIImageViewCenterX", constant: nil)
     }
 
     func filmScrollViewLeftArrowAction() {

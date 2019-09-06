@@ -28,13 +28,13 @@ protocol DetailScrollViewProtocol {
 
 class ViewModel {
 
-    var scrollImageContentOffsetX: CGFloat {
+    lazy var imageScrollViewWidth: CGFloat = {
         return detailScrollViewProtocol.imageScrollView.frame.width
-    }
+    }()
 
     var detailScrollViewProtocol: DetailScrollViewProtocol
     
-    var previousImageViewContentOffset: CGPoint = .zero
+    private(set) var previousImageScrollViewContentOffset: CGPoint = .zero
 
     enum PageDirection {
         case left
@@ -71,8 +71,24 @@ class ViewModel {
         visibleRect.origin.x = detailScrollViewProtocol.imageScrollView.frame.width * CGFloat(newPage)
         detailScrollViewProtocol.imageScrollView.contentOffset = visibleRect.origin
         detailScrollViewProtocol.imageScrollView.scrollRectToVisible(visibleRect, animated: true)
-        previousImageViewContentOffset = detailScrollViewProtocol.imageScrollView.contentOffset
+        previousImageScrollViewContentOffset = detailScrollViewProtocol.imageScrollView.contentOffset
         detailScrollViewProtocol.pageIndex = newPage
+    }
+    
+    func setUIImageViewCenterXContraint(identifier: String, constant: CGFloat?) {
+        if let constant = constant {
+            detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = constant
+        } else {
+            if previousImageScrollViewContentOffset.x != 0.0 {
+                detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = previousImageScrollViewContentOffset.x
+            } else {
+                detailScrollViewProtocol.imageScrollView.constraintWithIdentifier(identifier)?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll to the first page of the scroll view, it stop responding. Nevertheless, the constant should be 0, since we are at the first page. But it won't work with 0, so 1 is a quick fix for now.
+            }
+        }
+    }
+    
+    func setPreviousImageViewContentOffset(with point: CGPoint) {
+        previousImageScrollViewContentOffset = point
     }
 }
 

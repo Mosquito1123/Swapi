@@ -82,14 +82,14 @@ extension SpecieDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let specieCount = specieNames?.count ?? (LocalCache.species?.count ?? 1)
         
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(specieCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(specieCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == specieImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 specieScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 specieScrollViewRightArrowAction()
             }
         }
@@ -250,6 +250,10 @@ class SpecieDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = SpecieDetailsViewModel(specieDetailsVC: self)
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -258,13 +262,19 @@ class SpecieDetailsViewController: UIViewController {
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
     }
 
-    override func viewDidLayoutSubviews() {
-        if let viewModel = self.viewModel {
-            viewModel.scrollViewSetup()
-            presentDetails()
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "specieUIImageViewCenterX", constant: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
     }
 
     func presentDetails() {
@@ -280,11 +290,7 @@ class SpecieDetailsViewController: UIViewController {
         }
         title = specieData?.name
         specieUIImageView.image = UIImage(named: "Species/\(title ?? "")")
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("specieUIImageViewCenterX")?.constant = 1
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "specieUIImageViewCenterX", constant: nil)
     }
 
     func specieScrollViewLeftArrowAction() {

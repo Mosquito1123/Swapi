@@ -36,7 +36,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic
         button.setTitle("Try Again", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .black
+        button.backgroundColor = .clear
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 0.5
         button.addTarget(self, action: #selector(preFetchAllStarwarsEntities), for: .touchUpInside)

@@ -29,14 +29,14 @@ extension VehicleDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let vehicleCount = vehicleNames?.count ?? (LocalCache.vehicles?.count ?? 1)
 
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(vehicleCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(vehicleCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == vehicleImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 vehicleScrollVIewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 vehicleScrollViewRightArrowAction()
             }
         }
@@ -221,27 +221,39 @@ class VehicleDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = VehicleDetailsViewModel(vehicleDetailsVC: self)
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
-    
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "vehicleUIImageViewCenterX", constant: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
+    }
+
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation.isLandscape {
             vehicleMainScrollView.constraintWithIdentifier("vehicleScrollViewBottom")?.constant = 250
         } else if UIDevice.current.orientation.isPortrait {
             vehicleMainScrollView.constraintWithIdentifier("vehicleScrollViewBottom")?.constant = -188
         }
-        
-        if let viewModel = self.viewModel {
-            viewModel.scrollViewSetup()
-            presentDetails()
-        }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let backItem = UIBarButtonItem()
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
     }
 
     func presentDetails() {
@@ -264,12 +276,7 @@ class VehicleDetailsViewController: UIViewController {
                 vehicleUIImageView.image = UIImage(named: "Vehicles/\(title)")
             }
         }
-
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("vehicleUIImageViewCenterX")?.constant = 1
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "vehicleUIImageViewCenterX", constant: nil)
     }
 
     func vehicleScrollVIewLeftArrowAction() {

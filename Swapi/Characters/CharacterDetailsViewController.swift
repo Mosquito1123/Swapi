@@ -152,14 +152,14 @@ extension CharacterDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let characterCount = characterNames?.count ?? (LocalCache.characters?.count ?? 1)
 
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(characterCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(characterCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == charactersImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 characterScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 characterScrollViewRightArrowAction()
             }
         }
@@ -329,6 +329,17 @@ class CharacterDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = CharacterDetailsViewModel(characterDetailsVC: self)
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "characterUIImageViewCenterX", constant: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -337,15 +348,16 @@ class CharacterDetailsViewController: UIViewController {
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
     }
 
     override func viewDidLayoutSubviews() {
         characterMainScrollView.contentSize.height = 1000
-
-        if let viewModel = self.viewModel {
-            viewModel.scrollViewSetup()
-            presentDetails()
-        }
     }
 
     func presentDetails() {
@@ -361,11 +373,7 @@ class CharacterDetailsViewController: UIViewController {
         }
         title = characterData?.name
         characterUIImageView.image = UIImage(named: "Characters/\(title ?? "")")
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("characterUIImageViewCenterX")?.constant = 1 // FIXME: just a temporary fix. Otherwise, when scroll from right to left. UIScrollView stop responding
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "characterUIImageViewCenterX", constant: nil)
     }
 
     // MARK: Character scroll view logic

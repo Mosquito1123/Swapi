@@ -29,14 +29,14 @@ extension PlanetDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let planetCount = planetNames?.count ?? (LocalCache.planets?.count ?? 1)
         
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(planetCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(planetCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == planetsImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 planetScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 planetScrollViewRightArrowAction()
             }
         }
@@ -228,9 +228,6 @@ class PlanetDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = PlanetDetailsViewModel(planetDetailsVC: self)
-    }
-    
-    override func viewDidLayoutSubviews() {
         if let viewModel = self.viewModel {
             viewModel.scrollViewSetup()
             presentDetails()
@@ -243,6 +240,19 @@ class PlanetDetailsViewController: UIViewController {
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "planetUIImageViewCenterX", constant: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
     }
 
     func presentDetails() {
@@ -258,12 +268,7 @@ class PlanetDetailsViewController: UIViewController {
         }
         title = planetData?.name
         planetUIImageView.image = UIImage(named: "Planets/\(title ?? "")")
-        
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("planetUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("planetUIImageViewCenterX")?.constant = 1
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "planetUIImageViewCenterX", constant: nil)
     }
 
     func planetScrollViewLeftArrowAction() {

@@ -29,14 +29,14 @@ extension StarshipDetailsViewController: UIScrollViewDelegate {
     var endOfScrollViewContentOffsetX: CGFloat {
         let starshipCount = starshipNames?.count ?? (LocalCache.starships?.count ?? 1)
         
-        return (viewModel?.scrollImageContentOffsetX ?? 0) * CGFloat(starshipCount - 1)
+        return (viewModel?.imageScrollViewWidth ?? 0) * CGFloat(starshipCount - 1)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == starshipImageScrollView {
-            if viewModel?.previousImageViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
+            if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 starshipScrollViewLeftArrowAction()
-            } else if viewModel?.previousImageViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
+            } else if viewModel?.previousImageScrollViewContentOffset.x ?? 0 < scrollView.contentOffset.x {
                 starshipScrollViewRightArrowAction()
             }
         }
@@ -235,6 +235,10 @@ class StarshipDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = StarshipDetailsViewModel(starshipDetailsVC: self)
+        if let viewModel = self.viewModel {
+            viewModel.scrollViewSetup()
+            presentDetails()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -243,6 +247,19 @@ class StarshipDetailsViewController: UIViewController {
         backItem.title = title
         backItem.tintColor = .yellow
         navigationItem.backBarButtonItem = backItem
+        imageScrollView.setContentOffset(.zero, animated: true)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel?.imageScrollViewWidth = size.width
+        imageScrollView.setContentOffset(imageScrollView.contentOffset, animated: true)
+        viewModel?.setPreviousImageViewContentOffset(with: imageScrollView.contentOffset)
+        viewModel?.setUIImageViewCenterXContraint(identifier: "starshipUIImageViewCenterX", constant: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageScrollView.setContentOffset(viewModel?.previousImageScrollViewContentOffset ?? .zero, animated: true)
     }
 
     override func viewDidLayoutSubviews() {
@@ -250,11 +267,6 @@ class StarshipDetailsViewController: UIViewController {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 600
         } else if UIDevice.current.orientation.isPortrait {
             starshipMainScrollView.constraintWithIdentifier("starshipScrollViewBottom")?.constant = 300
-        }
-
-        if let viewModel = self.viewModel {
-            viewModel.scrollViewSetup()
-            presentDetails()
         }
     }
 
@@ -271,12 +283,7 @@ class StarshipDetailsViewController: UIViewController {
         }
         title = starshipData?.name
         starshipUIImageView.image = UIImage(named: "Starships/\(title ?? "")")
-
-        if viewModel?.previousImageViewContentOffset.x != 0.0 {
-            imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = viewModel?.previousImageViewContentOffset.x ?? 0
-        } else {
-            imageScrollView.constraintWithIdentifier("starshipUIImageViewCenterX")?.constant = 1
-        }
+        viewModel?.setUIImageViewCenterXContraint(identifier: "starshipUIImageViewCenterX", constant: nil)
     }
 
     func starshipScrollViewLeftArrowAction() {
