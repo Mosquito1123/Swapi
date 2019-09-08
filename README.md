@@ -17,4 +17,4 @@ This app currently uses Clean IOS and ViewModel architecture. It also contains S
 
 # Contribution
 
-All contributions are more than welcomed. Especially with the color and theme of the app so that it should be more visually appealing to the eyes
+All contributions for cool features are welcomed. Especially with the color and theme of the app so that it should be more visually appealing to the eyes
