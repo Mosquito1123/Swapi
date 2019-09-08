@@ -461,9 +461,6 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="SpeciesMenuBar"/>
                             </userDefinedRuntimeAttributes>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="poI-Ve-NPm">
-                            <color key="tintColor" red="1" green="0.93849887460000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="revealMenuBar" destination="UY0-hn-2xC" id="wGI-so-NJ4"/>
