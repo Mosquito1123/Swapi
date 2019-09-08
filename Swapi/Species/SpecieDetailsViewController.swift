@@ -120,12 +120,14 @@ extension SpecieDetailsViewController: UICollectionViewDataSource {
             let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
 
             characterCell.name = viewModel?.characters[indexPath.row]
+            characterCell.showMoreIndicator = characterCell.showMoreIndicator ?? true
             return characterCell
 
         } else if collectionView == filmCollection,
             let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
+            filmCell.showMoreIndicator = filmCell.showMoreIndicator ?? true
             return filmCell
 
         }
