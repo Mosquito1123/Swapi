@@ -14,28 +14,29 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         searchResults.removeAll()
+        let caseInsensitiveSearchText = searchText.lowercased()
 
-        for character in LocalCache.characters?.values ?? [Int: Character]().values where character.name.contains(searchText) {
+        for character in LocalCache.characters?.values ?? [Int: Character]().values where character.name.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(character.name)
         }
 
-        for film in LocalCache.films?.values ?? [Int: Film]().values where film.title.contains(searchText) {
+        for film in LocalCache.films?.values ?? [Int: Film]().values where film.title.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(film.title)
         }
 
-        for planet in LocalCache.planets?.values ?? [Int: Planet]().values where planet.name.contains(searchText) {
+        for planet in LocalCache.planets?.values ?? [Int: Planet]().values where planet.name.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(planet.name)
         }
 
-        for specie in LocalCache.species?.values ?? [Int: Specie]().values where specie.name.contains(searchText) {
+        for specie in LocalCache.species?.values ?? [Int: Specie]().values where specie.name.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(specie.name)
         }
 
-        for starship in LocalCache.starships?.values ?? [Int: Starship]().values where starship.name.contains(searchText) {
+        for starship in LocalCache.starships?.values ?? [Int: Starship]().values where starship.name.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(starship.name)
         }
 
-        for vehicle in LocalCache.vehicles?.values ?? [Int: Vehicle]().values where vehicle.name.contains(searchText) {
+        for vehicle in LocalCache.vehicles?.values ?? [Int: Vehicle]().values where vehicle.name.lowercased().contains(caseInsensitiveSearchText) {
             searchResults.append(vehicle.name)
         }
     }
