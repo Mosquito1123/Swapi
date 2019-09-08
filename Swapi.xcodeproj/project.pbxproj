@@ -36,6 +36,7 @@
 		040D79A122F05E16002111A6 /* VehiclesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D79A022F05E16002111A6 /* VehiclesViewController.swift */; };
 		040D79A322F07687002111A6 /* VehicleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D79A222F07687002111A6 /* VehicleDetailsViewController.swift */; };
 		040D79A522F0769F002111A6 /* StarshipDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D79A422F0769F002111A6 /* StarshipDetailsViewController.swift */; };
+		0462F5CB23222C590079B163 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0462F5CA23222C590079B163 /* SearchViewController.swift */; };
 		B48079065F69206B1E2BE211 /* Pods_SwapiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9685A38100C9A704CDF0BC32 /* Pods_SwapiUITests.framework */; };
 		E90E65D0CEE84446AC49797E /* Pods_SwapiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DDB3A64F0E687ACAC7577C /* Pods_SwapiTests.framework */; };
 		FD25C1A2015BC34D1C06C578 /* Pods_Swapi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7280EF6721EAF71E6836C5 /* Pods_Swapi.framework */; };
@@ -96,6 +97,7 @@
 		040D79A022F05E16002111A6 /* VehiclesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesViewController.swift; sourceTree = "<group>"; };
 		040D79A222F07687002111A6 /* VehicleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDetailsViewController.swift; sourceTree = "<group>"; };
 		040D79A422F0769F002111A6 /* StarshipDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipDetailsViewController.swift; sourceTree = "<group>"; };
+		0462F5CA23222C590079B163 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		137B87BEBF043D1B99B15400 /* Pods-SwapiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwapiTests.release.xcconfig"; path = "Target Support Files/Pods-SwapiTests/Pods-SwapiTests.release.xcconfig"; sourceTree = "<group>"; };
 		3670F7B4E2F052A3CA6FDD45 /* Pods-Swapi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swapi.release.xcconfig"; path = "Target Support Files/Pods-Swapi/Pods-Swapi.release.xcconfig"; sourceTree = "<group>"; };
 		7EEE4FD2F475B76310A7DFAD /* Pods-SwapiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwapiTests.debug.xcconfig"; path = "Target Support Files/Pods-SwapiTests/Pods-SwapiTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		040A187B22EEC12800EA9D83 /* Swapi */ = {
 			isa = PBXGroup;
 			children = (
+				0462F5C923222C340079B163 /* Search */,
 				0409FA1C2305275100827A88 /* Commons */,
 				040D799F22F05DFA002111A6 /* Vehicles */,
 				040D799C22F05AA0002111A6 /* Starships */,
@@ -306,6 +309,14 @@
 				040D79A222F07687002111A6 /* VehicleDetailsViewController.swift */,
 			);
 			path = Vehicles;
+			sourceTree = "<group>";
+		};
+		0462F5C923222C340079B163 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0462F5CA23222C590079B163 /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		099D5A7D2B368F66D2BED31B /* Pods */ = {
@@ -624,6 +635,7 @@
 				040A0AE922F0499C000DF6F1 /* SpecieDetailsViewController.swift in Sources */,
 				040A18D422EED67900EA9D83 /* FilmsViewController.swift in Sources */,
 				040A0ADC22EFD28A000DF6F1 /* LaunchScreenModels.swift in Sources */,
+				0462F5CB23222C590079B163 /* SearchViewController.swift in Sources */,
 				040A0ADA22EFD28A000DF6F1 /* LaunchScreenWorker.swift in Sources */,
 				040D79A122F05E16002111A6 /* VehiclesViewController.swift in Sources */,
 				040D79A522F0769F002111A6 /* StarshipDetailsViewController.swift in Sources */,

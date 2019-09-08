@@ -110,11 +110,13 @@ extension VehicleDetailsViewController: UICollectionViewDataSource {
         if collectionView == filmCollection, let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
+            filmCell.showMoreIndicator = filmCell.showMoreIndicator ?? true
             return filmCell
         } else if collectionView == pilotCollection,
             let pilotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
 
             pilotCell.name = viewModel?.pilots[indexPath.row]
+            pilotCell.showMoreIndicator = pilotCell.showMoreIndicator ?? true
             return pilotCell
         }
         return UICollectionViewCell()

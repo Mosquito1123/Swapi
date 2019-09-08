@@ -42,22 +42,25 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
             let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
 
             filmCell.name = viewModel?.films[indexPath.row]
+            filmCell.showMoreIndicator = filmCell.showMoreIndicator ?? true
             return filmCell
         } else if collectionView == specieCollection,
             let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
 
             specieCell.name = viewModel?.species[indexPath.row]
+            specieCell.showMoreIndicator = specieCell.showMoreIndicator ?? true
             return specieCell
         } else if collectionView == vehicleCollection,
             let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
 
             vehicleCell.name = viewModel?.vehicles[indexPath.row]
+            vehicleCell.showMoreIndicator = vehicleCell.showMoreIndicator ?? true
             return vehicleCell
         } else if collectionView == starshipCollection,
             let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
 
             starshipCell.name = viewModel?.starships[indexPath.row]
-
+            starshipCell.showMoreIndicator = starshipCell.showMoreIndicator ?? true
             return starshipCell
         }
 

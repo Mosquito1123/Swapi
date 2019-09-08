@@ -103,10 +103,12 @@ extension PlanetDetailsViewController: UICollectionViewDataSource {
         if collectionView == filmCollection,
             let filmCell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? FilmCell {
             filmCell.name = viewModel?.films[indexPath.row]
+            filmCell.showMoreIndicator = filmCell.showMoreIndicator ?? true
             return filmCell
         } else if collectionView == inhabitantCollection,
             let inhabitantCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             inhabitantCell.name = viewModel?.inhabitants[indexPath.row]
+            inhabitantCell.showMoreIndicator = inhabitantCell.showMoreIndicator ?? true
             return inhabitantCell
         }
 

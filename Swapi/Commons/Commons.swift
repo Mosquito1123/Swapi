@@ -107,6 +107,31 @@ class Cell: UICollectionViewCell {
         }
     }
 
+    var labelColor: UIColor? {
+        didSet {
+            guard let color = labelColor else { return }
+            label.textColor = color
+        }
+    }
+
+    var textAlignment: NSTextAlignment? {
+        didSet {
+            guard let alignment = textAlignment else { return }
+            label.textAlignment = alignment
+        }
+    }
+
+    var showMoreIndicator: Bool? {
+        didSet {
+            guard let showMoreIndicator = showMoreIndicator else {
+                return
+            }
+            if showMoreIndicator {
+                setupViewMoreIndicator()
+            }
+        }
+    }
+
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +146,7 @@ class Cell: UICollectionViewCell {
         return button
     }()
 
-    private func setupLabel() {
+   func setupLabel() {
         contentView.addSubview(label)
         label.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         label.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
@@ -157,7 +182,6 @@ class Cell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupLabel()
-        setupViewMoreIndicator()
     }
 }
 

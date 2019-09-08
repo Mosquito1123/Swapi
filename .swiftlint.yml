@@ -14,7 +14,7 @@ variable_name:
  min_length: 2 # only min_length
 
 line_length:
- warning: 160
+ warning: 200
  ignores_comments: true
 
 cyclomatic_complexity:

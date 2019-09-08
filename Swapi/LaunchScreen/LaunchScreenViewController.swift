@@ -36,8 +36,7 @@ class LaunchScreenViewController: UIViewController, LaunchScreenDisplayLogic {
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.clear.cgColor
         button.addTarget(self, action: #selector(preFetchAllStarwarsEntities), for: .touchUpInside)
 
         return button

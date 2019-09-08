@@ -65,22 +65,27 @@ extension FilmDetailsViewController: UICollectionViewDataSource {
         if collectionView == characterCollection,
             let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterCell", for: indexPath) as? CharacterCell {
             characterCell.name = viewModel?.characters[indexPath.row]
+            characterCell.showMoreIndicator = characterCell.showMoreIndicator ?? true
             return characterCell
         } else if collectionView == planetCollection,
             let planetCell = collectionView.dequeueReusableCell(withReuseIdentifier: "planetCell", for: indexPath) as? PlanetCell {
             planetCell.name = viewModel?.planets[indexPath.row]
+            planetCell.showMoreIndicator = planetCell.showMoreIndicator ?? true
             return planetCell
         } else if collectionView == starshipCollection,
             let starshipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "starshipCell", for: indexPath) as? StarshipCell {
             starshipCell.name = viewModel?.starships[indexPath.row]
+            starshipCell.showMoreIndicator = starshipCell.showMoreIndicator ?? true
             return starshipCell
         } else if collectionView == vehicleCollection,
             let vehicleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "vehicleCell", for: indexPath) as? VehicleCell {
             vehicleCell.name = viewModel?.vehicles[indexPath.row]
+            vehicleCell.showMoreIndicator = vehicleCell.showMoreIndicator ?? true
             return vehicleCell
         } else if collectionView == specieCollection,
             let specieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "specieCell", for: indexPath) as? SpecieCell {
             specieCell.name = viewModel?.species[indexPath.row]
+            specieCell.showMoreIndicator = specieCell.showMoreIndicator ?? true
             return specieCell
         }
         return UICollectionViewCell()
@@ -95,7 +100,6 @@ extension FilmDetailsViewController: UIScrollViewDelegate {
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
         if scrollView == filmsImageScrollView {
             if viewModel?.previousImageScrollViewContentOffset.x ?? 0 > scrollView.contentOffset.x {
                 filmScrollViewLeftArrowAction()

@@ -71,7 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXL-9d-pbe" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-475" y="-97"/>
+            <point key="canvasLocation" x="-552" y="76"/>
         </scene>
         <!--Menu Bar Table View Controller-->
         <scene sceneID="YX5-cW-Uq9">
@@ -211,7 +211,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NoV-F5-4cM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1384" y="-97"/>
+            <point key="canvasLocation" x="-1509" y="76"/>
         </scene>
         <!--Films-->
         <scene sceneID="jkH-ws-qLC">
@@ -461,6 +461,9 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="SpeciesMenuBar"/>
                             </userDefinedRuntimeAttributes>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="poI-Ve-NPm">
+                            <color key="tintColor" red="1" green="0.93849887460000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="revealMenuBar" destination="UY0-hn-2xC" id="wGI-so-NJ4"/>
@@ -539,11 +542,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="c4g-iU-hSx" kind="relationship" relationship="viewControllers" id="7PP-pb-qWk"/>
+                        <segue destination="cZy-lk-DHf" kind="relationship" relationship="viewControllers" id="FyF-Yf-Vmt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mrg-qf-O39" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2275" y="-97"/>
+            <point key="canvasLocation" x="-2496" y="76"/>
         </scene>
         <!--Home-->
         <scene sceneID="oWZ-az-uP0">
@@ -817,6 +821,7 @@
                         <viewLayoutGuide key="safeArea" id="Kdj-AY-n7P"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="jVD-CP-19a"/>
+                    <navigationItem key="navigationItem" id="G8D-MZ-k9E"/>
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
                         <outlet property="attributeCollection" destination="MYS-EI-dxX" id="hJs-dz-1Sk"/>
@@ -832,7 +837,122 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1e-q6-NND" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563.768115942029" y="92.410714285714278"/>
+            <point key="canvasLocation" x="704" y="121"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n5M-4a-FHR">
+            <objects>
+                <navigationController id="cZy-lk-DHf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="z2Q-at-URL"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hyb-Na-WWr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" red="1" green="0.93849887460000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="e1M-qu-e0V" kind="relationship" relationship="rootViewController" id="4qn-8u-Xjc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZqE-n6-vm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1510" y="796"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="zfe-J2-j5F">
+            <objects>
+                <viewController id="e1M-qu-e0V" customClass="SearchViewController" customModule="Swapi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XE0-KM-96P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t2k-O1-1bf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="tintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="wq2-4m-nZP">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JnW-qn-2iJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="8vi-kr-mGm">
+                                                <size key="itemSize" width="50" height="44"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchFilterOptionCell" id="RNo-h0-8ty" customClass="SearchFilterOptionCell" customModule="Swapi" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="0.0" width="50" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </view>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="e1M-qu-e0V" id="eJV-ho-g9f"/>
+                                                <outlet property="delegate" destination="e1M-qu-e0V" id="eGY-Nf-qee"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="JnW-qn-2iJ" firstAttribute="leading" secondItem="wq2-4m-nZP" secondAttribute="leading" id="Spy-Ip-OZI"/>
+                                        <constraint firstItem="JnW-qn-2iJ" firstAttribute="height" secondItem="wq2-4m-nZP" secondAttribute="height" id="YbO-t1-dWk"/>
+                                        <constraint firstItem="JnW-qn-2iJ" firstAttribute="width" secondItem="wq2-4m-nZP" secondAttribute="width" id="eiE-yJ-cJb"/>
+                                        <constraint firstItem="JnW-qn-2iJ" firstAttribute="top" secondItem="wq2-4m-nZP" secondAttribute="top" id="ur0-pL-Efz"/>
+                                    </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="k8U-xy-3aG">
+                                    <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    <color key="tintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchResultCell" id="HMn-Ct-Ijs">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HMn-Ct-Ijs" id="Fm1-Pz-b0U">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="e1M-qu-e0V" id="Qwk-w3-aXe"/>
+                                    <outlet property="delegate" destination="e1M-qu-e0V" id="UTP-Tl-bTi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t2k-O1-1bf" firstAttribute="leading" secondItem="XE0-KM-96P" secondAttribute="leading" id="1bm-Hv-DUt"/>
+                            <constraint firstAttribute="trailing" secondItem="t2k-O1-1bf" secondAttribute="trailing" id="I3X-dy-Y1h"/>
+                            <constraint firstItem="t2k-O1-1bf" firstAttribute="top" secondItem="ruG-mN-TDm" secondAttribute="top" id="Pz3-G4-eOk"/>
+                            <constraint firstItem="ruG-mN-TDm" firstAttribute="bottom" secondItem="t2k-O1-1bf" secondAttribute="bottom" id="jMT-Xi-Clb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ruG-mN-TDm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GYm-Go-J9I">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchResultTableView" destination="t2k-O1-1bf" id="eb0-Si-V6P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Mw-d2-I3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-549.27536231884062" y="795.53571428571422"/>
         </scene>
         <!--Film Details View Controller-->
         <scene sceneID="s0J-KT-SZI">
@@ -1167,6 +1287,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ws8-XQ-2td"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ixG-Ew-hHz"/>
                     <size key="freeformSize" width="414" height="1600"/>
                     <connections>
                         <outlet property="characterCollection" destination="e9o-e7-LYR" id="tst-AR-n1X"/>
@@ -1184,7 +1305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7q-Gn-5Yw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563.768115942029" y="-1009.1517857142857"/>
+            <point key="canvasLocation" x="583" y="-1191"/>
         </scene>
         <!--Planet Details View Controller-->
         <scene sceneID="oq9-TN-CAu">
@@ -1367,6 +1488,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4IJ-FQ-OkO"/>
                     </view>
+                    <navigationItem key="navigationItem" id="7wo-iA-SgT"/>
                     <connections>
                         <outlet property="filmCollection" destination="wVL-Qq-dH8" id="UsH-Ug-Bwd"/>
                         <outlet property="inhabitantCollection" destination="8i9-Gf-92U" id="Arr-ia-cNx"/>
@@ -1556,6 +1678,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EQE-Fv-nfI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="yhc-AK-4Ka">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="bix-aU-dia">
+                            <color key="tintColor" red="1" green="0.93849887460000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="filmCollection" destination="Yq0-YP-vig" id="a2d-Y7-4UL"/>
@@ -1616,7 +1743,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHn-jX-4Ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1377" y="1108"/>
+            <point key="canvasLocation" x="-1281" y="1582"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Hl8-rU-orn">
@@ -1635,7 +1762,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1c-OL-mwR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3043" y="1108"/>
+            <point key="canvasLocation" x="-3107" y="1583"/>
         </scene>
         <!--Starship-->
         <scene sceneID="ibd-N4-HLV">
@@ -1657,7 +1784,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WID-Bm-IO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2210" y="1108"/>
+            <point key="canvasLocation" x="-2239" y="1582"/>
         </scene>
         <!--Vehicles-->
         <scene sceneID="cC6-Zf-A62">
@@ -1706,7 +1833,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBz-AG-Sx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1378" y="2069"/>
+            <point key="canvasLocation" x="-1378" y="2613"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CbG-at-tkY">
@@ -1725,7 +1852,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2z-xs-qSV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3043" y="2069"/>
+            <point key="canvasLocation" x="-3193" y="2614"/>
         </scene>
         <!--Vehicles-->
         <scene sceneID="UgT-2m-Q2d">
@@ -1747,7 +1874,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmX-Ff-Z79" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2213" y="2069"/>
+            <point key="canvasLocation" x="-2239" y="2613"/>
         </scene>
         <!--Starship Details View Controller-->
         <scene sceneID="5Uo-HU-CnJ">
@@ -1937,6 +2064,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gGL-Km-Oxt"/>
                     </view>
+                    <navigationItem key="navigationItem" id="prl-lp-G0m"/>
                     <size key="freeformSize" width="414" height="1300"/>
                     <connections>
                         <outlet property="filmCollection" destination="Q5g-un-dzX" id="KZc-jg-PF9"/>
@@ -1949,7 +2077,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE5-q1-MGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-478.26086956521743" y="833.70535714285711"/>
+            <point key="canvasLocation" x="-226" y="1598"/>
         </scene>
         <!--Vehicle Details View Controller-->
         <scene sceneID="lWb-Iu-gui">
@@ -2141,6 +2269,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XgY-P3-New"/>
                     </view>
+                    <navigationItem key="navigationItem" id="PVY-rA-cLm"/>
                     <size key="freeformSize" width="414" height="1300"/>
                     <connections>
                         <outlet property="filmCollection" destination="0ba-ad-gMx" id="pLN-fN-Pe4"/>
@@ -2153,7 +2282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjZ-7g-Ciw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-555.07246376811599" y="2068.5267857142858"/>
+            <point key="canvasLocation" x="-391" y="2614"/>
         </scene>
     </scenes>
     <resources>
