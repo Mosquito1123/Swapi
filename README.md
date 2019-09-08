@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
-![alt text](https://imgur.com/bca61sG)
+![alt text][Imgur](https://i.imgur.com/bca61sG.png)
 
 # Swapi
 
