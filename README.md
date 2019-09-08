@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
-![alt text](https://ibb.co/yhbHqH6)
 
 # Swapi
 
@@ -13,7 +12,7 @@ API and back end service are already written and credit to https://github.com/ph
 * Carvilsi
 * Andrea Stagi
 
-# Design Patter
+# Design Pattern
 
 This app currently uses Clean IOS and ViewModel architecture. It also contains SwapiUiTests.swfit and SwapiTests.swift for continous integration
 
