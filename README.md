@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
-[url=https://ibb.co/yhbHqH6][img]https://i.ibb.co/yhbHqH6/Download-on-the-App-Store-Badge-US-UK-wht-092917.png[/img][/url]
+![a link](<a href="https://imgbb.com/"><img src="https://i.ibb.co/7g6sKsn/Download-on-the-App-Store-Badge-US-UK-wht-092917.png" alt="Download-on-the-App-Store-Badge-US-UK-wht-092917" border="0"></a><br /><a target='_blank' href='https://freeonlinedice.com/'>yahtzee rolls</a><br />)
 
 # Swapi
 
