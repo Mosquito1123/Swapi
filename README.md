@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
+# Motivation
+
+I made this app for educational purpose because it uses my favorite ios design pattern Clean and MVVM
+
+<a href="https://apps.apple.com/us/app/swai/id1478864053?ign-mpt=uo%3D2"><img src="https://i.ibb.co/7g6sKsn/Download-on-the-App-Store-Badge-US-UK-wht-092917.png" alt="Download-on-the-App-Store-Badge-US-UK-wht-092917" width="100" height="50" border="0"></a>
+
 # Swapi
 
 An IOS app that displays a set of all the People, Films, Species, Starships, Vehicles and Planets from **Star Wars** movies. And how they are related to each other.
