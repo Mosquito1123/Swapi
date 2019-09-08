@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/tdle94/Swapi.svg?branch=master)](https://travis-ci.com/tdle94/Swapi)
+[![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
 # Swapi
 
