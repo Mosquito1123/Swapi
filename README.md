@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/tdle94/Swapi-Mobile-App.svg?branch=master)](https://travis-ci.com/tdle94/Swapi-Mobile-App)
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/7g6sKsn/Download-on-the-App-Store-Badge-US-UK-wht-092917.png" alt="Download-on-the-App-Store-Badge-US-UK-wht-092917" width="200" height="100" border="0"></a>
+<a href="https://apps.apple.com/us/app/swai/id1478864053?ign-mpt=uo%3D2"><img src="https://i.ibb.co/7g6sKsn/Download-on-the-App-Store-Badge-US-UK-wht-092917.png" alt="Download-on-the-App-Store-Badge-US-UK-wht-092917" width="100" height="50" border="0"></a>
 
 # Swapi
 
